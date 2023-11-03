@@ -2,6 +2,18 @@
 @import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
 @import url('normalize.css');
 
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    caret-color: transparent;
+}
+
+::selection {
+    background: transparent;
+}
+
 body {
     background-image: url("../../assets/img/index/fondo_inicio.gif");
     background-size: 0.3rem;
@@ -33,7 +45,7 @@ body {
     padding: 3rem;
     background: #000;
     border: 0.13rem solid #fff;
-    margin-top: 10rem;
+    margin-top: 8rem;
 }
 
 .close {
