@@ -11,6 +11,16 @@
     <script defer src="src/js/main.js"></script>
 </head>
 <body>
+<div id="retroPrompt" class="retro-prompt">
+    <div class="prompt-container">
+        <div id="closePrompt" class="close">&times;</div>
+        <p>Choose a Memory Card:</p>
+        <ul class="memory-card-list">
+            <li tabindex="0" data-value="card1" class="memory-card-option">Memory Card 1</li>
+            <li tabindex="0" data-value="card2" class="memory-card-option">Memory Card 2</li>
+        </ul>
+    </div>
+</div>
 <svg viewBox="0 0 690 120" xmlns="http://www.w3.org/2000/svg">
     <style type="text/css">
         text {
@@ -74,6 +84,8 @@
         <text x="0" y="100">VisualDynamics</text>
     </g>
 </svg>
-<div class="titulo">PRESS START!</div>
+<div class="titulo texto-oculto">PRESS START!</div>
+<audio id="mariocoin" src="/assets/sound/index/mario-coin.mp3"></audio>
+<audio id="bgm" src="/assets/sound/index/bgm.mp3"></audio>
 </body>
 </html>
