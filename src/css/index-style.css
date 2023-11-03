@@ -30,7 +30,7 @@ body {
 .prompt-container,
 .prompt-message{
     position: relative;
-    padding: 3.13rem;
+    padding: 3rem;
     background: #000;
     border: 0.13rem solid #fff;
 }

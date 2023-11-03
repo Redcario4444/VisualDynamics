@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				break;
 			case 'Enter':
 				handleMemoryCardSelection(memoryCardOptions[selectedOptionIndex].dataset.value);
+				playSoundAndMove();
 				break;
 			case 'Escape':
 				closePrompt();
