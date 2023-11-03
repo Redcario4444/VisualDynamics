@@ -1,0 +1,27 @@
+@import url('https://fonts.cdnfonts.com/css/press-start-2p');
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+@import url('normalize.css');
+
+body{
+    background-image: url("../../assets/img/main/fondo_inicio.gif");
+    background-size: 0.3rem;
+}
+
+svg{
+    width: 90vw;
+    height: 30vh;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.titulo {
+    font-family: 'Press Start 2P', sans-serif;
+    color: white;
+    font-size: 2.1rem;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0.38rem 0.25rem 0.3rem rgba(204,204,204,0.53);
+    margin-top: 35vh;
+}
