@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- HTML Meta Tags -->
     <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
     <meta content="Landing page de VisualDynamics" name="description">
     <meta content="Daniel Alonso Lázaro" name="author">
     <meta content="Víctor Hellín Sáez" name="author">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Favicon -->
+    <link href="/assets/favicon/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+    <link href="/assets/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="/assets/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+    <link href="/assets/favicon/site.webmanifest" rel="manifest">
+    <link color="#5bbad5" href="/assets/favicon/safari-pinned-tab.svg" rel="mask-icon">
+    <link href="/assets/favicon/favicon.ico" rel="shortcut icon">
+    <meta content="VisualDynamics" name="apple-mobile-web-app-title">
+    <meta content="VisualDynamics" name="application-name">
+    <meta content="#b91d47" name="msapplication-TileColor">
+    <meta content="/assets/favicon/browserconfig.xml" name="msapplication-config">
+    <meta content="#000000" name="theme-color">
+    <!-- CSS -->
     <link href="src/css/index-style.css" rel="stylesheet">
     <title>VisualDynamics</title>
+    <!-- JS -->
     <script defer src="src/js/main.js"></script>
 </head>
 <body>
-<div id="retroPrompt" class="retro-prompt">
+<div class="retro-prompt" id="retroPrompt">
     <div class="prompt-container">
-        <div id="closePrompt" class="close">&times;</div>
+        <div class="close" id="closePrompt">&times;</div>
         <p>Choose a Memory Card:</p>
         <ul class="memory-card-list">
-            <li tabindex="0" data-value="card1" class="memory-card-option">Memory Card 1</li>
-            <li tabindex="0" data-value="card2" class="memory-card-option">Memory Card 2</li>
+            <li autofocus class="memory-card-option" data-value="card1" tabindex="0">Memory Card 1</li>
+            <li class="memory-card-option" data-value="card2" tabindex="0">Memory Card 2</li>
         </ul>
     </div>
 </div>
@@ -46,17 +61,14 @@
                 <feMergeNode in="black"/>
                 <feMergeNode in="comp1"/>
                 <feMergeNode in="off1b"/>
-                <animate attributeName="y" dur="4s" id="y"
-                         keyTimes="0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518; 0.564; 0.593; 0.613; 0.644; 0.693;
-                         0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1" repeatCount="indefinite"
-                         values="104px; 104px; 30px; 105px; 30px; 2px; 2px; 50px; 40px; 105px; 105px; 20px; 6ßpx; 40px;
-                         104px; 40px; 70px; 10px; 30px; 104px; 102px"/>
-                <animate attributeName="height" dur="4s" id="h"
-                         keyTimes="0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518; 0.564; 0.593; 0.613; 0.644; 0.693;
-                         0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1"
-                         repeatCount="indefinite"
-                         values="10px; 0px; 10px; 30px; 50px; 0px; 10px; 0px; 0px; 0px; 10px; 50px; 40px; 0px; 0px;
-                         0px; 40px; 30px; 10px; 0px; 50px"/>
+                <animate attributeName="y" dur="4s" id="y" keyTimes="0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518;
+                0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1"
+                         repeatCount="indefinite" values="104px; 104px; 30px; 105px; 30px; 2px; 2px; 50px; 40px; 105px;
+                         105px; 20px; 6ßpx; 40px; 104px; 40px; 70px; 10px; 30px; 104px; 102px"/>
+                <animate attributeName="height" dur="4s" id="h" keyTimes="0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518;
+                0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1"
+                         repeatCount="indefinite" values="10px; 0px; 10px; 30px; 50px; 0px; 10px; 0px; 0px; 0px; 10px;
+                         50px; 40px; 0px; 0px; 0px; 40px; 30px; 10px; 0px; 50px"/>
             </feMerge>
             <feMerge height="65px" result="merge2" width="100%" x="0" y="60px">
                 <feMergeNode in="black"/>
@@ -84,8 +96,20 @@
         <text x="0" y="100">VisualDynamics</text>
     </g>
 </svg>
+<div class="retro-message" id="no-memory">
+    <div class="prompt-message">
+        <div class="close">X</div>
+            NO MEMORY CARD SELECTED<br>
+            PLEASE F5 TO CONTINUE...
+    </div>
+</div>
 <div class="titulo texto-oculto">PRESS START!</div>
+<div id="music-player">
+    <button id="play-pause-btn"></button>
+</div>
+<div class="coming" id="coming">COMING SOON</div>
 <audio id="mariocoin" src="/assets/sound/index/mario-coin.mp3"></audio>
-<audio id="bgm" src="/assets/sound/index/bgm.mp3"></audio>
+<audio id="bgm" loop src="/assets/sound/index/bgm.mp3">Tu navegador no soporta audio.</audio>
+<audio id="cursor" src="/assets/sound/index/cursor.mp3"></audio>
 </body>
 </html>

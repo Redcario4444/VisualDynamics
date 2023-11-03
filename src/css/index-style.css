@@ -2,12 +2,13 @@
 @import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
 @import url('normalize.css');
 
-body{
+body {
     background-image: url("../../assets/img/index/fondo_inicio.gif");
     background-size: 0.3rem;
 }
 
-.retro-prompt {
+.retro-prompt,
+.retro-message{
     display: flex;
     position: fixed;
     left: 0;
@@ -17,32 +18,41 @@ body{
     background-color: rgba(0, 0, 0, 0.9);
     justify-content: center;
     align-items: center;
+    font-family: "Press Start 2P", cursive;
+    font-size: 1.5rem;
+    color: #fff;
 }
 
-.prompt-container {
+#no-memory{
+    display: none;
+}
+
+.prompt-container,
+.prompt-message{
     position: relative;
-    padding: 20px;
+    padding: 3.13rem;
     background: #000;
-    border: 2px solid #fff;
+    border: 0.13rem solid #fff;
 }
 
 .close {
     position: absolute;
-    top: 5px;
-    right: 10px;
+    top: 0.32rem;
+    right: 0.64rem;
     cursor: pointer;
 }
 
 .memory-card-list {
     list-style: none;
-    padding: 0;
+    padding: 0.7rem;
 }
 
 .memory-card-option {
-    padding: 10px;
-    border: 1px solid #fff;
-    margin-top: 10px;
+    padding: 1rem;
+    border: 0.07rem solid #fff;
+    margin-top: 1rem;
     cursor: pointer;
+    text-align: center;
 }
 
 .memory-card-option:focus {
@@ -50,7 +60,12 @@ body{
     background: #333;
 }
 
-svg{
+.memory-card-option:hover {
+    outline: none;
+    background: #333;
+}
+
+svg {
     width: 90vw;
     height: 30vh;
     display: block;
@@ -60,13 +75,59 @@ svg{
 }
 
 .titulo {
-    font-family: 'Press Start 2P', sans-serif;
+    font-family: 'Press Start 2P', cursive;
     color: white;
     font-size: 2.1rem;
     text-align: center;
     text-decoration: none;
     text-shadow: 0.38rem 0.25rem 0.3rem rgba(204, 204, 204, 0.53);
-    margin-top: 35vh;
+    margin-top: 20vh;
+}
+
+.coming {
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    font-size: 5rem;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0.38rem 0.25rem 0.3rem rgba(204, 204, 204, 0.53);
+    margin-top: 20vh;
+    display: none;
+    opacity: 0;
+    animation: fadeIn 5s ease-in-out 1s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.titulo-animado {
+    background: linear-gradient(
+            to right,
+            yellow 50%,
+            rgba(255, 255, 0, 0.4) 60%,
+            transparent 70%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% 100%;
+    animation: fillText 1.5s linear infinite;
+}
+
+@keyframes fillText {
+    0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
 }
 
 .texto-oculto {
@@ -79,3 +140,53 @@ svg{
     opacity: 1;
     transform: translateY(0);
 }
+
+#music-player {
+    position: fixed;
+    bottom: 0;
+    left: 80vw;
+    height: 5rem;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#play-pause-btn {
+    font-family: 'Press Start 2P', cursive;
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.25rem;
+    cursor: pointer;
+    outline: none;
+    display: none;
+}
+
+#pause-emoji, #pause-text {
+    color: #e30b0b;
+    text-shadow: 0.38rem 0.25rem 0.3rem rgba(227, 11, 11, 0.53);
+}
+
+#play-emoji, #play-text{
+    color: #3d07e7 ;
+    text-shadow: 0.38rem 0.25rem 0.3rem rgba(67, 1, 231, 0.53);
+}
+
+#pause-emoji {
+    margin-right: 1.5rem;
+}
+
+#play-emoji {
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+}
+
+#play-emoji, #play-text {
+    font-size: 1.5rem;
+}
+
+#pause-text {
+    font-size: 1.5rem;
+}
+
