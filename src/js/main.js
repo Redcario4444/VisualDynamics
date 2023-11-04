@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 	let selectedOptionIndex = 0;
 	let memoryCardOptions = document.querySelectorAll('.memory-card-option');
+	let areKeysNeeded = true;
+	let isPromptClosed = false;
 
 	function updateSelection(index) {
 		// Quitar el foco de todas las opciones
@@ -21,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		afterMemoryCardSelection(value);
 	}
 
-	function afterMemoryCardSelection(value) {
+	function afterMemoryCardSelection() {
+		areKeysNeeded = false;
 		const textoOculto = document.querySelector(".texto-oculto");
 		textoOculto.classList.add("mostrar-texto");
 
@@ -84,33 +87,40 @@ document.addEventListener('DOMContentLoaded', function () {
 	cursorSound.load();
 
 	window.onkeydown = function (e) {
-		if (['ArrowUp', 'ArrowDown', 'Enter', 'Escape'].includes(e.key)) {
+		if (e.key === ' ' || e.code === 'Space') {
 			e.preventDefault();
-		}
+			toggleMusic();
+		} else if (['ArrowUp', 'ArrowDown', 'Enter', 'Escape'].includes(e.key) && areKeysNeeded && !isPromptClosed) {
+			e.preventDefault();
 
-		let delay = 500;
-		let playSoundAndMove = function () {
-			cursorSound.currentTime = 0;
-			cursorSound.play()
-			updateSelection(selectedOptionIndex);
-		};
+			let playSoundAndMove = function () {
+				cursorSound.currentTime = 0;
+				cursorSound.play();
+				updateSelection(selectedOptionIndex);
+			};
 
-		switch (e.key) {
-			case 'ArrowUp':
-				selectedOptionIndex = (selectedOptionIndex > 0) ? selectedOptionIndex - 1 : memoryCardOptions.length - 1;
-				playSoundAndMove();
-				break;
-			case 'ArrowDown':
-				selectedOptionIndex = (selectedOptionIndex < memoryCardOptions.length - 1) ? selectedOptionIndex + 1 : 0;
-				playSoundAndMove();
-				break;
-			case 'Enter':
-				handleMemoryCardSelection(memoryCardOptions[selectedOptionIndex].dataset.value);
-				playSoundAndMove();
-				break;
-			case 'Escape':
-				closePrompt();
-				break;
+			switch (e.key) {
+				case 'ArrowUp':
+					selectedOptionIndex = (selectedOptionIndex > 0) ? selectedOptionIndex - 1 : memoryCardOptions.length - 1;
+					playSoundAndMove();
+					break;
+				case 'ArrowDown':
+					selectedOptionIndex = (selectedOptionIndex < memoryCardOptions.length - 1) ? selectedOptionIndex + 1 : 0;
+					playSoundAndMove();
+					break;
+				case 'Enter':
+					handleMemoryCardSelection(memoryCardOptions[selectedOptionIndex].dataset.value);
+					playSoundAndMove();
+					break;
+				case 'Escape':
+					isPromptClosed = true;
+					closePrompt();
+					break;
+			}
+		}else if(e.key === "F5" && isPromptClosed){
+			cursorSound.play();
+			e.preventDefault();
+			location.reload();
 		}
 	};
 
