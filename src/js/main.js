@@ -91,13 +91,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		let delay = 500;
 		let playSoundAndMove = function () {
 			cursorSound.currentTime = 0;
-			cursorSound.play().then(() => {
-				setTimeout(() => {
-					updateSelection(selectedOptionIndex);
-				}, delay - cursorSound.currentTime * 1000);
-			}).catch(err => {
-				console.error("Error al reproducir el sonido:", err);
-			});
+			cursorSound.play()
+			updateSelection(selectedOptionIndex);
 		};
 
 		switch (e.key) {
