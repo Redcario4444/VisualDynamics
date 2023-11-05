@@ -3,6 +3,20 @@ body {
     background-size: 0.3rem;
 }
 
+#reproductor {
+    display: flex;
+}
+
+.botones {
+    color: white;
+    margin-left: 0.6rem;
+    width: 5%;
+}
+
+#adelante {
+    margin-left: 0.8rem;
+}
+
 svg {
     width: 90vw;
     height: 30vh;
