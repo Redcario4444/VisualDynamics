@@ -271,7 +271,7 @@ rgba(255, 255, 0, 0.8);}}
 }
 
 /* SMALL */
-@media screen and (min-width: 35.5rem) and (max-width: 47.9rem) {
+@media screen and (min-width: 35rem) and (max-width: 47.99rem) {
     body,
     .retro-prompt,
     .retro-message{
@@ -352,7 +352,7 @@ rgba(255, 255, 0, 0.8);}}
 }
 
 /* MEDIUM  - TABLET*/
-@media screen and (min-width: 48rem) and (max-width: 63.9rem) {
+@media screen and (min-width: 48rem) and (max-width: 63.99rem) {
     body,
     .retro-prompt,
     .retro-message{
@@ -433,7 +433,7 @@ rgba(255, 255, 0, 0.8);}}
 }
 
 /* LARGE */
-@media screen and (min-width: 64em) and (max-width: 79.9rem) {
+@media screen and (min-width: 64em) and (max-width: 79.99rem) {
     body,
     .retro-prompt,
     .retro-message{
@@ -513,7 +513,7 @@ rgba(255, 255, 0, 0.8);}}
 }
 
 /*EXTRA-LARGE*/
-@media screen and (min-width: 80rem) and (max-width: 119.9rem) {
+@media screen and (min-width: 80rem) and (max-width: 119.99rem) {
     body,
     .retro-prompt,
     .retro-message{
