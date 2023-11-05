@@ -1,123 +1,81 @@
+function App() {}
+
+window.onload = function (event) {
+	window.app = new App();
+	app.initializeCarousel(); // Inicializa el carrusel
+	app.startAutoScroll(); // Inicia el desplazamiento automático con un intervalo de 3 segundos al cargar la página
+}
+
+App.prototype.initializeCarousel = function() {
+	this.track = document.getElementById('track');
+	this.carruselList = document.getElementById('carrusel-list');
+	this.carrusel = this.track.querySelectorAll('.carrusel');
+	this.carruselWidth = this.carrusel[0].offsetWidth;
+	this.trackWidth = this.track.offsetWidth;
+	this.listWidth = this.carruselList.offsetWidth;
+	this.leftPosition = 0;
+	this.autoScrollTimer = null; // Agregar el temporizador para el desplazamiento automático
+	this.interactionDetected = false; // Indicador de interacción del usuario
+}
+
+App.prototype.processingButton = function (event) {
+	// Detener el temporizador cuando el usuario interactúa
+	this.interactionDetected = true;
+	clearInterval(this.autoScrollTimer);
+
+	const btn = event.currentTarget;
+	btn.dataset.button === "button-prev" ? this.prevAction() : this.nextAction();
+
+	// Volver a iniciar el desplazamiento automático después de 5 segundos de inactividad
+	this.startAutoScroll(5000);
+}
+
+App.prototype.prevAction = function() {
+	if (this.leftPosition > 0) {
+		this.leftPosition -= this.carruselWidth * 2; // Avanza 2 elementos hacia atrás
+	} else {
+		// Si llegamos al primer elemento y se presiona "prev", vamos al último elemento
+		this.leftPosition = -(this.listWidth - this.trackWidth);
+	}
+	this.updateCarouselPosition();
+}
+
+App.prototype.nextAction = function() {
+	if (this.leftPosition < (this.trackWidth - this.listWidth)) {
+		this.leftPosition += this.carruselWidth * 2; // Avanza 2 elementos hacia adelante
+	} else {
+		// Si llegamos al último elemento y se presiona "next", volvemos al primer elemento
+		this.leftPosition = 0;
+	}
+	this.updateCarouselPosition();
+}
+
+App.prototype.updateCarouselPosition = function() {
+	this.track.style.left = `${-this.leftPosition}px`;
+}
+
+App.prototype.startAutoScroll = function(delay) {
+	if (this.interactionDetected) {
+		// Si se detectó interacción del usuario, inicia el temporizador después de 5 segundos
+		this.interactionDetected = false;
+		delay = 5000; // 5 segundos
+	} else {
+		// En caso contrario, inicia el temporizador después de 3 segundos
+		delay = delay || 3000; // 3 segundos
+	}
+
+	// Iniciar el temporizador para el desplazamiento automático
+	this.autoScrollTimer = setTimeout(() => {
+		this.nextAction(); // Simula un clic en el botón "Next"
+		this.startAutoScroll(); // Volver a iniciar el desplazamiento automático
+	}, delay);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-	let selectedOptionIndex = 0;
-	let memoryCardOptions = document.querySelectorAll('.memory-card-option');
-
-	function updateSelection(index) {
-		// Quitar el foco de todas las opciones
-		memoryCardOptions.forEach(option => option.classList.remove('selected'));
-		// Añadir foco a la opción seleccionada
-		memoryCardOptions[index].classList.add('selected');
-		memoryCardOptions[index].focus();
-	}
-
-	function closePrompt() {
-		document.getElementById('retroPrompt').style.display = 'none';
-		document.getElementById('no-memory').style.display = 'inline-flex';
-	}
-
-	function handleMemoryCardSelection(value) {
-		console.log('Opción seleccionada:', value);
-		document.getElementById('retroPrompt').style.display = 'none';
-		afterMemoryCardSelection(value);
-	}
-
-	function afterMemoryCardSelection(value) {
-		const textoOculto = document.querySelector(".texto-oculto");
-		textoOculto.classList.add("mostrar-texto");
-
-		// Inicia la secuencia de animación y sonido
-		setTimeout(function () {
-			let sonido = new Audio("/assets/sound/index/mario-coin.mp3");
-			sonido.play();
-			toYellow();
-		}, 7000);
-	}
-
-	let playPauseBtn = document.getElementById('play-pause-btn');
-	let bgMusic = document.getElementById('bgm');
-
-	function toggleMusic() {
-		if (bgMusic.paused) {
-			bgMusic.play();
-			playPauseBtn.innerHTML = '<span id="pause-emoji">▐▐</span><span id="pause-text">PAUSE</span>';
-		} else {
-			bgMusic.pause();
-			playPauseBtn.innerHTML = '<span id="play-emoji">▶</span><span id="play-text">PLAY</span>';
-		}
-	}
-
-	playPauseBtn.addEventListener('click', toggleMusic);
-
-	function startMusic() {
-		toggleMusic();
-		playPauseBtn.style.display = 'inline-flex';
-	}
-
-	function toYellow() {
-		let titulo = document.getElementsByClassName("titulo");
-		titulo[0].classList.add("titulo-animado");
-		toWhite();
-	}
-
-	function toWhite() {
-		setTimeout(function () {
-			let titulo = document.getElementsByClassName("titulo");
-			let coming = document.getElementById("coming");
-			titulo[0].style.color = "white";
-			startMusic();
-			coming.style.display = "inherit";
-		}, 850);
-	}
-
-	document.getElementById('closePrompt').onclick = closePrompt;
-
-	memoryCardOptions.forEach((option, index) => {
-		option.onclick = function () {
-			handleMemoryCardSelection(option.dataset.value);
-		};
-		option.onfocus = function () {
-			selectedOptionIndex = index;
-		};
-	});
-
-	let cursorSound = new Audio("/assets/sound/index/cursor.mp3");
-	cursorSound.load();
-
-	window.onkeydown = function (e) {
-		if (['ArrowUp', 'ArrowDown', 'Enter', 'Escape'].includes(e.key)) {
-			e.preventDefault();
-		}
-
-		let delay = 500;
-		let playSoundAndMove = function () {
-			cursorSound.currentTime = 0;
-			cursorSound.play().then(() => {
-				setTimeout(() => {
-					updateSelection(selectedOptionIndex);
-				}, delay - cursorSound.currentTime * 1000);
-			}).catch(err => {
-				console.error("Error al reproducir el sonido:", err);
-			});
-		};
-
-		switch (e.key) {
-			case 'ArrowUp':
-				selectedOptionIndex = (selectedOptionIndex > 0) ? selectedOptionIndex - 1 : memoryCardOptions.length - 1;
-				playSoundAndMove();
-				break;
-			case 'ArrowDown':
-				selectedOptionIndex = (selectedOptionIndex < memoryCardOptions.length - 1) ? selectedOptionIndex + 1 : 0;
-				playSoundAndMove();
-				break;
-			case 'Enter':
-				handleMemoryCardSelection(memoryCardOptions[selectedOptionIndex].dataset.value);
-				playSoundAndMove();
-				break;
-			case 'Escape':
-				closePrompt();
-				break;
-		}
-	};
-
-	updateSelection(selectedOptionIndex);
-});
+	document.getElementById('button-prev').addEventListener('click', function () {
+		app.processingButton(event);
+	})
+	document.getElementById('button-next').addEventListener('click', function () {
+		app.processingButton(event);
+	})
+})

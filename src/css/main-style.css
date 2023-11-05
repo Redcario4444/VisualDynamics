@@ -1,0 +1,137 @@
+body {
+    background-image: url("../../assets/img/index/fondo_inicio.gif");
+    background-size: 0.3rem;
+}
+
+svg {
+    width: 90vw;
+    height: 30vh;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+h4, h2, small, a {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+   text-decoration: none;
+}
+
+.carousel {
+    width: 100%;
+    margin: 0 0;
+}
+
+@media(min-width: 768px){
+    .carousel {
+        margin: 0 60px;
+    }
+}
+
+.carousel h2 {
+    font-size: 45px;
+    line-height: 38px;
+    padding-bottom: 50px;
+    opacity: .9;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+}
+
+.carrusel-list {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 304px;
+    padding: 10px 0;
+    margin: 0 auto;
+    max-width: 90vw;
+    overflow: hidden;
+}
+
+.carrusel-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    transition: .5s ease-in-out;
+}
+
+.carrusel {
+    position: relative;
+    width: 210px;
+    padding: 0 18px;
+    float: left;
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+}
+
+.carrusel h4 {
+    position: absolute;
+    z-index: 1;
+    font-size: 22px;
+    line-height: 23px;
+    color: white;
+    padding: 15px;
+}
+
+.carrusel h4 small {
+    font-size: 15px;
+    display: block;
+}
+
+.carrusel a img {
+    object-fit: cover;
+    height: 300px;
+    width: 200px;
+    box-shadow: 0 2px 5px grey;
+    transition: .3s ease-in-out;
+}
+
+@media(min-width: 768px) {
+    .carrusel {
+        width: 275px;
+    }
+
+    .carrusel a img {
+        width: 250px;
+    }
+}
+
+.carrusel-arrow {
+    background-color: white;
+    position: absolute;
+    z-index: 4;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    border: 0;
+    cursor: pointer;
+}
+
+.carrusel-arrow:focus {
+    outline: 0;
+}
+
+.carrusel-arrow svg {
+    width: 12px;
+    height: 100%;
+    color: black;
+}
+
+.carrusel-prev {
+    left: 0;
+}
+
+.carrusel-next {
+    right: 0;
+}
+
