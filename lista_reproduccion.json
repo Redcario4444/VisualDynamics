@@ -1,0 +1,16 @@
+{
+  "canciones": [
+    {
+      "titulo": "Canción 1",
+      "archivo": "/ruta/a/archivo1.mp3"
+    },
+    {
+      "titulo": "Canción 2",
+      "archivo": "/ruta/a/archivo2.mp3"
+    },
+    {
+      "titulo": "Canción 3",
+      "archivo": "/ruta/a/archivo3.mp3"
+    }
+  ]
+}
