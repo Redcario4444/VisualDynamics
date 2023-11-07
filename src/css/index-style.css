@@ -13,6 +13,10 @@
     --font-secondary: 'Share Tech Mono', monospace;
 }
 
+a {
+    text-decoration: none;
+}
+
 * {
     user-select: none;
 }
@@ -23,7 +27,7 @@
 
 html{
     font-size: 16px;
-    font-family: "Press Start 2P", cursive;
+    font-family: "Press Start 2P", serif;
 }
 
 body,

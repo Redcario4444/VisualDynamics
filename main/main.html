@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- HTML Meta Tags -->
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="PÁGINA PRINCIPAL DE VisualDynamics">
     <meta name="author" content="Daniel Alonso Lázaro">
     <meta name="author" content="Víctor Hellín Sáez">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link href="/assets/favicon/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+    <link href="/assets/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="/assets/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+    <link href="/assets/favicon/site.webmanifest" rel="manifest">
+    <link color="#5bbad5" href="/assets/favicon/safari-pinned-tab.svg" rel="mask-icon">
+    <link href="/assets/favicon/favicon.ico" rel="shortcut icon">
+    <meta content="VisualDynamics" name="apple-mobile-web-app-title">
+    <meta content="VisualDynamics" name="application-name">
+    <meta content="#b91d47" name="msapplication-TileColor">
+    <meta content="/assets/favicon/browserconfig.xml" name="msapplication-config">
+    <meta content="#000000" name="theme-color">
+    <!-- CSS -->
     <link rel="stylesheet" href="../src/css/main-style.css">
     <title>VisualDynamics</title>
+    <!-- JS -->
     <script defer src="../src/js/main.js"></script>
 </head>
 <body>
 <div>
     <div id="reproductor">
-        <p class="botones" id="atras">◀◀</p>
-        <p class="botones" id="parar-continuar">▐▐</p>
-        <p class="botones" id="adelante">▶▶</p>
-        <svg viewBox="0 0 690 120" xmlns="http://www.w3.org/2000/svg">
+        <div id="botones">
+            <div class="botones" id="atras-parar">◀◀</div>
+            <div class="botones" id="parar">▐▐</div>
+            <div class="botones" id="adelante-parar">▶▶</div>
+        </div>
+        <marquee id="titulo-cancion">Título de la canción</marquee>
+        <svg id="titulo" viewBox="-50 20 690 120" xmlns="http://www.w3.org/2000/svg">
             <style type="text/css">
                 text {
                     filter: url(#filter);
                     fill: white;
                     font-family: 'Share Tech Mono', sans-serif;
-                    font-size: 5.63rem;
+                    font-size: 5rem;
                     -webkit-font-smoothing: antialiased;
                     -moz-osx-font-smoothing: grayscale;
                 }
@@ -77,19 +95,9 @@
             </g>
         </svg>
     </div>
-    <div class="carousel">
+    <div>
         <div class="carrusel-list" id="carrusel-list">
-
-            <button class="carrusel-arrow carrusel-prev" id="button-prev" data-button="button-prev">
-                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left"
-                     class="svg-inline--fa fa-chevron-left fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 320 512">
-                    <path fill="currentColor"
-                          d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z">
-                    </path>
-                </svg>
-            </button>
-
+            <button class="carrusel-arrow carrusel-prev" id="button-prev" data-button="button-prev">◀</button>
             <div class="carrusel-track" id="track">
                 <div class="carrusel">
                     <div>
@@ -183,17 +191,10 @@
                 </div>
             </div>
 
-            <button class="carrusel-arrow carrusel-next" id="button-next" data-button="button-next">
-                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                     class="svg-inline--fa fa-chevron-right fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 320 512">
-                    <path fill="currentColor"
-                          d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z">
-                    </path>
-                </svg>
-            </button>
+            <button class="carrusel-arrow carrusel-next" id="button-next" data-button="button-next">▶</button>
         </div>
     </div>
 </div>
+<audio id="bgm" loop src="/assets/sound/index/bgm.mp3">Tu navegador no soporta audio.</audio>
 </body>
 </html>

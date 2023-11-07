@@ -36,17 +36,22 @@ document.addEventListener('DOMContentLoaded', function () {
 	let playPauseBtn = document.getElementById('play-pause-btn');
 	let bgMusic = document.getElementById('bgm');
 
-	function toggleMusic() {
-		if (bgMusic.paused) {
-			bgMusic.play();
-			playPauseBtn.innerHTML = '<span id="pause-emoji">▐▐</span><span id="pause-text">PAUSE</span>';
-		} else {
-			bgMusic.pause();
-			playPauseBtn.innerHTML = '<span id="play-emoji">▶</span><span id="play-text">PLAY</span>';
+	function toggleMusic(state) {
+		if (state === 1){
+			if (!bgMusic.paused) {
+				bgMusic.pause();
+				playPauseBtn.innerHTML = '<span id="play-emoji">▶</span><span id="play-text">PLAY</span>';
+			}
+		}else {
+			if (bgMusic.paused) {
+				bgMusic.play();
+				playPauseBtn.innerHTML = '<span id="pause-emoji">▐▐</span><span id="pause-text">PAUSE</span>';
+			} else {
+				bgMusic.pause();
+				playPauseBtn.innerHTML = '<span id="play-emoji">▶</span><span id="play-text">PLAY</span>';
+			}
 		}
 	}
-
-	playPauseBtn.addEventListener('click', toggleMusic);
 
 	function startMusic() {
 		toggleMusic();
@@ -63,10 +68,28 @@ document.addEventListener('DOMContentLoaded', function () {
 		setTimeout(function () {
 			let titulo = document.getElementsByClassName("titulo");
 			let coming = document.getElementById("coming");
+			let play = document.getElementById("play");
 			titulo[0].style.color = "white";
 			startMusic();
 			coming.style.display = "inherit";
+			play.innerHTML = '<div id="link" class="titulo texto-oculto mostrar-texto titulo-animado" style="color: white; cursor: pointer;">PRESS START!</div>';
 		}, 850);
+		setTimeout(function(){
+			toHome();
+		}, 851);
+	}
+
+	function toHome(){
+		let link = document.getElementById("link");
+		let glados = document.getElementById("welcome");
+		link.addEventListener("click", function(){
+			toggleMusic(1);
+			glados.play();
+			setTimeout(function(){
+				window.location.href="../main/main.html";
+			}, 3000);
+		});
+		playPauseBtn.addEventListener('click', toggleMusic);
 	}
 
 	document.getElementById('closePrompt').onclick = closePrompt;

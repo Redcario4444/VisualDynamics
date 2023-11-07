@@ -2,8 +2,8 @@ function App() {}
 
 window.onload = function (event) {
 	window.app = new App();
-	app.initializeCarousel(); // Inicializa el carrusel
-	app.startAutoScroll(); // Inicia el desplazamiento automático con un intervalo de 3 segundos al cargar la página
+	app.initializeCarousel();
+	app.startAutoScroll();
 }
 
 App.prototype.initializeCarousel = function() {
@@ -14,27 +14,24 @@ App.prototype.initializeCarousel = function() {
 	this.trackWidth = this.track.offsetWidth;
 	this.listWidth = this.carruselList.offsetWidth;
 	this.leftPosition = 0;
-	this.autoScrollTimer = null; // Agregar el temporizador para el desplazamiento automático
-	this.interactionDetected = false; // Indicador de interacción del usuario
+	this.autoScrollTimer = null;
+	this.interactionDetected = false;
 }
 
 App.prototype.processingButton = function (event) {
-	// Detener el temporizador cuando el usuario interactúa
 	this.interactionDetected = true;
 	clearInterval(this.autoScrollTimer);
 
 	const btn = event.currentTarget;
 	btn.dataset.button === "button-prev" ? this.prevAction() : this.nextAction();
 
-	// Volver a iniciar el desplazamiento automático después de 5 segundos de inactividad
 	this.startAutoScroll(5000);
 }
 
 App.prototype.prevAction = function() {
 	if (this.leftPosition > 0) {
-		this.leftPosition -= this.carruselWidth * 2; // Avanza 2 elementos hacia atrás
+		this.leftPosition -= this.carruselWidth * 2;
 	} else {
-		// Si llegamos al primer elemento y se presiona "prev", vamos al último elemento
 		this.leftPosition = -(this.listWidth - this.trackWidth);
 	}
 	this.updateCarouselPosition();
@@ -42,9 +39,8 @@ App.prototype.prevAction = function() {
 
 App.prototype.nextAction = function() {
 	if (this.leftPosition < (this.trackWidth - this.listWidth)) {
-		this.leftPosition += this.carruselWidth * 2; // Avanza 2 elementos hacia adelante
+		this.leftPosition += this.carruselWidth * 2;
 	} else {
-		// Si llegamos al último elemento y se presiona "next", volvemos al primer elemento
 		this.leftPosition = 0;
 	}
 	this.updateCarouselPosition();
@@ -56,18 +52,15 @@ App.prototype.updateCarouselPosition = function() {
 
 App.prototype.startAutoScroll = function(delay) {
 	if (this.interactionDetected) {
-		// Si se detectó interacción del usuario, inicia el temporizador después de 5 segundos
 		this.interactionDetected = false;
-		delay = 5000; // 5 segundos
+		delay = 5000;
 	} else {
-		// En caso contrario, inicia el temporizador después de 3 segundos
-		delay = delay || 3000; // 3 segundos
+		delay = delay || 3000;
 	}
 
-	// Iniciar el temporizador para el desplazamiento automático
 	this.autoScrollTimer = setTimeout(() => {
-		this.nextAction(); // Simula un clic en el botón "Next"
-		this.startAutoScroll(); // Volver a iniciar el desplazamiento automático
+		this.nextAction();
+		this.startAutoScroll();
 	}, delay);
 }
 
@@ -78,4 +71,49 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('button-next').addEventListener('click', function () {
 		app.processingButton(event);
 	})
+
+	let botones = document.getElementById("botones").children;
+	let adelante = document.getElementById("adelante-parar");
+	let atras = document.getElementById("atras-parar");
+	let titulocancion = document.getElementById("titulo-cancion");
+	let flechas = document.getElementsByClassName("carrusel-arrow");
+	for (var i = 0; i < botones.length; i++) {
+		botones[i].addEventListener("click", function (event) {
+			if (this.id === "parar") {
+				this.removeAttribute("id");
+				this.setAttribute("id", "continuar");
+				this.textContent = "▶";
+				adelante.removeAttribute("id");
+				adelante.setAttribute("id", "adelante-continuar");
+				atras.removeAttribute("id");
+				atras.setAttribute("id", "atras-continuar");
+				titulocancion.style.color = "#e30b0b";
+				titulocancion.style.textShadow = "0.2rem 0.2rem 0.1rem rgba(227, 11, 11, 0.5)";
+				for (let i = 0; i < flechas.length; i++) {
+					flechas[i].style.color = "#3d07e7";
+					flechas[i].style.textShadow = "0.2rem 0.2rem 0.1rem rgba(67, 1, 231, 0.5)";
+				}
+			} else if (this.id === "continuar") {
+				this.removeAttribute("id");
+				this.setAttribute("id", "parar");
+				this.textContent = "▐▐";
+				adelante.removeAttribute("id");
+				adelante.setAttribute("id", "adelante-parar");
+				atras.removeAttribute("id");
+				atras.setAttribute("id", "atras-parar");
+				titulocancion.style.color = "#3d07e7";
+				titulocancion.style.textShadow = "0.2rem 0.2rem 0.1rem rgba(67, 1, 231, 0.5)";
+				for (let i = 0; i < flechas.length; i++) {
+					flechas[i].style.color = "#e30b0b";
+					flechas[i].style.textShadow = "0.2rem 0.2rem 0.1rem rgba(227, 11, 11, 0.5)";
+				}
+			} else if (this.id === "adelante-parar" || this.id === "adelante-continuar") {
+				alert("Has pasado a la siguiente canción");
+			} else if (this.id === "atras-parar" || this.id === "atras-continuar") {
+				alert("Has vuelto a la anterior canción");
+			}
+		});
+	}
+
+
 })
