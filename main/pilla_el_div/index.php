@@ -1,11 +1,11 @@
 <?php
     $descripcion = "Pilla el Div, un juego que comprueba tus reflejos y movimientos rápidos";
     $titulo = "Pilla el Div";
-    $css = "../../src/css/pilla_el_div.css";
-    $js = "../../src/js/pilla_el_div.css";
-    include "templates/header.php";
+    $css_propio = "../../src/css/pilla_el_div.css";
+    $js_propio = "../../src/js/pilla_el_div.js";
+    include "../../src/header.php";
 ?>
-
+<h1>Pilla el Div</h1>
 
 <div id="campo">
 </div>

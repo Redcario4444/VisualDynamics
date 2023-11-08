@@ -82,6 +82,15 @@ document.addEventListener('DOMContentLoaded', function () {
 	function toHome(){
 		let link = document.getElementById("link");
 		let glados = document.getElementById("welcome");
+		link.addEventListener("keydown", function(e){
+			if(e.key === "Home" || e.code === "Home"){
+				toggleMusic(1);
+				glados.play();
+				setTimeout(function(){
+					window.location.href="../../main/main.php";
+				}, 3000);
+			}
+		});
 		link.addEventListener("click", function(){
 			toggleMusic(1);
 			glados.play();
@@ -90,6 +99,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			}, 3000);
 		});
 		playPauseBtn.addEventListener('click', toggleMusic);
+		window.addEventListener('keydown', function (e) {
+			if(e.key === " " || e.code === "Space"){
+				toggleMusic();
+			}
+		});
 	}
 
 	document.getElementById('closePrompt').onclick = closePrompt;
@@ -111,16 +125,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			e.preventDefault();
 		}
 
-		let delay = 500;
 		let playSoundAndMove = function () {
 			cursorSound.currentTime = 0;
-			cursorSound.play().then(() => {
-				setTimeout(() => {
-					updateSelection(selectedOptionIndex);
-				}, delay - cursorSound.currentTime * 1000);
-			}).catch(err => {
-				console.error("Error al reproducir el sonido:", err);
-			});
+			cursorSound.play();
+			updateSelection(selectedOptionIndex);
 		};
 
 		switch (e.key) {

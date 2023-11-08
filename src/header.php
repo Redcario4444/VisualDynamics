@@ -1,9 +1,9 @@
 <?php
     /**
      * @var string $descripcion Descripción de la página
-     * @var string $css         Hoja de estilos
-     * @var string $titulo      Título de la página
-     * @var string $js          Script de la página
+     * @var string $titulo Título de la página
+     * @var string $css_propio  Hoja de estilos propia de la página a la que hace referencia
+     * @var string $js_propio   Script propio de la página a la que hace referencia
      */
 ?>
 <!DOCTYPE html>
@@ -28,10 +28,16 @@
     <meta content='/assets/favicon/browserconfig.xml' name='msapplication-config'>
     <meta content='#000000' name='theme-color'>
     <!-- CSS -->
-    <link rel='stylesheet' href='<?=$css?>'>
+    <link rel='stylesheet' href="/src/css/header_footer.css">
+    <?php
+        echo $css_propio?"<link rel='stylesheet' href='$css_propio'>":"";
+    ?>
     <title><?=$titulo?></title>
     <!-- JS -->
-    <script defer src="<?=$js?>"></script>
+    <script defer src="/src/js/header.js"></script>
+    <?php
+        echo $js_propio?"<script defer src='$js_propio'></script>":"";
+    ?>
 </head>
 <body>
 <div>
@@ -67,28 +73,15 @@
                         <feMergeNode in='black'/>
                         <feMergeNode in='comp1'/>
                         <feMergeNode in='off1b'/>
-                        <animate attributeName='y' dur='4s' id='y' keyTimes='0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518;
-                0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1'
-                                 repeatCount='indefinite' values='104px; 104px; 30px; 105px; 30px; 2px; 2px; 50px; 40px; 105px;
-                         105px; 20px; 6ßpx; 40px; 104px; 40px; 70px; 10px; 30px; 104px; 102px'/>
-                        <animate attributeName='height' dur='4s' id='h' keyTimes='0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518;
-                0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1'
-                                 repeatCount='indefinite' values='10px; 0px; 10px; 30px; 50px; 0px; 10px; 0px; 0px; 0px; 10px;
-                         50px; 40px; 0px; 0px; 0px; 40px; 30px; 10px; 0px; 50px'/>
+                        <animate attributeName='y' dur='4s' id='y' keyTimes='0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518; 0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1' repeatCount='indefinite' values='104px; 104px; 30px; 105px; 30px; 2px; 2px; 50px; 40px; 105px; 105px; 20px; 6ßpx; 40px; 104px; 40px; 70px; 10px; 30px; 104px; 102px'/>
+                        <animate attributeName='height' dur='4s' id='h' keyTimes='0; 0.362; 0.368 0.421; 0.440; 0.477; 0.518; 0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1' repeatCount='indefinite' values='10px; 0px; 10px; 30px; 50px; 0px; 10px; 0px; 0px; 0px; 10px; 50px; 40px; 0px; 0px; 0px; 40px; 30px; 10px; 0px; 50px'/>
                     </feMerge>
                     <feMerge height='65px' result='merge2' width='100%' x='0' y='60px'>
                         <feMergeNode in='black'/>
                         <feMergeNode in='comp2'/>
                         <feMergeNode in='off2b'/>
-                        <animate attributeName='y' dur='4s' id='y'
-                                 keyTimes='0; 0.055; 0.100; 0.125; 0.159; 0.182; 0.202; 0.236; 0.268; 0.326; 0.357; 0.400;
-                         0.408; 0.461; 0.493; 0.513; 0.548; 0.577; 0.613; 1' repeatCount='indefinite'
-                                 values='103px; 104px; 69px; 53px; 42px; 104px; 78px; 89px; 96px; 100px; 67px; 50px; 96px;
-                         66px; 88px; 42px; 13px; 100px; 100px; 104px;'/>
-                        <animate attributeName='height' dur='4s' id='h'
-                                 keyTimes='0; 0.055; 0.100; 0.125; 0.159; 0.182; 0.202; 0.236; 0.268; 0.326; 0.357; 0.400;
-                         0.408; 0.461; 0.493; 0.513;  1' repeatCount='indefinite'
-                                 values='0px; 0px; 0px; 16px; 16px; 12px; 12px; 0px; 0px; 5px; 10px; 22px; 33px; 11px;
+                        <animate attributeName='y' dur='4s' id='y' keyTimes='0; 0.055; 0.100; 0.125; 0.159; 0.182; 0.202; 0.236; 0.268; 0.326; 0.357; 0.400; 0.408; 0.461; 0.493; 0.513; 0.548; 0.577; 0.613; 1' repeatCount='indefinite' values='103px; 104px; 69px; 53px; 42px; 104px; 78px; 89px; 96px; 100px; 67px; 50px; 96px; 66px; 88px; 42px; 13px; 100px; 100px; 104px;'/>
+                        <animate attributeName='height' dur='4s' id='h' keyTimes='0; 0.055; 0.100; 0.125; 0.159; 0.182; 0.202; 0.236; 0.268; 0.326; 0.357; 0.400; 0.408; 0.461; 0.493; 0.513;  1' repeatCount='indefinite' values='0px; 0px; 0px; 16px; 16px; 12px; 12px; 0px; 0px; 5px; 10px; 22px; 33px; 11px;
                          0px; 0px; 10px'/>
                     </feMerge>
                     <feMerge>
@@ -98,8 +91,6 @@
                     </feMerge>
                 </filter>
             </defs>
-            <g>
-                <text x='0' y='100'>VisualDynamics</text>
-            </g>
+            <g><text x='0' y='100'>VisualDynamics</text></g>
         </svg>
     </div>
