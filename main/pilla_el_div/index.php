@@ -12,5 +12,5 @@
 <audio id="rebote" src="/assets/sound/pilla_el_div/rebote.mp3"></audio>
 
 <?php
-    include 'templates/footer.php'; #TODO COMPROBAR RUTA!
+    include '../../src/footer.php';
 ?>
