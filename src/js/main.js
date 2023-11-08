@@ -70,3 +70,25 @@ document.getElementById('button-prev').addEventListener('click', function () {
 document.getElementById('button-next').addEventListener('click', function () {
 	app.processingButton(event);
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+
+	let flecha = document.getElementsByClassName("carrusel-arrow");
+	let botones = document.getElementById("botones").children;
+
+	for (let i = 0; i < botones.length; i++) {
+		botones[i].addEventListener("click", function (event) {
+			if (this.id === "parar") {
+				for (let i = 0; i < flecha.length; i++) {
+					flecha[i].style.color = "#e30b0b";
+					flecha[i].style.textShadow = "0.2rem 0.2rem 0.1rem rgba(227, 11, 11, 0.5)";
+				}
+			} else if (this.id === "continuar") {
+				for (let i = 0; i < flecha.length; i++) {
+				flecha[i].style.color = "#3d07e7";
+				flecha[i].style.textShadow = "0.2rem 0.2rem 0.1rem rgba(67, 1, 231, 0.5)";
+				}
+			}
+		});
+	}
+});

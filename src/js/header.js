@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 titulocancion.textContent = canciones[contador].textContent;
             } else if (this.id === "adelante-parar" || this.id === "adelante-continuar") {
                 canciones[contador].pause();
+                canciones[contador].currentTime = 0;
                 if (contador+1 < canciones.length){
                     contador++;
                 }else {
@@ -45,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 titulocancion.textContent = canciones[contador].textContent;
             } else if (this.id === "atras-parar" || this.id === "atras-continuar") {
                 canciones[contador].pause();
+                canciones[contador].currentTime = 0;
                 if (contador-1 > -1){
                     contador--;
                 }else {
