@@ -82,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	function toHome(){
 		let link = document.getElementById("link");
 		let glados = document.getElementById("welcome");
-		link.addEventListener("keydown", function(e){
-			if(e.key === "Home" || e.code === "Home"){
+		document.addEventListener("keydown", function(e){
+			if(e.key === "Home" || e.code === "Home" || e.key === "Enter" || e.code === "Enter"){
 				toggleMusic(1);
 				glados.play();
 				setTimeout(function(){
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}, 3000);
 		});
 		playPauseBtn.addEventListener('click', toggleMusic);
-		window.addEventListener('keydown', function (e) {
+		document.addEventListener('keydown', function (e) {
 			if(e.key === " " || e.code === "Space"){
 				toggleMusic();
 			}

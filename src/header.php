@@ -2,8 +2,11 @@
     /**
      * @var string $descripcion Descripción de la página
      * @var string $titulo Título de la página
-     * @var string $css_propio  Hoja de estilos propia de la página a la que hace referencia
+     * @var string $css CSS del header y del footer en ruta relativa al directorio raíz
+     * @var string $css_propio  CSS propia de la página a la que hace referencia
+     * @var string $js Script del header en ruta relativa al directorio raíz
      * @var string $js_propio   Script propio de la página a la que hace referencia
+     * @var string $ruta_canciones Ruta relativa de assets/sound/canciones/
      */
 ?>
 <!DOCTYPE html>
@@ -28,15 +31,15 @@
     <meta content='/assets/favicon/browserconfig.xml' name='msapplication-config'>
     <meta content='#000000' name='theme-color'>
     <!-- CSS -->
-    <link rel='stylesheet' href="/src/css/header_footer.css">
+    <link rel='stylesheet' href="<?=$css?>">
     <?php
-        echo $css_propio?"<link rel='stylesheet' href='$css_propio'>":"";
+        echo $css_propio?"<link rel='stylesheet' href='$css_propio'>\n":"\n";
     ?>
     <title><?=$titulo?></title>
     <!-- JS -->
-    <script defer src="/src/js/header.js"></script>
+    <script defer src="<?=$js?>"></script>
     <?php
-        echo $js_propio?"<script defer src='$js_propio'></script>":"";
+        echo $js_propio?"<script defer src='$js_propio'></script>\n":"\n";
     ?>
 </head>
 <body>
@@ -93,4 +96,9 @@
             </defs>
             <g><text x='0' y='100'>VisualDynamics</text></g>
         </svg>
+        <div id='canciones'>
+            <audio src="<?=$ruta_canciones?>assets/sound/canciones/neon-gaming.mp3">Neon Gaming</audio>
+            <audio src="<?=$ruta_canciones?>assets/sound/canciones/old-school.mp3">Old School</audio>
+            <audio src="<?=$ruta_canciones?>assets/sound/canciones/hyperloop.mp3">Hyperloop</audio>
+        </div>
     </div>

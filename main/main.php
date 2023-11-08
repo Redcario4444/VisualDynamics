@@ -1,8 +1,11 @@
 <?php
     $descripcion = "VisualDynamics es una empresa de diseño gráfico y desarrollo web. Nuestro objetivo es ayudar a las empresas a crecer y a mejorar su imagen.";
     $titulo = "VisualDynamics";
+    $css = "../src/css/header_footer.css";
     $css_propio = "../src/css/main-style.css";
+    $js = "../src/js/header.js";
     $js_propio = "../src/js/main.js";
+    $ruta_canciones = "../";
     include "../src/header.php";
 ?>
     <div class="carrusel-list" id="carrusel-list">
@@ -102,6 +105,5 @@
         <button class="carrusel-arrow carrusel-next" id="button-next" data-button="button-next">▶</button>
     </div>
 <?php
-    $ruta_footer = '../';
     include "../src/footer.php";
 ?>

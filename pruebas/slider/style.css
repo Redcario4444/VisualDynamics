@@ -1,0 +1,51 @@
+@import url('https://fonts.cdnfonts.com/css/press-start-2p');
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+@import url('../../src/css/normalize.css');
+
+#prev, #next {
+    cursor: pointer;
+}
+
+body {
+    background: #121314;
+}
+
+body > ul {
+    position: absolute;
+    top: 50%;
+    width: 800px;
+    height: 200px;
+    left: 50%;
+    margin-left: -400px;
+    margin-top: -130px;
+}
+
+ul > li {
+    width: 25%;
+    list-style-type: none;
+    position: absolute;
+    top: 0;
+    height: 200px;
+    opacity: 0;
+    padding: 40px 20px 20px;
+    text-align: center;
+    transition: 1s opacity;
+}
+
+.active {
+    opacity: 1;
+}
+
+p {
+    font-family: "Press Start 2P", monospace;
+    font-size: 13px;
+    color: #646566;
+    line-height: 1.5em;
+}
+
+strong {
+    color: #fff;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 100px;
+}
