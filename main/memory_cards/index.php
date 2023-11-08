@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <meta name="description" content="'Memory cards' de VisualDynamics">
-    <meta name="author" content="Daniel Alonso Lázaro">
-    <meta name="author" content="Víctor Hellín Sáez">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../src/css/memory_cards-style.css">
-    <title>'Memory Cards' de VisualDynamics</title>
-    <script defer src="../../src/js/memory_cards.js"></script>
-</head>
-<body>
-<div>
+<?php
+    $descripcion = "¡Memory cards! Pon a prueba tu memoria con este juego de cartas.";
+    $titulo = "¡Memory Cards!";
+    $css = "../../src/css/header_footer.css";
+    $css_propio = "../../src/css/memory_cards.css";
+    $js = "../../src/css/header.js";
+    $js_propio = "../../src/css/memory_cards.js";
+    $ruta_canciones = "../../";
+    include "../../src/header.php";
+?>
 
-</div>
-</body>
-</html>
+<!-- AQUÍ EL CONTENIDO DE LA PÁGINA -->
+
+<?php
+    include '../../src/footer.php';
+?>

@@ -20,7 +20,7 @@
     <meta content="/assets/favicon/browserconfig.xml" name="msapplication-config">
     <meta content="#000000" name="theme-color">
     <!-- CSS -->
-    <link href="src/css/index-style.css" rel="stylesheet">
+    <link href="src/css/index.css" rel="stylesheet">
     <!-- JS -->
     <script defer src="src/js/index.js"></script>
     <title>VisualDynamics</title>

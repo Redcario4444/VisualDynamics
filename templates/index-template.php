@@ -1,13 +1,17 @@
 <?php
+    /*TODO TODAS LAS RUTAS SON RELATIVAS A LA UBICACIÓN DE LOS ARCHIVOS CON RESPECTO A ESTE ARCHIVO*/
     $descripcion = ""; /*TODO AÑADIR DESCRIPCIÓN DE LA PÁGINA*/
     $titulo = ""; /*TODO AÑADIR TÍTULO DE LA PÁGINA*/
-    $css_propio = ""; /*TODO AÑADIR LINK AL CSS DE ESTA PÁGINA*/
-    $js_propio = ""; /*TODO AÑADIR LINK AL JS DE ESTA PÁGINA*/
-    include "src/header.php"; #TODO COMPROBAR RUTA!
+    $css = ""; /*TODO AÑADIR LINK RELATIVO AL CSS DEL HEADER*/
+    $css_propio = ""; /*TODO AÑADIR LINK RELATIVO AL CSS DE ESTA PÁGINA*/
+    $js = ""; /*TODO AÑADIR LINK RELATIVO AL JS DEL HEADER*/
+    $js_propio = ""; /*TODO AÑADIR LINK RELATIVO AL JS DE ESTA PÁGINA*/
+    $ruta_canciones = ""; /*TODO AÑADIR LINK RELATIVO A "assets/sound/canciones/[...].mp3"*/
+    include "src/header.php"; #TODO COMPROBAR RUTA! (RUTA RELATIVA A LA UBICACIÓN DE ESTE ARCHIVO)
 ?>
 
 <!-- AQUÍ EL CONTENIDO DE LA PÁGINA -->
 
 <?php
-    include 'src/footer.php'; #TODO COMPROBAR RUTA!
+    include 'src/footer.php'; #TODO COMPROBAR RUTA! (RUTA RELATIVA A LA UBICACIÓN DE ESTE ARCHIVO)
 ?>
