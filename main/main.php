@@ -11,7 +11,7 @@
             <div class="carrusel">
                 <div>
                     <a href="/">
-                        <h4><small>1</small> Mas </h4>
+                        <h4><small>Reflejos y Velocidad</small>Pilla en Div</h4>
                         <picture>
                             <img src="../assets/img/index/fondo_inicio.gif" alt="imagen">
                         </picture>
