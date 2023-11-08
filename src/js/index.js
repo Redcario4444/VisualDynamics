@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			toggleMusic(1);
 			glados.play();
 			setTimeout(function(){
-				window.location.href="../main/main.html";
+				window.location.href="../../main/main.php";
 			}, 3000);
 		});
 		playPauseBtn.addEventListener('click', toggleMusic);
