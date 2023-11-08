@@ -1,0 +1,12 @@
+.reboteDiv {
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    position: absolute;
+}
+
+#campo {
+    height: 500px;
+    width: 500px;
+    border: solid thin black;
+}
