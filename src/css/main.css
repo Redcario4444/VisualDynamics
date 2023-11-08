@@ -6,6 +6,7 @@ body {
     background-image: url("../../assets/img/index/fondo_inicio.gif");
     background-size: 0.3rem;
     user-select: none;
+    font-family: "Press Start 2P", monospace;
 }
 
 #reproductor {
@@ -69,7 +70,6 @@ body {
 #titulo-cancion {
     width: 90%;
     justify-self: center;
-    font-family: "Press Start 2P", serif;
     color: #e30b0b;
     text-shadow: 0.2rem 0.2rem 0.1rem rgba(227, 11, 11, 0.5);
 }
@@ -106,7 +106,6 @@ body {
 }
 
 .carrusel h4 {
-    font-family: "Press Start 2P", serif;
     position: absolute;
     z-index: 1;
     font-size: 10px;
@@ -116,7 +115,6 @@ body {
 }
 /* Mirar Font Size */
 .carrusel h4 small {
-    font-family: "Press Start 2P", serif;
     font-size: 10px;
     display: block;
 }
