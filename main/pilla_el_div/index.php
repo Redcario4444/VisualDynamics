@@ -1,9 +1,9 @@
 <?php
-    $descripcion = ""; /*TODO AÑADIR DESCRIPCIÓN DE LA PÁGINA*/
-    $titulo = ""; /*TODO AÑADIR TÍTULO DE LA PÁGINA*/
-    $css = ""; /*TODO AÑADIR LINK AL CSS DE ESTA PÁGINA*/
-    $js = ""; /*TODO AÑADIR LINK AL JS DE ESTA PÁGINA*/
-    include "templates/header.php"; #TODO COMPROBAR RUTA!
+    $descripcion = "Pilla el Div, un juego que comprueba tus reflejos y movimientos rápidos";
+    $titulo = "Pilla el Div";
+    $css = "../../src/css/pilla_el_div.css";
+    $js = "../../src/js/pilla_el_div.css";
+    include "templates/header.php";
 ?>
 
 
