@@ -1,12 +1,85 @@
 .reboteDiv {
-    width: 10px;
-    height: 10px;
-    background-color: black;
+    width: 100px;
+    height: 100px;
+    background-color: deepskyblue;
     position: absolute;
+    border-radius: 50%;
+    border: solid thin black;
 }
 
-#campo {
-    height: 500px;
-    width: 500px;
-    border: solid thin black;
+.oculto {
+    display: none;
+}
+
+.campo {
+    margin: auto;
+    height: 25rem;
+    width: 800px;
+}
+
+.seleccion {
+    margin: auto;
+    height: 25rem;
+    width: 40rem;
+    background-size: 100% 100%;
+    background-color: black;
+    border: 0.3rem solid white;
+}
+
+#score-number {
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-family: "Press Start 2P", serif;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    height: 100%;
+}
+
+li {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    border: 0.3rem solid white;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-family: "Press Start 2P", serif;
+    width: 10rem;
+    height: 5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+li:focus,
+li:hover {
+    outline: none;
+    background: grey;
+    text-shadow: rgba(0, 0, 0, 1);
+}
+
+.fondo-facil {
+    background: url("../../assets/img/pilla_el_div/easy_bg.gif");
+    background-size: 100% 100%;
+}
+
+.fondo-normal {
+    background: url("../../assets/img/pilla_el_div/medium_bg.gif");
+    background-size: 100% 100%;
+}
+
+.fondo-dificil {
+    background: url("../../assets/img/pilla_el_div/hard_bg.gif");
+    background-size: 100% 100%;
+}
+
+.fondo-infinito {
+    background: url("../../assets/img/pilla_el_div/infinite.gif");
+    background-size: 100% 100%;
 }
