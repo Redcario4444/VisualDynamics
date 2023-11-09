@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let atras = document.getElementById("atras-continuar");
     let titulocancion = document.getElementById("titulo-cancion");
 
-    for (var i = 0; i < botones.length; i++) {
+    for (let i = 0; i < botones.length; i++) {
         botones[i].addEventListener("click", function (event) {
             if (this.id === "parar") {
                 this.removeAttribute("id");
@@ -33,6 +33,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 canciones[contador].play();
                 titulocancion.textContent = canciones[contador].textContent;
             } else if (this.id === "adelante-parar" || this.id === "adelante-continuar") {
+                siguienteCancion();
+            } else if (this.id === "atras-parar" || this.id === "atras-continuar") {
+                anteriorCancion();
+            }
+
+            canciones[contador].addEventListener("ended", function() {
+                siguienteCancion();
+            });
+
+            function siguienteCancion() {
                 canciones[contador].pause();
                 canciones[contador].currentTime = 0;
                 if (contador+1 < canciones.length){
@@ -44,7 +54,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     canciones[contador].play();
                 }
                 titulocancion.textContent = canciones[contador].textContent;
-            } else if (this.id === "atras-parar" || this.id === "atras-continuar") {
+            }
+
+            function anteriorCancion() {
                 canciones[contador].pause();
                 canciones[contador].currentTime = 0;
                 if (contador-1 > -1){
@@ -57,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 titulocancion.textContent = canciones[contador].textContent;
             }
+
         });
     }
 });
