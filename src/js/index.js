@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	cursorSound.load();
 
 	window.onkeydown = function (e) {
+		/*TODO LAS TECLAS SIGUEN SONANDO UNA VEZ HA BAJADO EL PRESS START*/
 		if (['ArrowUp', 'ArrowDown', 'Enter', 'Escape'].includes(e.key)) {
 			e.preventDefault();
 		}

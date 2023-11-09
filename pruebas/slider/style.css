@@ -1,33 +1,48 @@
 @import url('https://fonts.cdnfonts.com/css/press-start-2p');
 @import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
-@import url('../../src/css/normalize.css');
 
 #prev, #next {
     cursor: pointer;
+    position: absolute; /* Agrega posición absoluta */
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Compensa la mitad de la altura del botón */
+    z-index: 10; /* Asegúrate de que estén sobre los otros elementos si es necesario */
 }
 
-body {
-    background: #121314;
+#prev {
+    left: -50px; /* Ajusta según sea necesario para alinear con el lado izquierdo del carrusel */
 }
 
-body > ul {
+#next {
+    right: -50px; /* Ajusta según sea necesario para alinear con el lado derecho del carrusel */
+}
+
+.container{
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+}
+
+ul {
     position: absolute;
     top: 50%;
-    width: 800px;
+    width: 80%;
     height: 200px;
     left: 50%;
-    margin-left: -400px;
+    margin-left: -650px;
     margin-top: -130px;
 }
 
-ul > li {
+li {
     width: 25%;
     list-style-type: none;
     position: absolute;
     top: 0;
+    left: -3000px;
+    padding: 20px;
     height: 200px;
     opacity: 0;
-    padding: 40px 20px 20px;
+    padding-top: 40px;
     text-align: center;
     transition: 1s opacity;
 }
@@ -36,8 +51,8 @@ ul > li {
     opacity: 1;
 }
 
-p {
-    font-family: "Press Start 2P", monospace;
+li > p {
+    font-family: sans-serif;
     font-size: 13px;
     color: #646566;
     line-height: 1.5em;
@@ -48,4 +63,8 @@ strong {
     font-weight: 700;
     font-size: 60px;
     line-height: 100px;
+}
+
+div{
+    color: white;
 }

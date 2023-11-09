@@ -31,16 +31,16 @@
     <meta content='/assets/favicon/browserconfig.xml' name='msapplication-config'>
     <meta content='#000000' name='theme-color'>
     <!-- CSS -->
-    <link rel='stylesheet' href="<?=$css?>">
     <?php
         echo $css_propio?"<link rel='stylesheet' href='$css_propio'>\n":"\n";
     ?>
+    <link rel='stylesheet' href="<?=$css?>">
     <title><?=$titulo?></title>
     <!-- JS -->
-    <script defer src="<?=$js?>"></script>
     <?php
         echo $js_propio?"<script defer src='$js_propio'></script>\n":"\n";
     ?>
+    <script defer src="<?=$js?>"></script>
 </head>
 <body>
 <div>
@@ -76,8 +76,8 @@
                         <feMergeNode in='black'/>
                         <feMergeNode in='comp1'/>
                         <feMergeNode in='off1b'/>
-                        <animate attributeName='y' dur='4s' id='y' keyTimes='0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518; 0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1' repeatCount='indefinite' values='104px; 104px; 30px; 105px; 30px; 2px; 2px; 50px; 40px; 105px; 105px; 20px; 6ßpx; 40px; 104px; 40px; 70px; 10px; 30px; 104px; 102px'/>
-                        <animate attributeName='height' dur='4s' id='h' keyTimes='0; 0.362; 0.368 0.421; 0.440; 0.477; 0.518; 0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1' repeatCount='indefinite' values='10px; 0px; 10px; 30px; 50px; 0px; 10px; 0px; 0px; 0px; 10px; 50px; 40px; 0px; 0px; 0px; 40px; 30px; 10px; 0px; 50px'/>
+                        <animate attributeName='y' dur='4s' id='y' keyTimes='0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518; 0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1' repeatCount='indefinite' values='104px; 104px; 30px; 105px; 30px; 2px; 2px; 50px; 40px; 105px; 105px; 20px; 60px; 40px; 104px; 40px; 70px; 10px; 30px; 104px; 102px'/>
+                        <animate attributeName='height' dur='4s' id='h' keyTimes='0; 0.362; 0.368; 0.421; 0.440; 0.477; 0.518; 0.564; 0.593; 0.613; 0.644; 0.693; 0.721; 0.736; 0.772; 0.818; 0.844; 0.894; 0.925; 0.939; 1' repeatCount='indefinite' values='10px; 0px; 10px; 30px; 50px; 0px; 10px; 0px; 0px; 0px; 10px; 50px; 40px; 0px; 0px; 0px; 40px; 30px; 10px; 0px; 50px'/>
                     </feMerge>
                     <feMerge height='65px' result='merge2' width='100%' x='0' y='60px'>
                         <feMergeNode in='black'/>
@@ -102,3 +102,4 @@
             <audio src="<?=$ruta_canciones?>assets/sound/canciones/hyperloop.mp3">Hyperloop</audio>
         </div>
     </div>
+</div>
