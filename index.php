@@ -103,7 +103,7 @@
             PLEASE F5 TO CONTINUE...
     </div>
 </div>
-<span id="play"><div class="titulo texto-oculto">PRESS START!</div></span>
+<div class="titulo texto-oculto"><span id='play'>PRESS START!</span></div>
 <div id="music-player">
     <button id="play-pause-btn"></button>
 </div>
@@ -112,5 +112,7 @@
 <audio id="bgm" loop src="/assets/sound/index/bgm.mp3">Tu navegador no soporta audio.</audio>
 <audio id="cursor" src="/assets/sound/index/cursor.mp3"></audio>
 <audio id="welcome" src="/assets/sound/index/welcome-message.wav"></audio>
+<audio id="memory1" src="/assets/sound/index/memory1.wav"></audio>
+<audio id="memory2" src="/assets/sound/index/memory2.wav"></audio>
 </body>
 </html>
