@@ -1,10 +1,67 @@
-.reboteDiv {
-    width: 100px;
-    height: 100px;
+.reboteDivFacil {
+    width: 150px;
+    height: 150px;
     background-color: deepskyblue;
     position: absolute;
     border-radius: 50%;
     border: solid thin black;
+}
+
+.reboteDivFacil:hover {
+    cursor: pointer;
+    background-color: lightskyblue;
+}
+
+.reboteDivNormal {
+    width: 100px;
+    height: 100px;
+    background-color: darkorange;
+    position: absolute;
+    border-radius: 50%;
+    border: solid thin black;
+}
+
+.reboteDivNormal:hover {
+    cursor: pointer;
+    background-color: coral;
+}
+
+.reboteDivDificil {
+    width: 75px;
+    height: 75px;
+    background-color: red;
+    position: absolute;
+    border-radius: 50%;
+    border: solid thin black;
+}
+
+.reboteDivDificil:hover {
+    cursor: pointer;
+    background-color: darkred;
+}
+
+.reboteDivImposible {
+    width: 4px;
+    height: 4px;
+    background-color: white;
+    position: absolute;
+    border-radius: 50%;
+    border: solid thin black;
+}
+
+.reboteDivImposible:hover {
+    cursor: pointer;
+    background-color: grey;
+}
+
+.reboteDivInfinito {
+    position: absolute;
+    border-radius: 50%;
+    border: solid thin black;
+}
+
+.reboteDivInfinito:hover {
+    cursor: pointer;
 }
 
 .oculto {
@@ -17,20 +74,35 @@
     width: 800px;
 }
 
-.seleccion {
+.seleccion, #finDelJuego{
     margin: auto;
     height: 25rem;
     width: 40rem;
     background-size: 100% 100%;
     background-color: black;
     border: 0.3rem solid white;
+    box-shadow: 0.3rem 0.3rem 0.1rem rgba(204,204,204,0.8);
 }
 
-#score-number {
+#score, #divPop, #tiempo{
     text-align: center;
     color: white;
-    font-size: 16px;
+    font-size: 0.7rem;
     font-family: "Press Start 2P", serif;
+}
+
+#tiempo{
+    text-align: center;
+    color: white;
+    font-size: 0.7rem;
+    font-family: "Press Start 2P", serif;
+}
+
+#empezarDeNuevo:focus{
+    cursor: pointer;
+    background-color: grey;
+    text-shadow: 0.15rem 0.15rem 0.1rem rgba(0, 0, 0, 1);
+    outline: none;
 }
 
 ul {
@@ -41,7 +113,7 @@ ul {
     height: 100%;
 }
 
-li {
+li{
     display: flex;
     margin-top: auto;
     margin-bottom: auto;
@@ -52,16 +124,39 @@ li {
     font-size: 16px;
     font-family: "Press Start 2P", serif;
     width: 10rem;
-    height: 5rem;
+    height: 4.5rem;
     align-items: center;
     justify-content: center;
+    box-shadow: 0.15rem 0.15rem 0.1rem rgba(204,204,204,0.8);
+    text-shadow: 0.13rem 0.13rem 0.1rem rgba(204,204,204,1);
+}
+
+.final{
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    border: 0.3rem solid white;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-family: "Press Start 2P", serif;
+    width: 10rem;
+    height: 4.5rem;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0.15rem 0.15rem 0.1rem rgba(204,204,204,0.8);
+    text-shadow: 0.13rem 0.13rem 0.1rem rgba(204,204,204,1);
+}
+
+.final{
+    width: 80%;
 }
 
 li:focus,
 li:hover {
     outline: none;
     background: grey;
-    text-shadow: rgba(0, 0, 0, 1);
+    text-shadow: 0.15rem 0.15rem 0.1rem rgba(0, 0, 0, 1);
 }
 
 .fondo-facil {
@@ -76,6 +171,11 @@ li:hover {
 
 .fondo-dificil {
     background: url("../../assets/img/pilla_el_div/hard_bg.gif");
+    background-size: 100% 100%;
+}
+
+.fondo-hardcore {
+    background: url("../../assets/img/pilla_el_div/imposible_bg.gif");
     background-size: 100% 100%;
 }
 
