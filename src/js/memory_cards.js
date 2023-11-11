@@ -332,8 +332,8 @@ document.addEventListener('DOMContentLoaded', () => {
         dibujarCartas();
     }
 
-    const botonFacil = document.getElementById('facil');
-    const botonMedio = document.getElementById('medio');
+    const botonFacil = document.getElementById('ia');
+    const botonMedio = document.getElementById('dosJugadores');
     const botonDificil = document.getElementById('dificil');
 
     botonFacil.addEventListener('click', () => setDificultad('facil'));

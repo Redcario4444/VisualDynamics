@@ -13,9 +13,9 @@
     <div class="container">
         <!-- Menú de Selección de Dificultad -->
         <div id='menu-dificultad'>
-            <button class="botones-seleccion" id='facil'>Fácil
+            <button class="botones-seleccion" id='ia'>Fácil
                 <span class='tooltip-text'>Dif. Fácil con 'f'</span></button>
-            <button class='botones-seleccion' id='medio'>Medio
+            <button class='botones-seleccion' id='dosJugadores'>Medio
                 <span class='tooltip-text'>Dif. Media con 'm'</span></button>
             <button class='botones-seleccion' id='dificil'>Difícil
                 <span class='tooltip-text'>Max. Dif. con 'd'</span></button>

@@ -1,3 +1,7 @@
+@import url('https://fonts.cdnfonts.com/css/press-start-2p');
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+@import url('normalize.css');
+
 html {
     font-size:   16px;
     font-family: "Press Start 2P", serif;
@@ -119,7 +123,7 @@ h1 {
     text-shadow:      0.15rem 0.15rem 0.15rem rgba(204, 204, 204, 1);
 }
 
-#facil .tooltip-text {
+#ia .tooltip-text {
     margin-left: 3rem;
 }
 
@@ -128,14 +132,14 @@ h1 {
      margin-right: 1rem;
  }
 
-#facil, #medio, #dificil, #hardcore, #infinito {
+#ia, #dosJugadores, #dificil, #hardcore, #infinito {
     position:     relative;
     margin-right: 2rem;
 }
 
 #reiniciar:hover .tooltip-text,
-#facil:hover .tooltip-text,
-#medio:hover .tooltip-text,
+#ia:hover .tooltip-text,
+#dosJugadores:hover .tooltip-text,
 #dificil:hover .tooltip-text,
 #hardcore:hover .tooltip-text,
 #infinito:hover .tooltip-text {
