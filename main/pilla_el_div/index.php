@@ -40,7 +40,7 @@
     <audio id="pop" src="/assets/sound/pilla_el_div/pop.mp3"></audio>
     <audio id="divNotLie" src="/assets/sound/pilla_el_div/divNotLie.wav"></audio>
     <audio id="errorClic" src="/assets/sound/pilla_el_div/errorClic.mp3"></audio>
-    <audio id="cursor" src="/assets/sound/index/cursor.mp3"></audio>
+    <audio id="cursor" src="/assets/sound/index/cursor.mp3">⬇</audio>
 
 <?php
     include '../../src/footer.php';

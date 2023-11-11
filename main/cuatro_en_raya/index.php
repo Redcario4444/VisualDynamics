@@ -29,7 +29,7 @@
     </div>
 
     <div id='importante'>
-        <div class='seleccion'></div>
+        <div class='seleccion'>⬇</div>
         <div id='campo' class='campo'></div>
     </div>
 
