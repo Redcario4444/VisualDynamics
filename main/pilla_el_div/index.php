@@ -8,31 +8,39 @@
     $ruta_canciones = '../../';
     include "../../src/header.php";
 ?>
-<div class="seleccion">
-    <ul>
-        <li class="botones" id='facil'>Fácil</li>
-        <li class='botones' id='normal'>Normal</li>
-        <li class='botones' id='dificil'>Difícil</li>
-        <li class='botones' id='hardcore'>Hardcore</li>
-        <li class='botones' id='infinito'>Infinito</li>
-    </ul>
-</div>
-<div id="campo" class="oculto campo">
-    <div id='score'>
-        <p>Score: <span id='score-number'>0</span></p>
+    <h1>Pilla el Div</h1>
+
+    <div class='container'>
+        <!-- Menú de Selección de Dificultad -->
+        <div id='menu-dificultad'>
+            <button class='botones-seleccion' id='facil'>Fácil
+                <span class='tooltip-text'>No puedes perder<br>10 Pops +3 seg<br>5000 Puntos +3 seg</span></button>
+            <button class='botones-seleccion' id='medio'>Medio
+                <span class='tooltip-text'>3 fallos seguidos YOU LOSE<br>6 fallos en total YOU LOSE<br>10 Pops +1 seg<br>5000 Puntos +1 seg</span></button>
+            <button class='botones-seleccion' id='dificil'>Difícil
+                <span class='tooltip-text'>3 fallos seguidos YOU LOSE<br>6 fallos en total YOU LOSE<br>Cada clic 100 Puntos</span></button>
+            <button class='botones-seleccion' id='hardcore'>Hardcore
+                <span class='tooltip-text'>No te lo recomiendo...<br>Nadie ha conseguido hacer 1 punto</span></button>
+            <button class='botones-seleccion' id='infinito'>Infinito
+                <span class='tooltip-text'>Cada clic pone el tiempo a 10seg<br>Diviértete sin límites</span></button>
+        </div>
+        <div>
+            <button class='botones-seleccion marcador'>Score: <span id='score-number'>0</span></button>
+            <button class='botones-seleccion marcador'>Pops: <span id='pop-number'>0</span></button>
+            <button class='botones-seleccion marcador'>Tiempo: <span id='time-number'>30</span></button>
+        </div>
     </div>
-    <div id='divPop'>
-        <p>Pops: <span id='pop-number'>0</span></p>
+    <div id='importante'>
+        <div class='seleccion'></div>
+        <div id='campo' class='oculto campo'></div>
     </div>
-    <div id='tiempo'>
-        <p>Tiempo: <span id='time-number'>0</span></p>
-    </div>
-</div>
+
 <audio id="bienvenida" src="/assets/sound/pilla_el_div/welcome.wav"></audio>
 <audio id="dificile" src="/assets/sound/pilla_el_div/dificil.wav"></audio>
 <audio id="pop" src="/assets/sound/pilla_el_div/pop.mp3"></audio>
 <audio id="divNotLie" src="/assets/sound/pilla_el_div/divNotLie.wav"></audio>
 <audio id="errorClic" src="/assets/sound/pilla_el_div/errorClic.mp3"></audio>
+<audio id="cursor" src="/assets/sound/index/cursor.mp3"></audio>
 
 <?php
     include '../../src/footer.php';

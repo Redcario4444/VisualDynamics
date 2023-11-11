@@ -45,7 +45,7 @@
 <body>
 <div class="header">
     <div id='reproductor'>
-        <div id='botones'>
+        <div id='botonesMusica'>
             <div class='botones' id='atras-continuar'>◀◀</div>
             <div class='botones' id='continuar'>▶</div>
             <div class='botones' id='adelante-continuar'>▶▶</div>

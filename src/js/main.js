@@ -74,7 +74,7 @@ document.getElementById('button-next').addEventListener('click', function () {
 document.addEventListener('DOMContentLoaded', function () {
 
 	let flecha = document.getElementsByClassName("carrusel-arrow");
-	let botones = document.getElementById("botones").children;
+	let botones = document.getElementById("botonesMusica").children;
 
 	for (let i = 0; i < botones.length; i++) {
 		botones[i].addEventListener("click", function (event) {

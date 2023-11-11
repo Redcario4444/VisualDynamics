@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let canciones = document.getElementById("canciones").children;
     let contador = 0;
-    let botones = document.getElementById("botones").children;
+    let botones = document.getElementById("botonesMusica").children;
     let adelante = document.getElementById("adelante-continuar");
     let atras = document.getElementById("atras-continuar");
     let titulocancion = document.getElementById("titulo-cancion");

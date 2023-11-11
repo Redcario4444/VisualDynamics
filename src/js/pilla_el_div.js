@@ -3,62 +3,60 @@ document.addEventListener('DOMContentLoaded', function () {
     let bienvenidaSound = document.getElementById('bienvenida');
     let popSound = document.getElementById('pop');
     let imposibleSound = document.getElementById('divNotLie');
+    let cursorSound = document.getElementById('cursor');
     let errorClic = document.getElementById('errorClic');
     let container = document.getElementById('campo');
-    let botones = document.getElementsByClassName('botones');
+    let botonesSeleccion = document.getElementsByClassName('botones-seleccion');
     let seleccion = document.getElementsByClassName('seleccion')[0];
-    let score = 0;
-    let realScore = 0;
-    let scoreNumber = document.getElementById('score-number');
     let pop = 0;
     let realPop = 0;
     let aux = 0;
     let fallos = 0;
     let fallosConsecutivos = 0;
+    let score = 0;
+    let realScore = 0;
+    let tiempoRestante = 31;
+    let scoreNumber = document.getElementById('score-number');
     let popNumber = document.getElementById('pop-number');
-    let tiempoRestante = 31; // Tiempo en segundos
     let tiempoRestanteElement = document.getElementById('time-number');
+    let facil = document.getElementById("facil");
+    let medio = document.getElementById("medio");
+    let dificil = document.getElementById("dificil");
+    let hardcore = document.getElementById("hardcore");
+    let infinito = document.getElementById("infinito");
 
-    // Función para actualizar el tiempo restante en el elemento HTML
     function actualizarTiempo() {
         tiempoRestanteElement.textContent = tiempoRestante;
     }
 
-    // Función para detener el juego cuando el tiempo se agota
     function finalizarJuego() {
-        container.removeEventListener('click', clicGame);
-        if (aux === -1){container.innerHTML = "<div id='finDelJuego'><ul><p class='final'>Has explotado "+realPop+" Divs!!!</p><p class='final'>Has conseguido "+realScore+" puntos!!!</p><p class='final'>Has cometido demasiados<br>fallos :c</p><p class='final' id='empezarDeNuevo' tabindex='0'>Vuelve a escoger dificultad!!!</p></ul></div>";
+        container.removeEventListener('mousedown', clicGame);
+        if (aux === -1){
+            container.innerHTML = "<div id='finDelJuego'><ul><p class='final'>Has explotado "+realPop+" Divs!!!</p><p class='final'>Has conseguido "+realScore+" puntos!!!</p><p class='final'>Has cometido demasiados<br>fallos :c</p></ul></div>";
         }else {
-            container.innerHTML = "<div id='finDelJuego'><ul><p class='final'>Has explotado "+realPop+" Divs!!!</p><p class='final'>Has conseguido "+realScore+" puntos!!!</p><p class='final' id='empezarDeNuevo' tabindex='0'>Vuelve a escoger dificultad!!!</p></ul></div>";
+            container.innerHTML = "<div id='finDelJuego'><ul><p class='final'>Has explotado "+realPop+" Divs!!!</p><p class='final'>Has conseguido "+realScore+" puntos!!!</p></ul></div>";
         }
-        let empezarDeNuevo = document.getElementById('empezarDeNuevo');
-        empezarDeNuevo.focus();
-        empezarDeNuevo.addEventListener('click', function () {
-            location.reload();
-        }, false);
     }
 
-    // Función para disminuir el tiempo restante y verificar si el juego debe finalizar
     function actualizarTiempoRestante() {
         tiempoRestante--;
         actualizarTiempo();
         if (tiempoRestante <= 0) {
             finalizarJuego();
+            facil.classList.remove('oculto');
+            medio.classList.remove('oculto');
+            dificil.classList.remove('oculto');
+            hardcore.classList.remove('oculto');
+            infinito.classList.remove('oculto');
         } else {
-            // Llamar recursivamente después de 1 segundo
             setTimeout(actualizarTiempoRestante, 1000);
         }
     }
 
-    // Agregar el escuchador de clic al contenedor una sola vez
-    container.addEventListener('click', clicGame);
-
     function clicGame(event){
-        // Verificar si el objetivo del clic tiene la clase 'reboteDiv'
         if (event.target.classList.contains(reboteDivClase)) {
             popSound.currentTime = 0;
             popSound.play();
-            // Eliminar el elemento clicado
             event.target.remove();
             aux = Math.floor(Math.random() * 1000);
             score += aux;
@@ -77,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fallos++;
             fallosConsecutivos++;
             if (fallosConsecutivos === 3 || fallos === 6){
-                tiempoRestante = 0;
+                tiempoRestante = 1;
                 aux = -1;
             }
         }
@@ -104,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }else if (velocidad === 7){
             score = score - 100;
         }else if (velocidad === 10){
+            tiempoRestante = 1;
             finalizarJuego();
         }else if (velocidad === 6){
             fallosConsecutivos = 0;
@@ -112,61 +111,100 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    for (let i = 0; i < botones.length; i++) {
-        botones[i].addEventListener('click', function () {
-            seleccion.classList.add('oculto');
-            container.classList.remove('oculto');
-            tiempoRestanteElement.classList.remove('oculto');
-            if (botones[i].id === 'facil') {
+    function reiniciarVariables(){
+        pop = 0;
+        realPop = 0;
+        aux = 0;
+        fallos = 0;
+        fallosConsecutivos = 0;
+        score = 0;
+        realScore = 0;
+        tiempoRestante = 31;
+        container.textContent = "";
+        scoreNumber.textContent = "0";
+        popNumber.textContent = "0";
+        tiempoRestanteElement.textContent = "30";
+        facil.classList.add('oculto');
+        medio.classList.add('oculto');
+        dificil.classList.add('oculto');
+        hardcore.classList.add('oculto');
+        infinito.classList.add('oculto');
+    }
+
+    for (let i = 0; i < botonesSeleccion.length; i++){
+        botonesSeleccion[i].addEventListener('mouseover', function () {
+            cursorSound.currentTime = 0;
+            cursorSound.play();
+        });
+        botonesSeleccion[i].addEventListener('mousedown', function () {
+            if (botonesSeleccion[i].id === 'facil') {
+                reiniciarVariables();
+                seleccion.classList.add('oculto');
+                container.classList.remove('oculto');
                 container.classList.add('fondo-facil');
                 bienvenidaSound.currentTime = 0;
                 bienvenidaSound.play();
+                container.addEventListener('mousedown', clicGame);
                 setTimeout(function () {
                     dificultad(numeroDeDivs = 7, velocidad = 3, reboteDivClase = "reboteDivFacil");
-                    actualizarTiempoRestante(); // Comenzar el contador regresivo
+                    actualizarTiempoRestante();
                 }, 2300);
-            } else if (botones[i].id === 'normal') {
+            } else if (botonesSeleccion[i].id === 'medio') {
+                reiniciarVariables();
+                seleccion.classList.add('oculto');
+                container.classList.remove('oculto');
                 container.classList.add('fondo-normal');
                 bienvenidaSound.currentTime = 0;
                 bienvenidaSound.play();
+                container.addEventListener('mousedown', clicGame);
                 setTimeout(function () {
                     dificultad(numeroDeDivs = 5, velocidad = 5, reboteDivClase = "reboteDivNormal");
-                    actualizarTiempoRestante(); // Comenzar el contador regresivo
+                    actualizarTiempoRestante();
                 }, 2300);
-            } else if (botones[i].id === 'dificil') {
+            } else if (botonesSeleccion[i].id === 'dificil') {
+                reiniciarVariables();
+                seleccion.classList.add('oculto');
+                container.classList.remove('oculto');
                 container.classList.add('fondo-dificil');
                 dificilSound.currentTime = 0;
                 dificilSound.play();
+                container.addEventListener('mousedown', clicGame);
                 setTimeout(function () {
                     dificultad(numeroDeDivs = 3, velocidad = 7, reboteDivClase = "reboteDivDificil");
-                    actualizarTiempoRestante(); // Comenzar el contador regresivo
+                    actualizarTiempoRestante();
                 }, 4700);
-            } else if (botones[i].id === 'hardcore') {
+            } else if (botonesSeleccion[i].id === 'hardcore') {
+                reiniciarVariables();
+                seleccion.classList.add('oculto');
+                container.classList.remove('oculto');
                 container.classList.add('fondo-hardcore');
                 imposibleSound.currentTime = 0;
                 imposibleSound.play();
+                container.addEventListener('mousedown', clicGame);
                 setTimeout(function () {
                     dificultad(numeroDeDivs = 1000, velocidad = 10, reboteDivClase = "reboteDivImposible");
-                    actualizarTiempoRestante(); // Comenzar el contador regresivo
+                    actualizarTiempoRestante();
                 }, 2300);
-            } else if (botones[i].id === 'infinito') {
+            } else if (botonesSeleccion[i].id === 'infinito') {
+                reiniciarVariables();
+                seleccion.classList.add('oculto');
+                container.classList.remove('oculto');
                 container.classList.add('fondo-infinito');
                 bienvenidaSound.currentTime = 0;
                 bienvenidaSound.play();
+                container.addEventListener('mousedown', clicGame);
                 setTimeout(function () {
                     dificultad(numeroDeDivs = Math.random() * (10 - 5) + 5, velocidad = 6, reboteDivClase = "reboteDivInfinito");
-                    actualizarTiempoRestante(); // Comenzar el contador regresivo
+                    actualizarTiempoRestante();
                 }, 2300);
             }
-        });
+            });
 
         function dificultad(divCount, velocidad, reboteDivClase) {
             const arrayDivs = [];
             const campoJuego = container.getBoundingClientRect();
             const campoHorizontal = campoJuego.left;
             const campoVertical = campoJuego.top;
-
-
 
             for (let i = 0; i < divCount; i++) {
                 const div = document.createElement('div');
@@ -185,15 +223,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 div.className = reboteDivClase;
                 container.appendChild(div);
 
-                // Velocidad fija (puedes ajustarla)
-                fixedSpeed = velocidad;
+                let fixedSpeed = velocidad;
 
-                // Direcciones aleatorias
                 const angulo = Math.random() * Math.PI * 2;
                 const velocidadHorizontal = Math.cos(angulo) * fixedSpeed;
                 const velocidadVertical = Math.sin(angulo) * fixedSpeed;
-
-                // Posiciones aleatorias dentro de "campo" teniendo en cuenta el tamaño del div
                 const generacionHorizontal = Math.random() * (campoJuego.width - div.clientWidth);
                 const generacionVertical = Math.random() * (campoJuego.height - div.clientHeight);
 

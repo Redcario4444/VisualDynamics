@@ -13,10 +13,10 @@
         <div class="carrusel-track" id="track">
             <div class="carrusel">
                 <div>
-                    <a href="/">
-                        <h4><small>Reflejos y Velocidad</small>Pilla en Div</h4>
+                    <a href="pilla_el_div/index.php">
+                        <h4><small>Reflejos y Velocidad</small>Pilla el Div</h4>
                         <picture>
-                            <img src="../assets/img/index/fondo_inicio.gif" alt="imagen">
+                            <img src="../assets/img/main/pilla_el_div.png" alt="imagen">
                         </picture>
                     </a>
                 </div>
