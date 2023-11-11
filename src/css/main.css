@@ -24,7 +24,7 @@ body {
     grid-column: 1/2;
 }
 
-#botones {
+#botonesMusica {
     display: flex;
     flex-direction: row;
     justify-content: center;
