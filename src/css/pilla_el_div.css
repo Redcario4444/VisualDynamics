@@ -3,6 +3,10 @@ html {
     font-family: "Press Start 2P", serif;
 }
 
+body {
+    margin-bottom: 4rem;
+}
+
 .reboteDivFacil {
     width: 150px;
     height: 150px;
@@ -154,16 +158,18 @@ h1 {
 #score, #clicks, #tiempo {
 }
 
-.oculto {
-    display: none;
-}
-
 .campo {
+    display: flex;
+    align-items: center;
     margin: auto;
     height: 25rem;
     width: 800px;
     border: 0.3rem solid white;
     box-shadow: 0.3rem 0.3rem 0.1rem rgba(204,204,204,0.8);
+}
+
+.oculto {
+    display: none;
 }
 
 .seleccion, #finDelJuego{
@@ -174,6 +180,10 @@ h1 {
     background-color: black;
     border: 0.3rem solid white;
     box-shadow: 0.3rem 0.3rem 0.1rem rgba(204,204,204,0.8);
+}
+
+#finDelJuego{
+    height: 19rem;
 }
 
 #score, #divPop, #tiempo{
