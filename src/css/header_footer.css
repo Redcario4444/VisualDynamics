@@ -11,10 +11,14 @@ body {
     flex-direction: column;
 }
 
+.header {
+    margin-bottom: 5rem;
+}
+
 #reproductor {
     display: grid;
-    grid-template-columns: 25% 75%;
-    grid-template-rows: 15vh 15vh;
+    grid-template-columns: 15% 85%;
+    grid-template-rows: 15vh 2.5vh;
 }
 
 .botones {
@@ -36,7 +40,7 @@ body {
 }
 
 #parar {
-    color: #3d07e7 ;
+    color: #3d07e7;
     text-shadow: 0.2rem 0.2rem 0.1rem rgba(67, 1, 231, 0.5);
 }
 
@@ -48,13 +52,13 @@ body {
 }
 
 #atras-parar {
-    color: rgba(67, 1, 231, 0.5) ;
+    color: rgba(67, 1, 231, 0.5);
     text-shadow: 0.2rem 0.2rem 0.1rem rgba(67, 1, 231, 0.5);
 }
 
 #adelante-parar {
     margin-left: 1rem;
-    color: rgba(67, 1, 231, 0.5) ;
+    color: rgba(67, 1, 231, 0.5);
     text-shadow: 0.2rem 0.2rem 0.1rem rgba(67, 1, 231, 0.5);
 }
 
@@ -70,11 +74,12 @@ body {
 }
 
 #titulo-cancion {
-    width: 90%;
+    width: 91%;
     justify-self: center;
     font-family: "Press Start 2P", monospace;
     color: #e30b0b;
     text-shadow: 0.2rem 0.2rem 0.1rem rgba(227, 11, 11, 0.5);
+    border-radius: 50px;
 }
 
 #titulo {
