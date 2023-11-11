@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let scoreNumber = document.getElementById('score-number');
     let popNumber = document.getElementById('pop-number');
     let tiempoRestanteElement = document.getElementById('time-number');
-    let facil = document.getElementById("facil");
-    let medio = document.getElementById("medio");
+    let facil = document.getElementById("ia");
+    let medio = document.getElementById("dosJugadores");
     let dificil = document.getElementById("dificil");
     let hardcore = document.getElementById("hardcore");
     let infinito = document.getElementById("infinito");
@@ -140,7 +140,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (botonesSeleccion[i].id === 'facil') {
                 reiniciarVariables();
                 seleccion.classList.add('oculto');
-                container.classList.remove('oculto');
+                container.classList.remove('fondo-normal');
+                container.classList.remove('fondo-dificil');
+                container.classList.remove('fondo-hardcore');
+                container.classList.remove('fondo-infinito');
                 container.classList.add('fondo-facil');
                 bienvenidaSound.currentTime = 0;
                 bienvenidaSound.play();
@@ -153,6 +156,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 reiniciarVariables();
                 seleccion.classList.add('oculto');
                 container.classList.remove('oculto');
+                container.classList.remove('fondo-facil');
+                container.classList.remove('fondo-dificil');
+                container.classList.remove('fondo-hardcore');
+                container.classList.remove('fondo-infinito');
                 container.classList.add('fondo-normal');
                 bienvenidaSound.currentTime = 0;
                 bienvenidaSound.play();
@@ -165,6 +172,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 reiniciarVariables();
                 seleccion.classList.add('oculto');
                 container.classList.remove('oculto');
+                container.classList.remove('fondo-facil');
+                container.classList.remove('fondo-normal');
+                container.classList.remove('fondo-hardcore');
+                container.classList.remove('fondo-infinito');
                 container.classList.add('fondo-dificil');
                 dificilSound.currentTime = 0;
                 dificilSound.play();
@@ -177,6 +188,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 reiniciarVariables();
                 seleccion.classList.add('oculto');
                 container.classList.remove('oculto');
+                container.classList.remove('fondo-facil');
+                container.classList.remove('fondo-normal');
+                container.classList.remove('fondo-dificil');
+                container.classList.remove('fondo-infinito');
                 container.classList.add('fondo-hardcore');
                 imposibleSound.currentTime = 0;
                 imposibleSound.play();
@@ -189,6 +204,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 reiniciarVariables();
                 seleccion.classList.add('oculto');
                 container.classList.remove('oculto');
+                container.classList.remove('fondo-facil');
+                container.classList.remove('fondo-normal');
+                container.classList.remove('fondo-dificil');
+                container.classList.remove('fondo-hardcore');
                 container.classList.add('fondo-infinito');
                 bienvenidaSound.currentTime = 0;
                 bienvenidaSound.play();

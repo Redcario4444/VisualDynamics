@@ -1,5 +1,5 @@
 <?php
-    $descripcion = "Pilla el Div, un juego 5r que comprueba tus reflejos y movimientos rápidos";
+    $descripcion = "Pilla el Div, un juego que comprueba tus reflejos y movimientos rápidos";
     $titulo = "Pilla el Div";
     $css = "../../src/css/header_footer.css";
     $css_propio = "../../src/css/pilla_el_div.css";
@@ -13,14 +13,14 @@
     <div class='container'>
         <!-- Menú de Selección de Dificultad -->
         <div id='menu-dificultad'>
-            <button class='botones-seleccion' id='facil'>Fácil
+            <button class='botones-seleccion' id='ia'>Fácil
                 <span class='tooltip-text'>No puedes perder<br>10 Pops +3 seg<br>5000 Puntos +3 seg</span></button>
-            <button class='botones-seleccion' id='medio'>Medio
+            <button class='botones-seleccion' id='dosJugadores'>Medio
                 <span class='tooltip-text'>3 fallos seguidos YOU LOSE<br>6 fallos en total YOU LOSE<br>10 Pops +1 seg<br>5000 Puntos +1 seg</span></button>
             <button class='botones-seleccion' id='dificil'>Difícil
                 <span class='tooltip-text'>3 fallos seguidos YOU LOSE<br>6 fallos en total YOU LOSE<br>Cada clic 100 Puntos</span></button>
             <button class='botones-seleccion' id='hardcore'>Hardcore
-                <span class='tooltip-text'>No te lo recomiendo...<br>Nadie ha conseguido hacer 1 punto</span></button>
+                <span class='tooltip-text'>No te lo recomiendo...<br>Nadie ha conseguido hacer 2 puntos</span></button>
             <button class='botones-seleccion' id='infinito'>Infinito
                 <span class='tooltip-text'>Cada clic pone el tiempo a 10seg<br>Diviértete sin límites</span></button>
         </div>
@@ -35,12 +35,12 @@
         <div id='campo' class='oculto campo'></div>
     </div>
 
-<audio id="bienvenida" src="/assets/sound/pilla_el_div/welcome.wav"></audio>
-<audio id="dificile" src="/assets/sound/pilla_el_div/dificil.wav"></audio>
-<audio id="pop" src="/assets/sound/pilla_el_div/pop.mp3"></audio>
-<audio id="divNotLie" src="/assets/sound/pilla_el_div/divNotLie.wav"></audio>
-<audio id="errorClic" src="/assets/sound/pilla_el_div/errorClic.mp3"></audio>
-<audio id="cursor" src="/assets/sound/index/cursor.mp3"></audio>
+    <audio id="bienvenida" src="/assets/sound/pilla_el_div/welcome.wav"></audio>
+    <audio id="dificile" src="/assets/sound/pilla_el_div/dificil.wav"></audio>
+    <audio id="pop" src="/assets/sound/pilla_el_div/pop.mp3"></audio>
+    <audio id="divNotLie" src="/assets/sound/pilla_el_div/divNotLie.wav"></audio>
+    <audio id="errorClic" src="/assets/sound/pilla_el_div/errorClic.mp3"></audio>
+    <audio id="cursor" src="/assets/sound/index/cursor.mp3">⬇</audio>
 
 <?php
     include '../../src/footer.php';
