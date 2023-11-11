@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 150 225" width="150" height="225" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <pattern id="a" patternUnits="userSpaceOnUse" width="48" height="96"
+                 patternTransform="matrix(2, 0, 0, 2, 0, -2)">
+            <rect x="0" y="0" width="100%" height="100%" fill="hsla(0,0%,100%,1)"/>
+            <path d="M0 0v8h4v4h4v4h4v4h4v-4h4v-4h4V8h4V4h4V0H0zm40 0v4h-4v4h-4v4h-4v4h-4v4h-4v4h-4v4h-4v4H4v-4H0v8h4v4h4v4h4v4h36v-8h-4v-4h-4v-4h-4v-4h-4v4h-4v4h-4v4h-4v4h-4v-4h-4v-4h4v-4h4v-4h4v-4h4v-4h8v4h4v4h4v4h4v-8h-4v-4h-4v-4h-4v-4h4V8h4V4h4V0h-8zM8 4h12v4h-4v4h-4V8H8V4zm24 32h4v4h4v4H28v-4h4v-4zM0 44v4h4v-4H0zm0 8v12h4v4h8v-4h4v-4h4v-4h4v-4H0zm40 0v4h4v4h4v-8h-8zM4 56h8v4H4v-4zm24 4v8h8v-8h-8zm8 8v4h8v-4h-8zm8 4v4h4v-4h-4zm-16-4h-8v4h8v-4zm-8 4h-8v4h8v-4zm-8 4H4v8h8v-8zm-8 0v-4H0v4h4zm24 0v4h-4v4h-4v4h-4v4h32v-4h-4v-4h-4v-4h-4v-4h-8zm0 8h8v4h-8v-4z"
+                  stroke-width="1" stroke="none" fill="hsla(259, 0%, 0%, 1)"/>
+        </pattern>
+    </defs>
+    <rect width="150" height="225" fill="url(#a)" x="0" y="0" transform="matrix(1, 0, 0, 1, 5.684341886080802e-14, 0)"/>
+</svg>
