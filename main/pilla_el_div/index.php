@@ -35,6 +35,24 @@
         <div id='campo' class='oculto campo'></div>
     </div>
 
+    <div class='fondo-modal-inicio' id='fondo-modal-inicio'></div>
+    <div class='modal-inicio' id='modal-inicio'>
+        <div class='interior-modal-inicio'>
+            <h2>¡Bienvenido a Pilla el Div!</h2>
+            <h3>¡Prueba tus reflejos en este clásico de los Arcade!</h3>
+            <ul>
+                <li>Puedes elegir entre diversos modos, cada uno con su propia dificultad.</li>
+                <li>¡Las posibilidades de querer jugar una y otra vez son infinitas!</li>
+                <li>Si te aburres prueba otra dificultad, con paciencia mejorarás.</li>
+            </ul>
+
+            <p>¡Buena suerte!</p>
+            <button class='botones-seleccion cerrar-inicio abierto' id='cerrar-inicio'>Cerrar
+                <span class='tooltip-text  tooltip-right'>Ciérrame con 'c'</span>
+            </button>
+        </div>
+    </div>
+
     <audio id="bienvenida" src="/assets/sound/pilla_el_div/welcome.wav"></audio>
     <audio id="dificile" src="/assets/sound/pilla_el_div/dificil.wav"></audio>
     <audio id="pop" src="/assets/sound/pilla_el_div/pop.mp3"></audio>

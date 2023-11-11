@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let dificil = document.getElementById("dificil");
     let hardcore = document.getElementById("hardcore");
     let infinito = document.getElementById("infinito");
+    let cerrarModal = document.getElementById("cerrar-inicio");
+    let fondoModal = document.getElementById("fondo-modal-inicio");
+    let modalInicio = document.getElementById("modal-inicio");
 
     function actualizarTiempo() {
         tiempoRestanteElement.textContent = tiempoRestante;
@@ -130,6 +133,11 @@ document.addEventListener('DOMContentLoaded', function () {
         hardcore.classList.add('oculto');
         infinito.classList.add('oculto');
     }
+
+    cerrarModal.addEventListener('click', function () {
+        fondoModal.classList.add('oculto');
+        modalInicio.style.display = "none";
+    });
 
     for (let i = 0; i < botonesSeleccion.length; i++){
         botonesSeleccion[i].addEventListener('mouseover', function () {
