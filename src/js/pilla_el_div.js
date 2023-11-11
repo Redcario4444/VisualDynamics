@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let popSound = document.getElementById('pop');
     let imposibleSound = document.getElementById('divNotLie');
     let cursorSound = document.getElementById('cursor');
+    let facilSound = document.getElementById('facils');
+    let normalSound = document.getElementById('medios');
+    let infinitoSound = document.getElementById('infinitos');
+    let winSound = document.getElementById('victoria');
     let errorClic = document.getElementById('errorClic');
     let container = document.getElementById('campo');
     let botonesSeleccion = document.getElementsByClassName('botones-seleccion');
@@ -51,6 +55,8 @@ document.addEventListener('DOMContentLoaded', function () {
             dificil.classList.remove('oculto');
             hardcore.classList.remove('oculto');
             infinito.classList.remove('oculto');
+            winSound.currentTime = 0;
+            winSound.play();
         } else {
             setTimeout(actualizarTiempoRestante, 1000);
         }
@@ -137,6 +143,8 @@ document.addEventListener('DOMContentLoaded', function () {
     cerrarModal.addEventListener('click', function () {
         fondoModal.classList.add('oculto');
         modalInicio.style.display = "none";
+        bienvenidaSound.currentTime = 0;
+        bienvenidaSound.play();
     });
 
     for (let i = 0; i < botonesSeleccion.length; i++){
@@ -154,13 +162,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 container.classList.remove('fondo-hardcore');
                 container.classList.remove('fondo-infinito');
                 container.classList.add('fondo-facil');
-                bienvenidaSound.currentTime = 0;
-                bienvenidaSound.play();
+                facilSound.currentTime = 0;
+                facilSound.play();
                 container.addEventListener('mousedown', clicGame);
                 setTimeout(function () {
                     dificultad(numeroDeDivs = 7, velocidad = 3, reboteDivClase = "reboteDivFacil");
                     actualizarTiempoRestante();
-                }, 2300);
+                }, 2700);
             } else if (botonesSeleccion[i].id === 'medio') {
                 reiniciarVariables();
                 seleccion.classList.add('oculto');
@@ -170,13 +178,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 container.classList.remove('fondo-hardcore');
                 container.classList.remove('fondo-infinito');
                 container.classList.add('fondo-normal');
-                bienvenidaSound.currentTime = 0;
-                bienvenidaSound.play();
+                normalSound.currentTime = 0;
+                normalSound.play();
                 container.addEventListener('mousedown', clicGame);
                 setTimeout(function () {
                     dificultad(numeroDeDivs = 5, velocidad = 5, reboteDivClase = "reboteDivNormal");
                     actualizarTiempoRestante();
-                }, 2300);
+                }, 2800);
             } else if (botonesSeleccion[i].id === 'dificil') {
                 reiniciarVariables();
                 seleccion.classList.add('oculto');
@@ -218,8 +226,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 container.classList.remove('fondo-dificil');
                 container.classList.remove('fondo-hardcore');
                 container.classList.add('fondo-infinito');
-                bienvenidaSound.currentTime = 0;
-                bienvenidaSound.play();
+                infinitoSound.currentTime = 0;
+                infinitoSound.play();
                 container.addEventListener('mousedown', clicGame);
                 setTimeout(function () {
                     dificultad(numeroDeDivs = Math.random() * (10 - 5) + 5, velocidad = 6, reboteDivClase = "reboteDivInfinito");
