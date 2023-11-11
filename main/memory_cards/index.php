@@ -8,7 +8,7 @@
     $ruta_canciones = "../../";
     include "../../src/header.php";
 ?>
-    <h1>Memory cards</h1>
+    <h1>Memory cards #GC2</h1>
 
     <div class="container">
         <!-- Menú de Selección de Dificultad -->
@@ -123,9 +123,37 @@
                 <span class='tooltip-text  tooltip-right'>Ciérrame con 'c'</span>
             </button>
         </div>
+
+        <!-- Modal de inicio -->
+        <div class="fondo-modal-inicio" id="fondo-modal-inicio"></div>
+        <div class="modal-inicio" id="modal-inicio">
+            <div class="interior-modal-inicio">
+                <h2>¡Bienvenido a Memory Cards!</h2>
+                <h3>¡Pon a prueba tu memoria con este juego de cartas!</h3>
+                <ul>
+                    <li>Puedes elegir entre los modos <em>Fácil</em>, <em>Medio</em> y
+                        <em>Difícil</em>.
+                    </li>
+                    <li>En el menú de
+                        <span style="text-decoration: underline">Fondos</span>
+                        puedes elegir entre varios fondos y colores.
+                    </li>
+                    <li>Selecciona reiniciar para volver a empezar.</li>
+                </ul>
+
+                <p>¡Buena suerte!</p>
+                <button class="botones-seleccion cerrar-inicio abierto" id='cerrar-inicio'>Cerrar
+                    <span class='tooltip-text  tooltip-right'>Ciérrame con 'c'</span>
+                </button>
+            </div>
+        </div>
     </div>
     <!-- Canvas para el juego -->
     <canvas id='memory-cards'></canvas>
+
+    <!-- Archivos de audio -->
+    <audio id='modem' src='../../assets/sound/memory_cards/modem.mp3' preload="auto"></audio>
+    <audio id='welcome' src='../../assets/sound/memory_cards/welcome.mp3' preload="auto"></audio>
 
 <?php
     include '../../src/footer.php';

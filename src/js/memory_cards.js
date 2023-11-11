@@ -1,46 +1,10 @@
-let canvas = document.getElementById('memory-cards');
-let reiniciar = document.getElementById('reiniciar');
-let colorSeleccionado = "";
-let fondoSeleccionado = "../../assets/img/memory_cards/fondos/fondo0.svg";
-let dificultadSeleccionada = 'facil';
-let primeraCartaSeleccionada = null;
-let segundaCartaSeleccionada = null;
-let filas;
-let altoCarta;
-let anchoCarta;
-let altoTotal;
-const espacioX = espacioY = 30;
-const columnas = 8;
-const multiplicadorAncho = 1.5;
-const multiplicadorGenerico = 1;
-const multiplicadorEspecifico = 0.58;
-const maximoAnchorCarta = 200;
-const filasFacil = 2;
-const filasMedio = 3;
-const filasDificil = 4;
-const delayCartas = 100;
-const timeoutGenerico = 1000;
-let cartas = [];
-let score = 0;
-let clicks = 0;
-let intervalo;
-let tiempoInicio;
-let tiempoActualizado = false;
-let procesando = false;
-
-let spanScore = document.getElementById('score');
-let spanClicks = document.getElementById('clicks');
-let spanTiempo = document.getElementById('tiempo');
-
-// Este es el objeto donde se dibuja
-let ctx = canvas.getContext('2d');
-
-// Se carga un array de imágenes
+// Constantes
 const cartasPoker = [
-    {id: '10_of_clubs', svg: '../../assets/img/memory_cards/poker_cards/10_of_clubs.svg'},
-    {id: '10_of_diamonds', svg: '../../assets/img/memory_cards/poker_cards/10_of_diamonds.svg'},
-    {id: '10_of_hearts', svg: '../../assets/img/memory_cards/poker_cards/10_of_hearts.svg'},
-    {id: '10_of_spades', svg: '../../assets/img/memory_cards/poker_cards/10_of_spades.svg'},
+    // Array de objetos de imágenes
+    {id: 'ace_of_clubs', svg: '../../assets/img/memory_cards/poker_cards/ace_of_clubs.svg'},
+    {id: 'ace_of_diamonds', svg: '../../assets/img/memory_cards/poker_cards/ace_of_diamonds.svg'},
+    {id: 'ace_of_hearts', svg: '../../assets/img/memory_cards/poker_cards/ace_of_hearts.svg'},
+    {id: 'ace_of_spades', svg: '../../assets/img/memory_cards/poker_cards/ace_of_spades.svg'},
     {id: '2_of_clubs', svg: '../../assets/img/memory_cards/poker_cards/2_of_clubs.svg'},
     {id: '2_of_diamonds', svg: '../../assets/img/memory_cards/poker_cards/2_of_diamonds.svg'},
     {id: '2_of_hearts', svg: '../../assets/img/memory_cards/poker_cards/2_of_hearts.svg'},
@@ -73,10 +37,10 @@ const cartasPoker = [
     {id: '9_of_diamonds', svg: '../../assets/img/memory_cards/poker_cards/9_of_diamonds.svg'},
     {id: '9_of_hearts', svg: '../../assets/img/memory_cards/poker_cards/9_of_hearts.svg'},
     {id: '9_of_spades', svg: '../../assets/img/memory_cards/poker_cards/9_of_spades.svg'},
-    {id: 'ace_of_clubs', svg: '../../assets/img/memory_cards/poker_cards/ace_of_clubs.svg'},
-    {id: 'ace_of_diamonds', svg: '../../assets/img/memory_cards/poker_cards/ace_of_diamonds.svg'},
-    {id: 'ace_of_hearts', svg: '../../assets/img/memory_cards/poker_cards/ace_of_hearts.svg'},
-    {id: 'ace_of_spades', svg: '../../assets/img/memory_cards/poker_cards/ace_of_spades.svg'},
+    {id: '10_of_clubs', svg: '../../assets/img/memory_cards/poker_cards/10_of_clubs.svg'},
+    {id: '10_of_diamonds', svg: '../../assets/img/memory_cards/poker_cards/10_of_diamonds.svg'},
+    {id: '10_of_hearts', svg: '../../assets/img/memory_cards/poker_cards/10_of_hearts.svg'},
+    {id: '10_of_spades', svg: '../../assets/img/memory_cards/poker_cards/10_of_spades.svg'},
     {id: 'jack_of_clubs', svg: '../../assets/img/memory_cards/poker_cards/jack_of_clubs.svg'},
     {id: 'jack_of_diamonds', svg: '../../assets/img/memory_cards/poker_cards/jack_of_diamonds.svg'},
     {id: 'jack_of_hearts', svg: '../../assets/img/memory_cards/poker_cards/jack_of_hearts.svg'},
@@ -93,16 +57,114 @@ const cartasPoker = [
     {id: 'red_joker', svg: '../../assets/img/memory_cards/poker_cards/red_joker.svg'}
 ];
 
+const espacioX = espacioY = 30;
+const columnas = 8;
+const multiplicadorAncho = 1.5;
+const multiplicadorGenerico = 1;
+const multiplicadorEspecifico = 0.58;
+const maximoAnchorCarta = 200;
+const filasFacil = 2;
+const filasMedio = 3;
+const filasDificil = 4;
+const delayCartas = 100;
+const timeoutGenerico = 1000;
+const timeoutComprobacion = 1500;
+const timeoutBienvenida = 2500;
+
+// Variables
+let filas;
+let altoCarta;
+let anchoCarta;
+let altoTotal;
+let intervalo;
+let tiempoInicio;
+let primeraCartaSeleccionada = null;
+let segundaCartaSeleccionada = null;
+let tiempoActualizado = false;
+let procesando = false;
+let teclasActivadas = true;
+let score = 0;
+let clicks = 0;
+let cartas = [];
+let dificultadSeleccionada = 'facil';
+let colorSeleccionado = "";
+let fondoSeleccionado = "../../assets/img/memory_cards/fondos/fondo0.svg";
+
+// Elementos del DOM
+let spanScore = document.getElementById('score');
+let spanClicks = document.getElementById('clicks');
+let spanTiempo = document.getElementById('tiempo');
+let reiniciar = document.getElementById('reiniciar');
+let canvas = document.getElementById('memory-cards');
+let ctx = canvas.getContext('2d');
+
+// Constantes del DOM
+const botonFacil = document.getElementById('facil');
+const botonMedio = document.getElementById('medio');
+const botonDificil = document.getElementById('dificil');
+
+// Variables del DOM
+let modal = document.getElementById('modal-fondos');
+let botonFondo = document.getElementById('boton-fondo');
+let cerrarModal = document.getElementById('cerrar-modal');
+let fondoModal = document.getElementById('fondo-modal');
+let fondoModalInicio = document.getElementById('fondo-modal-inicio');
+let modalInicio = document.getElementById('modal-inicio');
+let cerrarModalInicio = document.getElementById('cerrar-inicio');
+let divsObjetoSVG = document.querySelectorAll('.objetoSVG');
+let colorOptions = document.querySelectorAll('.color-option');
+
 document.addEventListener('DOMContentLoaded', () => {
-    window.onload = () => {
-        iniciarOReiniciarJuego();
+
+    botonFondo.onclick = function () {
+        modal.style.display = 'block';
+        fondoModal.style.display = 'block';
+        cerrarModal.classList.add('abierto');
     }
 
-    reiniciar.addEventListener('click', () => {
-        iniciarOReiniciarJuego();
-    });
+    cerrarModal.onclick = function () {
+        modal.style.display = 'none';
+        fondoModal.style.display = 'none';
+        cerrarModal.classList.remove('abierto');
+    }
+
+    cerrarModalInicio.onclick = function () {
+        modalInicio.style.display = 'none';
+        fondoModalInicio.style.display = 'none';
+        playSound("welcome");
+        setTimeout(() => {
+            playSound("modem");
+            setTimeout(() => {
+                setDificultad(dificultadSeleccionada);
+                iniciarOReiniciarJuego();
+            }, timeoutBienvenida);
+        }, timeoutBienvenida);
+    };
+
+    window.onclick = function (event) {
+        if (event.target === fondoModal) {
+            modal.style.display = 'none';
+            fondoModal.style.display = 'none';
+            cerrarModal.classList.remove('abierto');
+        } else if (event.target === fondoModalInicio) {
+            modalInicio.style.display = 'none';
+            fondoModalInicio.style.display = 'none';
+            playSound("welcome");
+            setTimeout(() => {
+                playSound("modem");
+                setTimeout(() => {
+                    setDificultad(dificultadSeleccionada);
+                    iniciarOReiniciarJuego();
+                }, timeoutBienvenida);
+            }, timeoutBienvenida);
+        }
+    }
 
     window.addEventListener('keypress', (event) => {
+        if (!teclasActivadas) {
+            return;
+        }
+
         if (event.key === 'r') {
             iniciarOReiniciarJuego();
         }
@@ -122,17 +184,32 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.key === 'e') {
             modal.style.display = 'block';
             fondoModal.style.display = 'block';
+            cerrarModal.classList.add('abierto');
         }
 
         if (event.key === 'c') {
-            modal.style.display = 'none';
-            fondoModal.style.display = 'none';
+            if (cerrarModal.classList.contains('abierto')) {
+                modal.style.display = 'none';
+                fondoModal.style.display = 'none';
+                cerrarModal.classList.remove('abierto');
+            } else if (cerrarModalInicio.classList.contains('abierto')) {
+                modalInicio.style.display = 'none';
+                fondoModalInicio.style.display = 'none';
+                playSound("welcome");
+                setTimeout(() => {
+                    playSound("modem");
+                    setTimeout(() => {
+                        setDificultad(dificultadSeleccionada);
+                        iniciarOReiniciarJuego();
+                    }, timeoutBienvenida);
+                }, timeoutBienvenida);
+            }
         }
     });
 
     window.addEventListener('resize', () => dibujarTablero(dificultadSeleccionada));
 
-    setDificultad(dificultadSeleccionada);
+    reiniciar.addEventListener('click', () => iniciarOReiniciarJuego());
 
     canvas.addEventListener('click', function (event) {
         if (procesando) {
@@ -157,10 +234,49 @@ document.addEventListener('DOMContentLoaded', () => {
         let indiceSeleccionado = filaSeleccionada * columnas + columnaSeleccionada;
 
         if (indiceSeleccionado < cartas.length) {
-            manejarSeleccionCarta(cartas[indiceSeleccionado]);
+            manejarSeleccion(cartas[indiceSeleccionado]);
         }
         verificarFinDelJuego();
     });
+
+    botonFacil.addEventListener('click', () => setDificultad('facil'));
+    botonMedio.addEventListener('click', () => setDificultad('medio'));
+    botonDificil.addEventListener('click', () => setDificultad('dificil'));
+
+    colorOptions.forEach(colorDiv => {
+        colorDiv.addEventListener('click', function () {
+            colorOptions.forEach(cd => cd.classList.remove('seleccionado'));
+            colorDiv.classList.add('seleccionado');
+            colorSeleccionado = colorDiv.querySelector('.color').style.backgroundColor;
+            // Cambiar el color de todos los SVG
+            colorizarSVG();
+            dibujarTablero(dificultadSeleccionada);
+        });
+    });
+
+    divsObjetoSVG.forEach(div => {
+        div.addEventListener('click', function () {
+            divsObjetoSVG.forEach(svgDiv => {
+                svgDiv.classList.remove('seleccionado');
+                svgDiv.querySelector('.tooltip-text').style.visibility = 'hidden';
+                svgDiv.style.border = '';
+            });
+
+            div.classList.add('seleccionado');
+            let tooltip = div.querySelector('.tooltip-text');
+            tooltip.style.visibility = 'visible';
+            div.style.border = '0.2rem solid #e30b0b';
+            fondoSeleccionado = div.querySelector('object').getAttribute('data');
+            dibujarTablero(dificultadSeleccionada);
+        });
+    });
+
+    function iniciarOReiniciarJuego() {
+        resetearJuego();
+        desactivarBotonesYTeclas();
+        cartas = seleccionarYMezclarCartas();
+        dibujarTablero(dificultadSeleccionada);
+    }
 
     function dibujarTablero(modo) {
         // Cálculo del ancho y alto máximos disponibles
@@ -201,11 +317,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dibujarCartas();
     }
 
-    function iniciarOReiniciarJuego() {
-        cartas = seleccionarYMezclarCartas();
-        dibujarTablero(dificultadSeleccionada);
-    }
-
     function seleccionarYMezclarCartas() {
         let totalCartas = filas * columnas;
         let cartasSeleccionadas = [];
@@ -226,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return cartasSeleccionadas;
     }
 
-    function manejarSeleccionCarta(cartaSeleccionada) {
+    function manejarSeleccion(cartaSeleccionada) {
         // Iniciar el tiempo si no se ha iniciado
         if (!tiempoActualizado) {
             tiempoInicio = Date.now();
@@ -240,7 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
             primeraCartaSeleccionada = cartaSeleccionada;
         } else if (!segundaCartaSeleccionada && cartaSeleccionada !== primeraCartaSeleccionada) {
             segundaCartaSeleccionada = cartaSeleccionada;
-
             comprobarCoincidencia();
         }
         dibujarCartas();
@@ -303,6 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (i === segmentos - 1) {
                     procesando = false;
+                    reactivarBotonesYTeclas();
                 }
             }, delayCartas * i); // Retraso incremental para cada segmento
         }
@@ -322,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 primeraCartaSeleccionada.revelada = false;
                 segundaCartaSeleccionada.revelada = false;
                 resetearSeleccion();
-            }, timeoutGenerico); // 1 segundo de retraso
+            }, timeoutComprobacion); // 1 segundo de retraso
         }
     }
 
@@ -332,43 +443,31 @@ document.addEventListener('DOMContentLoaded', () => {
         dibujarCartas();
     }
 
-    const botonFacil = document.getElementById('facil');
-    const botonMedio = document.getElementById('medio');
-    const botonDificil = document.getElementById('dificil');
+    function desactivarBotonesYTeclas() {
+        botonFacil.disabled = true;
+        botonMedio.disabled = true;
+        botonDificil.disabled = true;
+        reiniciar.disabled = true;
+        teclasActivadas = false;
+    }
 
-    botonFacil.addEventListener('click', () => setDificultad('facil'));
-    botonMedio.addEventListener('click', () => setDificultad('medio'));
-    botonDificil.addEventListener('click', () => setDificultad('dificil'));
+    function reactivarBotonesYTeclas() {
+        botonFacil.disabled = false;
+        botonMedio.disabled = false;
+        botonDificil.disabled = false;
+        reiniciar.disabled = false;
+        teclasActivadas = true;
+    }
 
     function setDificultad(dificultad) {
-        console.log("=>(memory_cards.js:170) dificultad", dificultad);
+        const dificultades = {
+            facil: filasFacil,
+            medio: filasMedio,
+            dificil: filasDificil
+        };
         dificultadSeleccionada = dificultad;
-        dibujarTablero(dificultadSeleccionada);
-    }
-
-    let modal = document.getElementById('modal-fondos');
-    let botonFondo = document.getElementById('boton-fondo');
-    let cerrarModal = document.getElementById('cerrar-modal');
-    let fondoModal = document.getElementById('fondo-modal');
-
-    // Abrir
-    botonFondo.onclick = function () {
-        modal.style.display = 'block';
-        fondoModal.style.display = 'block';
-    }
-
-    // Cerrar con botón
-    cerrarModal.onclick = function () {
-        modal.style.display = 'none';
-        fondoModal.style.display = 'none';
-    }
-
-    // Cerrar al hacer click fuera del modal
-    window.onclick = function (event) {
-        if (event.target === fondoModal) {
-            modal.style.display = 'none';
-            fondoModal.style.display = 'none';
-        }
+        filas = dificultades[dificultad] || filasFacil;
+        iniciarOReiniciarJuego();
     }
 
     function colorizarSVG() {
@@ -386,36 +485,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Cambiar color del fondo del svg
-    let colorOptions = document.querySelectorAll('.color-option');
-    colorOptions.forEach(colorDiv => {
-        colorDiv.addEventListener('click', function () {
-            colorOptions.forEach(cd => cd.classList.remove('seleccionado'));
-            colorDiv.classList.add('seleccionado');
-            colorSeleccionado = colorDiv.querySelector('.color').style.backgroundColor;
-            // Cambiar el color de todos los SVG
-            colorizarSVG();
-        });
-    });
-
-    let divsObjetoSVG = document.querySelectorAll('.objetoSVG');
-    divsObjetoSVG.forEach(div => {
-        div.addEventListener('click', function () {
-            divsObjetoSVG.forEach(svgDiv => {
-                svgDiv.classList.remove('seleccionado');
-                svgDiv.querySelector('.tooltip-text').style.visibility = 'hidden';
-                svgDiv.style.border = '';
-            });
-
-            div.classList.add('seleccionado');
-            let tooltip = div.querySelector('.tooltip-text');
-            tooltip.style.visibility = 'visible';
-            div.style.border = '0.2rem solid #e30b0b';
-            fondoSeleccionado = div.querySelector('object').getAttribute('data');
-            dibujarTablero(dificultadSeleccionada);
-        });
-    });
-
     function actualizarTiempo() {
         let tiempoTranscurrido = Date.now() - tiempoInicio;
         let minutos = Math.floor(tiempoTranscurrido / 60000);
@@ -426,8 +495,27 @@ document.addEventListener('DOMContentLoaded', () => {
     function verificarFinDelJuego() {
         // Comprobar si todas las cartas están reveladas
         if (cartas.every(carta => carta.revelada)) {
-            clearInterval(intervalo);
             alert("GL");
+            resetearJuego();
         }
     }
-})
+
+    function playSound(soundId) {
+        let audioElement = document.getElementById(soundId);
+        if (audioElement) {
+            audioElement.play().catch(e => console.error("Error al reproducir el audio:", e));
+        } else {
+            console.error("Elemento de audio no encontrado:", soundId);
+        }
+    }
+
+    function resetearJuego() {
+        score = 0;
+        spanScore.textContent = '0';
+        clicks = 0;
+        spanClicks.textContent = '0';
+        clearInterval(intervalo);
+        tiempoInicio = Date.now();
+        actualizarTiempo();
+    }
+});
