@@ -26,9 +26,8 @@ h1 {
 }
 
 .container {
-    text-align:    center;
-    margin-bottom: 0.8rem;
-    margin-top:    1.2rem;
+    text-align: center;
+    margin:     1.5rem 0;
 }
 
 .botones-seleccion {
@@ -74,7 +73,7 @@ h1 {
     text-shadow: 0.15rem 0.15rem 0.1rem rgba(204, 204, 204, 1);
 }
 
-#seleccion-colores {
+.seleccion-colores {
     display:         flex;
     justify-content: center;
     align-items:     center;
@@ -101,7 +100,7 @@ h1 {
     border:    2px solid #e30b0b;
 }
 
-#modal-fondos {
+.modal-fondos {
     display:          none;
     position:         fixed;
     top:              50%;
@@ -138,27 +137,65 @@ h1 {
     display:  inline-block;
 }
 
-
 .tooltip-text {
     visibility:       hidden;
-    width:            120px;
+    width:            auto;
+    min-width:        120px;
     background-color: #000;
     color:            #fff;
     border:           2px solid #fff;
     text-align:       center;
-    padding:          5px 0;
+    padding:          5px 10px;
     position:         absolute;
-    z-index:          1;
-    bottom:           100%;
-    left:             50%;
-    margin-left:      -60px;
-    margin-bottom:    1rem;
+    z-index:          5;
     box-shadow:       0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
     text-shadow:      0.15rem 0.15rem 0.15rem rgba(204, 204, 204, 1);
+    white-space:      nowrap;
 }
 
-.objetoSVG:hover .tooltip-text {
+.tooltip-top {
+    bottom:        100%;
+    left:          50%;
+    transform:     translateX(-50%);
+    margin-bottom: 1.5rem;
+}
+
+.tooltip-bottom {
+    top:        100%;
+    left:       50%;
+    transform:  translateX(-50%);
+    margin-top: 1.5rem;
+}
+
+.tooltip-left {
+    right:        100%;
+    top:          50%;
+    transform:    translateY(-50%);
+    margin-right: 1.5rem;
+}
+
+.tooltip-right {
+    left:        100%;
+    top:         50%;
+    transform:   translateY(-50%);
+    margin-left: 1.5rem;
+}
+
+.objetoSVG:hover .tooltip-text,
+.dificultad:hover .tooltip-text,
+.marcador:hover .tooltip-text,
+.reiniciar:hover .tooltip-text,
+.seleccion-fondo:hover .tooltip-text,
+.color:hover .tooltip-text {
     visibility: visible;
+}
+
+.dificultad,
+.marcador,
+#boton-fondo,
+.reiniciar,
+#cerrar-modal {
+    position: relative;
 }
 
 #menu-dificultad, #boton-fondo {
@@ -167,30 +204,10 @@ h1 {
 }
 
 #facil, #medio, #dificil {
-    position:     relative;
     margin-right: 2rem;
 }
 
-#facil .tooltip-text, #medio .tooltip-text, #dificil .tooltip-text {
-    width:       15rem;
-    margin-left: -7.5rem;
-}
-
-#reiniciar .tooltip-text {
-    width:       15rem;
-    margin-left: -7.5rem;
-}
-
-#reiniciar:hover .tooltip-text,
-#boton-fondo:hover .tooltip-text,
-#facil:hover .tooltip-text,
-#medio:hover .tooltip-text,
-#dificil:hover .tooltip-text {
-    visibility: visible;
-}
-
 #boton-fondo, #reiniciar {
-    position:    relative;
     margin-left: 3rem;
 }
 
@@ -201,16 +218,3 @@ h1 {
 .marcador {
     margin-left: 2rem;
 }
-
-#boton-fondo .tooltip-text {
-    width:       15rem;
-    margin-left: -7.5rem;
-}
-
-#score, #clicks, #tiempo {
-}
-
-#cerrar-modal {
-    margin: 0.5rem auto;
-}
-
