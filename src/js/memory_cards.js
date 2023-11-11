@@ -60,8 +60,9 @@ const cartasPoker = [
 const espacioX = espacioY = 30;
 const columnas = 8;
 const multiplicadorAncho = 1.5;
-const multiplicadorGenerico = 1;
-const multiplicadorEspecifico = 0.58;
+const multiplicadorGenerico = 0.60;
+const uno = 1;
+const multiplicadorEspecifico = 0.45;
 const maximoAnchorCarta = 200;
 const filasFacil = 2;
 const filasMedio = 3;
@@ -281,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function dibujarTablero(modo) {
         // Cálculo del ancho y alto máximos disponibles
         const porcentajeAncho = multiplicadorGenerico;
-        let porcentajeAlto = multiplicadorGenerico
+        let porcentajeAlto = multiplicadorGenerico;
 
         if (modo === 'facil') {
             filas = filasFacil;
@@ -300,13 +301,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const maxAltoContenedor = window.innerHeight * porcentajeAlto;
 
         // Calcular el tamaño de las cartas con el ancho disponible
-        anchoCarta = Math.min((maxAnchoContenedor - (columnas + multiplicadorGenerico) * espacioX) / columnas, maximoAnchorCarta);
+        anchoCarta = Math.min((maxAnchoContenedor - (columnas + uno) * espacioX) / columnas, maximoAnchorCarta);
         altoCarta = anchoCarta * multiplicadorAncho;
         altoTotal = filas * (altoCarta + espacioY) + espacioY;
 
         // Ajustar el tamaño de las cartas si el alto total excede el alto disponible
         if (altoTotal > maxAltoContenedor) {
-            altoCarta = (maxAltoContenedor - (filas + multiplicadorGenerico) * espacioY) / filas;
+            altoCarta = (maxAltoContenedor - (filas + uno) * espacioY) / filas;
             anchoCarta = altoCarta / multiplicadorAncho;
         }
 
@@ -330,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mezclar las cartas
         for (let i = cartasSeleccionadas.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + multiplicadorGenerico));
+            let j = Math.floor(Math.random() * (i + uno));
             [cartasSeleccionadas[i], cartasSeleccionadas[j]] = [cartasSeleccionadas[j], cartasSeleccionadas[i]];
         }
 
@@ -409,7 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let alturaSegmento = imagen.naturalHeight / segmentos;
         for (let i = 0; i < segmentos; i++) {
             setTimeout(function () {
-                ctx.drawImage(imagen, 0, 0, imagen.naturalWidth, alturaSegmento * (i + multiplicadorGenerico), x, y, ancho, alto * (i + multiplicadorGenerico) / segmentos);
+                ctx.drawImage(imagen, 0, 0, imagen.naturalWidth, alturaSegmento * (i + uno), x, y, ancho, alto * (i + uno) / segmentos);
 
                 if (i === segmentos - 1) {
                     procesando = false;

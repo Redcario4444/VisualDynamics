@@ -213,28 +213,28 @@ h1 {
     bottom:        100%;
     left:          50%;
     transform:     translateX(-50%);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .tooltip-bottom {
     top:        100%;
     left:       50%;
     transform:  translateX(-50%);
-    margin-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 .tooltip-left {
     right:        100%;
     top:          50%;
     transform:    translateY(-50%);
-    margin-right: 1.5rem;
+    margin-right: 1rem;
 }
 
 .tooltip-right {
     left:        100%;
     top:         50%;
     transform:   translateY(-50%);
-    margin-left: 1.5rem;
+    margin-left: 1rem;
 }
 
 .objetoSVG:hover .tooltip-text,
@@ -258,23 +258,6 @@ h1 {
     position: relative;
 }
 
-#menu-dificultad, #boton-fondo {
-    display:      inline-block;
-    margin-right: 1rem;
-}
-
-#facil, #medio, #dificil {
-    margin-right: 2rem;
-}
-
-#boton-fondo, #reiniciar {
-    margin-left: 3rem;
-}
-
-.marcador button:nth-child(2) {
-    margin-left: 1rem;
-}
-
-.marcador {
-    margin-left: 2rem;
+#menu-dificultad {
+    display: inline-block;
 }
