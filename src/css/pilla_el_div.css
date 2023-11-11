@@ -3,10 +3,6 @@ html {
     font-family: "Press Start 2P", serif;
 }
 
-body {
-    margin-bottom: 4rem;
-}
-
 .reboteDivFacil {
     width: 150px;
     height: 150px;
@@ -86,7 +82,7 @@ h1 {
 }
 
 .botones-seleccion {
-    margin:        1rem auto;
+    margin:        0.5rem auto;
     padding:       0.5rem 1rem;
     color:         #fff;
     background:    #000;
