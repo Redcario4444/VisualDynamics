@@ -8,14 +8,14 @@
     $ruta_canciones = '../../';
     include "../../src/header.php";
 ?>
-    <h1>Pilla el Div</h1>
+    <h1>Pilla el Div #GC1</h1>
 
     <div class='container'>
         <!-- Menú de Selección de Dificultad -->
         <div id='menu-dificultad'>
-            <button class='botones-seleccion' id='ia'>Fácil
+            <button class='botones-seleccion' id='facil'>Fácil
                 <span class='tooltip-text'>No puedes perder<br>10 Pops +3 seg<br>5000 Puntos +3 seg</span></button>
-            <button class='botones-seleccion' id='dosJugadores'>Medio
+            <button class='botones-seleccion' id='medio'>Medio
                 <span class='tooltip-text'>3 fallos seguidos YOU LOSE<br>6 fallos en total YOU LOSE<br>10 Pops +1 seg<br>5000 Puntos +1 seg</span></button>
             <button class='botones-seleccion' id='dificil'>Difícil
                 <span class='tooltip-text'>3 fallos seguidos YOU LOSE<br>6 fallos en total YOU LOSE<br>Cada clic 100 Puntos</span></button>

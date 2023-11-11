@@ -123,23 +123,19 @@ h1 {
     text-shadow:      0.15rem 0.15rem 0.15rem rgba(204, 204, 204, 1);
 }
 
-#ia .tooltip-text {
-    margin-left: 3rem;
-}
-
 #menu-dificultad {
      display:      inline-block;
      margin-right: 1rem;
  }
 
-#ia, #dosJugadores, #dificil, #hardcore, #infinito {
+#facil, #medio, #dificil, #hardcore, #infinito {
     position:     relative;
     margin-right: 2rem;
 }
 
 #reiniciar:hover .tooltip-text,
-#ia:hover .tooltip-text,
-#dosJugadores:hover .tooltip-text,
+#facil:hover .tooltip-text,
+#medio:hover .tooltip-text,
 #dificil:hover .tooltip-text,
 #hardcore:hover .tooltip-text,
 #infinito:hover .tooltip-text {

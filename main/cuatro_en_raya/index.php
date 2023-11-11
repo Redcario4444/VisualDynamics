@@ -8,7 +8,7 @@
     $ruta_canciones = '../../';
     include '../../src/header.php';
 ?>
-    <h1>Cuatro en Raya</h1>
+    <h1>Cuatro en Raya #GC3</h1>
 
     <div class='container'>
         <!-- Menú de Selección de Dificultad -->
