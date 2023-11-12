@@ -2,21 +2,30 @@
 @import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
 @import url('normalize.css');
 
+
 html {
     font-size:   16px;
-    font-family: "Press Start 2P", serif;
+    font-family: "Press Start 2P", monospace;
 }
 
-.container {
-    text-align:    center;
-    margin-bottom: 0.8rem;
-    margin-top:    1.2rem;
+body {
+    background-image: url("../../assets/img/index/fondo_inicio.gif");
+    background-size:  0.3rem;
 }
 
 h1 {
-    color:      white;
+    color:      #fff;
     font-size:  2.5rem;
     text-align: center;
+}
+
+.container {
+    text-align: center;
+    margin:     1.5rem 0;
+}
+
+.menu {
+    display: inline-block;
 }
 
 .botones-seleccion {
@@ -27,7 +36,7 @@ h1 {
     border:        0.3rem solid #fff;
     outline:       none;
     box-shadow:    0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
-    border-radius: 2.5px;
+    border-radius: 0.15rem;
 }
 
 .botones-seleccion:focus,
@@ -37,59 +46,105 @@ h1 {
     text-shadow: 0.2rem 0.2rem 0.1rem rgba(0, 0, 0, 1);
 }
 
+/* TOOLTIP MAESTRO*/
 .tooltip-text {
     visibility:       hidden;
     width:            auto;
-    min-width: 7.5rem;
+    min-width:        120px;
     background-color: #000;
     color:            #fff;
     border:           2px solid #fff;
     text-align:       center;
     padding:          5px 10px;
     position:         absolute;
-    z-index:          1;
-    bottom:           100%;
-    left:             50%;
-    transform:         translateX(-50%);
-    margin-bottom:    1rem;
+    z-index:          5;
     box-shadow:       0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
-    white-space: nowrap;
     text-shadow:      0.15rem 0.15rem 0.15rem rgba(204, 204, 204, 1);
+    white-space:      nowrap;
 }
 
-#menu-dificultad {
-    display:      inline-block;
+/* POSICIONES TOOLTIP */
+.tooltip-top {
+    bottom:        100%;
+    left:          50%;
+    transform:     translateX(-50%);
+    margin-bottom: 1rem;
+}
+
+.tooltip-bottom {
+    top:        100%;
+    left:       50%;
+    transform:  translateX(-50%);
+    margin-top: 1rem;
+}
+
+.tooltip-left {
+    right:        100%;
+    top:          50%;
+    transform:    translateY(-50%);
     margin-right: 1rem;
 }
 
-#ia, #dosJugadores, #reiniciar {
-    position:     relative;
-    margin-right: 2rem;
+.tooltip-right {
+    left:        100%;
+    top:         50%;
+    transform:   translateY(-50%);
+    margin-left: 1rem;
 }
 
-#reiniciar:hover .tooltip-text,
-#ia:hover .tooltip-text,
-#dosJugadores:hover .tooltip-text {
+/** HOVERS DE LOS TOOLTIPS **/
+.dificultad:hover .tooltip-text,
+.marcador:hover .tooltip-text,
+.reiniciar:hover .tooltip-text {
     visibility: visible;
 }
 
-.marcador {
-    margin-left: 2rem;
+/* POSITION DE LOS TOOLTIPS */
+.dificultad,
+.marcador,
+.reiniciar {
+    position: relative;
 }
 
-#score, #clicks, #tiempo {
+/* ESTILOS TABLERO */
+#tablero {
+    border-collapse: collapse;
+    margin:          auto;
 }
 
-.campo {
-    display: flex;
-    align-items: center;
-    margin: auto;
-    height: 25rem;
-    width: 800px;
-    border: 0.3rem solid white;
-    box-shadow: 0.3rem 0.3rem 0.1rem rgba(204,204,204,0.8);
+#tablero td {
+    width:            100px;
+    height:           100px;
+    border:           1px solid black;
+    background-color: white;
+    position:         relative;
 }
 
-.oculto {
-    display: none;
+#flecha {
+    text-align:  center;
+    font-size:   3rem;
+    margin:      auto;
+    cursor:      pointer;
+    user-select: none;
 }
+
+#juego {
+    position: relative;
+    width:    fit-content;
+    margin:   auto;
+}
+
+#flecha {
+    position: absolute;
+    top:      -3.5rem;
+    left:     0;
+    color:    #fff;
+}
+
+.ficha-img {
+    position: absolute;
+    width:    100px;
+    height:   100px;
+    display:  block;
+}
+
