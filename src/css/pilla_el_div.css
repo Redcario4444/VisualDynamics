@@ -4,7 +4,12 @@
 
 html {
     font-size:   16px;
-    font-family: "Press Start 2P", serif;
+    font-family: "Press Start 2P", monospace;
+}
+
+body {
+    background-image: url("../../assets/img/index/fondo_inicio.gif");
+    background-size: 0.3rem;
 }
 
 .reboteDivFacil {
