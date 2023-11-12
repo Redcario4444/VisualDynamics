@@ -1,0 +1,131 @@
+@import url('https://fonts.cdnfonts.com/css/press-start-2p');
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+@import url('normalize.css');
+
+html {
+    font-size:   16px;
+    font-family: "Press Start 2P", serif;
+}
+
+.container {
+    text-align:    center;
+    margin-bottom: 0.8rem;
+    margin-top:    1.2rem;
+}
+
+h1 {
+    color:      white;
+    font-size:  2.5rem;
+    text-align: center;
+}
+
+.botones-seleccion {
+    margin:        0.5rem auto;
+    padding:       0.5rem 1rem;
+    color:         #fff;
+    background:    #000;
+    border:        0.3rem solid #fff;
+    outline:       none;
+    box-shadow:    0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
+    border-radius: 2.5px;
+}
+
+.botones-seleccion:focus,
+.botones-seleccion:hover {
+    outline:     none;
+    background:  #999;
+    text-shadow: 0.2rem 0.2rem 0.1rem rgba(0, 0, 0, 1);
+}
+
+.tooltip-text {
+    visibility:       hidden;
+    width:            auto;
+    min-width: 7.5rem;
+    background-color: #000;
+    color:            #fff;
+    border:           2px solid #fff;
+    text-align:       center;
+    padding:          5px 10px;
+    position:         absolute;
+    z-index:          1;
+    bottom:           100%;
+    left:             50%;
+    transform:         translateX(-50%);
+    margin-bottom:    1rem;
+    box-shadow:       0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
+    white-space: nowrap;
+    text-shadow:      0.15rem 0.15rem 0.15rem rgba(204, 204, 204, 1);
+}
+
+#menu-dificultad {
+    display:      inline-block;
+    margin-right: 1rem;
+}
+
+#ia, #dosJugadores, #reiniciar {
+    position:     relative;
+    margin-right: 2rem;
+}
+
+#reiniciar:hover .tooltip-text,
+#ia:hover .tooltip-text,
+#dosJugadores:hover .tooltip-text {
+    visibility: visible;
+}
+
+.marcador {
+    margin-left: 2rem;
+}
+
+#score, #clicks, #tiempo {
+}
+
+.campo {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    height: 25rem;
+    width: 800px;
+    border: 0.3rem solid white;
+    box-shadow: 0.3rem 0.3rem 0.1rem rgba(204,204,204,0.8);
+}
+
+.oculto {
+    display: none;
+}
+
+#campo-jugador {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+    gap: 1px;
+    border: 1px solid #000;
+}
+
+.game-container {
+     display: flex;
+     justify-content: space-around;
+     margin: 20px;
+ }
+
+.campoJuego {
+    display: grid;
+    grid-template-columns: repeat(10, 2.5rem);
+    grid-gap: 0.1rem;
+}
+
+.celda {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid;
+    cursor: pointer;
+    background-color: darkblue;
+}
+
+.ship {
+    background-color: grey;
+}
+
+.hit {
+    background-color: red;
+}
