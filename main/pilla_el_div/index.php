@@ -58,7 +58,11 @@
     <audio id="pop" src="/assets/sound/pilla_el_div/pop.mp3"></audio>
     <audio id="divNotLie" src="/assets/sound/pilla_el_div/divNotLie.wav"></audio>
     <audio id="errorClic" src="/assets/sound/pilla_el_div/errorClic.mp3"></audio>
-    <audio id="cursor" src="/assets/sound/index/cursor.mp3">⬇</audio>
+    <audio id="cursor" src="/assets/sound/index/cursor.mp3"></audio>
+    <audio id="facils" src="/assets/sound/pilla_el_div/facil.wav"></audio>
+    <audio id="medios" src="/assets/sound/pilla_el_div/normal.wav"></audio>
+    <audio id="infinitos" src="/assets/sound/pilla_el_div/infinite.wav"></audio>
+    <audio id="victoria" src="/assets/sound/pilla_el_div/win.wav"></audio>
 
 <?php
     include '../../src/footer.php';

@@ -79,6 +79,32 @@ html {
     margin-top:    1.2rem;
 }
 
+#finDelJuego ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    height: 100%;
+}
+
+#finDelJuego li{
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    border: 0.3rem solid white;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-family: "Press Start 2P", serif;
+    width: 10rem;
+    height: 4.5rem;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0.15rem 0.15rem 0.1rem rgba(204,204,204,0.8);
+    text-shadow: 0.13rem 0.13rem 0.1rem rgba(204,204,204,1);
+}
+
 h1 {
     color:      white;
     font-size:  2.5rem;
