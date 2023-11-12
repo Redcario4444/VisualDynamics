@@ -4,7 +4,7 @@
 
 html {
     font-size:   16px;
-    font-family: "Press Start 2P", serif;
+    font-family: "Press Start 2P", monospace;
 }
 
 body {
@@ -38,7 +38,7 @@ h1 {
     border:        0.3rem solid #fff;
     outline:       none;
     box-shadow:    0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
-    border-radius: 2.5px;
+    border-radius: 0.15rem;
 }
 
 .botones-seleccion:focus,
