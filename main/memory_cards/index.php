@@ -41,7 +41,7 @@
             <span class="tooltip-text tooltip-top">Seleccióname con la tecla 'r'</span></button>
 
         <!-- Menú de selección de fondos -->
-        <button class="botones-seleccion seleccion-fondo" id='boton-fondo'>Elegir fondo
+        <button class="botones-seleccion seleccion-fondo" id='boton-seleccion-fondo'>Elegir fondo
             <span class='tooltip-text  tooltip-top'>Seleccióname con la tecla 'e'</span></button>
 
         <!-- Modal de selección de fondos -->
@@ -147,13 +147,27 @@
                 </button>
             </div>
         </div>
+
+        <!-- Modal de estadísticas -->
+        <!-- TODO QUITAR EL DISPLAY NONE! -->
+        <div class='fondo-modal-estadisticas' id='fondo-modal-estadisticas' style="display: none"></div>
+        <div class='modal-estadisticas' id='modal-estadisticas' style="display: none">
+            <div class='interior-modal-estadisticas'>
+                <button class='botones-seleccion cerrar-estadisticas abierto' id='cerrar-inicio'>Cerrar
+                    <span class='tooltip-text  tooltip-right'>Ciérrame con 'c'</span>
+                </button>
+            </div>
+        </div>
     </div>
+
+    <h1>Memory cards #GC2</h1>
     <!-- Canvas para el juego -->
     <canvas id='memory-cards'></canvas>
 
     <!-- Archivos de audio -->
     <audio id='modem' src='../../assets/sound/memory_cards/modem.mp3' preload="auto"></audio>
     <audio id='welcome' src='../../assets/sound/memory_cards/welcome.mp3' preload="auto"></audio>
+    <audio id='cursor' src='../../assets/sound/memory_cards/cursor.mp3' preload="auto"></audio>
 
 <?php
     include '../../src/footer.php';
