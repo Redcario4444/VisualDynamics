@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const p1Campo = document.getElementById('p1Campo');
-    const p1Disparos = document.getElementById('p1Disparos');
-    const p2Campo = document.getElementById('p2Campo');
-    const p2Disparos = document.getElementById('p2Disparos');
+    let p1Campo = document.getElementById('p1Campo');
+    let p1Disparos = document.getElementById('p1Disparos');
+    let p2Campo = document.getElementById('p2Campo');
+    let p2Disparos = document.getElementById('p2Disparos');
+    let cambiarTableroP1 = document.getElementById('tablerop1');
+    let cambiarTableroP2 = document.getElementById('tablerop2');
     let contadorDeBarcos = 0;
 
     crearCampoDeJuego(p1Campo);
@@ -13,26 +15,40 @@ document.addEventListener('DOMContentLoaded', function () {
     colocarBarcos(p2Campo);
     crearCampoDeJuego(p2Disparos);
 
+    cambiarTableroP1.addEventListener('click', function (event) {
+        if (event.target.id === 'tablerop1'){
+            p1Campo.innerHTML = '';
+            crearCampoDeJuego(p1Campo);
+            colocarBarcos(p1Campo);
+        }
+    });
+
     let celdasP1Campo = p1Campo.querySelectorAll('.celda');
     let celdasP1Disparos = p1Disparos.querySelectorAll('.celda');
     let celdasP2Campo = p2Campo.querySelectorAll('.celda');
-    let celdasP2Disparos = p1Disparos.querySelectorAll('.celda');
+    let celdasP2Disparos = p2Disparos.querySelectorAll('.celda');
+    let jugador1;
+    let jugador2;
     let clic = 0;
 
-    p1Ataque(celdasP2Disparos, celdasP2Campo);
-
-    /*cambiarJugador();
+    cambiarJugador();
 
     function cambiarJugador() {
         clic++;
         if (clic %2 === 0){
-            p1Ataque(celdasP1Disparos, celdasP2Campo);
+            jugador1 = false;
+            jugador2 = true;
+            /*alert('Turno del jugador 2');*/
+            ataque(celdasP2Disparos, celdasP1Campo);
         }else {
-            p1Ataque(celdasP2Disparos, celdasP1Campo);
+            jugador1 = true;
+            jugador2 = false;
+            /*alert('Turno del jugador 1');*/
+            ataque(celdasP1Disparos, celdasP2Campo);
         }
-    }*/
+    }
 
-    function p1Ataque(campoAtaque, campoAtacado){
+    function ataque(campoAtaque, campoAtacado){
         for (let i = 0; i < campoAtaque.length; i++) {
             campoAtaque[i].addEventListener('click', function (event) {
                 let fila = event.target.dataset.row;
@@ -60,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     campoAtacado[i].classList.add('tocado');
                 }else{
                     campoAtacado[i].classList.add('agua');
-                    /*cambiarJugador();*/
+                    cambiarJugador();
                     return;
                 }
             }

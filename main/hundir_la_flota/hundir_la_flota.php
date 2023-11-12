@@ -26,6 +26,8 @@
             <button class='botones-seleccion marcador'>Turno: <span id="turno">Nadie</span></button>
             <button class='botones-seleccion marcador'>Tiempo: <span id='time-number'>0</span></button>
             <button class='botones-seleccion marcador'>Movimientos: <span id='movimientos-number'>0</span></button>
+            <button class='botones-seleccion marcador' id='tablerop1'>Cambiar tablero P1</button>
+            <button class='botones-seleccion marcador' id='tablerop2'>Cambiar tablero P2</button>
         </div>
     </div>
 
