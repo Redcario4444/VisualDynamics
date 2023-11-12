@@ -34,11 +34,13 @@
         <div>
             <h2>Jugador 1</h2>
             <div id='p1-campo' class='campoJuego'></div>
+            <br><br><br>
             <div id='p1-disparos' class='campoJuego'></div>
         </div>
         <div>
             <h2>Jugador 2</h2>
             <div id='p2-campo' class='campoJuego'></div>
+            <br><br><br>
             <div id='p2-disparos' class='campoJuego'></div>
         </div>
     </div>
