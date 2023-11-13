@@ -105,5 +105,6 @@
         <button class="carrusel-arrow carrusel-next" id="button-next" data-button="button-next">▶</button>
     </div>
 <?php
+    $src = "../assets/img/main/back.svg";
     include "../src/footer.php";
 ?>

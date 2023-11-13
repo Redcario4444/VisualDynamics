@@ -169,5 +169,6 @@
     <audio id='cursor' src='../../assets/sound/memory_cards/cursor.mp3' preload="auto"></audio>
 
 <?php
+    $src = '../../assets/img/main/back.svg';
     include '../../src/footer.php';
 ?>
