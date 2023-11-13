@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
 @import url('normalize.css');
 
-
 html {
     font-size:   16px;
     font-family: "Press Start 2P", monospace;
@@ -17,19 +16,25 @@ h1 {
     color:      #fff;
     font-size:  2.5rem;
     text-align: center;
+    width:      100%;
 }
 
 .container {
     text-align: center;
-    margin:     1.5rem 0;
+    margin:     1rem auto 5rem;
 }
 
 .menu {
-    display: inline-block;
+    display:         flex;
+    flex-wrap:       wrap;
+    justify-content: center;
+    align-items:     center;
+    width:           100%;
+
 }
 
 .botones-seleccion {
-    margin:        0.5rem auto;
+    margin:        0.5rem 1rem;
     padding:       0.5rem 1rem;
     color:         #fff;
     background:    #000;
@@ -108,24 +113,16 @@ h1 {
 
 /* ESTILOS TABLERO */
 #tablero {
-    border-collapse: collapse;
-    margin:          auto;
+    border-collapse:  separate;
+    border-spacing:   5px; /* Espacio entre celdas */
+    margin:           auto;
+    background-color: #0077ff; /* Azul */
 }
 
 #tablero td {
-    width:            100px;
-    height:           100px;
-    border:           1px solid black;
-    background-color: white;
-    position:         relative;
-}
-
-#flecha {
-    text-align:  center;
-    font-size:   3rem;
-    margin:      auto;
-    cursor:      pointer;
-    user-select: none;
+    width:    100px;
+    height:   100px;
+    position: relative;
 }
 
 #juego {
@@ -134,17 +131,49 @@ h1 {
     margin:   auto;
 }
 
+@keyframes boteFlecha {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-0.8rem);
+    }
+}
+
 #flecha {
-    position: absolute;
-    top:      -3.5rem;
-    left:     0;
-    color:    #fff;
+    visibility:  hidden;
+    position:    absolute;
+    left:        0;
+    text-align:  center;
+    cursor:      pointer;
+    user-select: none;
+    animation:   boteFlecha 1.5s ease-in-out infinite;
+}
+
+.flecha-jugador1 {
+    color:       #f4c12f;
+    text-shadow: 0.3rem 0.25rem 0.15rem rgba(242, 138, 11, 0.5);
+}
+
+.flecha-jugador2 {
+    color:       #cf1546;
+    text-shadow: 0.3rem 0.25rem 0.15rem rgba(157, 22, 57, 0.5);
 }
 
 .ficha-img {
     position: absolute;
-    width:    100px;
-    height:   100px;
-    display:  block;
+    top:      0;
+    left:     0;
+    z-index:  2;
+}
+
+.svg-negativo {
+    position:            absolute;
+    top:                 0;
+    left:                0;
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center;
+    z-index:             1;
 }
 
