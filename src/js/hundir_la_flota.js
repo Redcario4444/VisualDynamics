@@ -5,15 +5,70 @@ document.addEventListener('DOMContentLoaded', function () {
     let p2Disparos = document.getElementById('p2Disparos');
     let cambiarTableroP1 = document.getElementById('tablerop1');
     let cambiarTableroP2 = document.getElementById('tablerop2');
+    let comenzarJuego = document.getElementById('comenzarJuego');
+    let turno = document.getElementById('turno');
+    let clic = -1;
     let contadorDeBarcos = 0;
+    let cerrarModal = document.getElementById("cerrar-inicio");
+    let fondoModal = document.getElementById("fondo-modal-inicio");
+    let modalInicio = document.getElementById("modal-inicio");
+    let dosJugadores = document.getElementById('dosJugadores');
+    let terminadoP1 = document.getElementById('terminadoP1');
+    let terminadoP2 = document.getElementById('terminadoP2');
+    let tiempoRestanteElement = document.getElementById('time-number');
+    let mostrarCampoP1 = document.getElementById('mostrarCampoP1');
+    let mostrarCampoP2 = document.getElementById('mostrarCampoP2');
 
-    crearCampoDeJuego(p1Campo);
-    colocarBarcos(p1Campo);
-    crearCampoDeJuego(p1Disparos);
+    cerrarModal.addEventListener('click', function () {
+        fondoModal.classList.add('oculto');
+        modalInicio.style.display = "none";
+        /*bienvenidaSound.currentTime = 0;
+        bienvenidaSound.play();*/
+    });
 
-    crearCampoDeJuego(p2Campo);
-    colocarBarcos(p2Campo);
-    crearCampoDeJuego(p2Disparos);
+    dosJugadores.addEventListener('click', function (event){
+        if (event.target.id === "dosJugadores"){
+            /*setTimeout(function () {
+            }, 3000);*/
+            cambiarTableroP1.classList.remove('oculto');
+            terminadoP1.classList.remove('oculto');
+            mostrarCampoP1.textContent = "Jugador1";
+            mostrarCampoP2.textContent = "Jugador2";
+        }
+    });
+
+    terminadoP1.addEventListener('click', function (event){
+        let celdasP1Campo = p1Campo.querySelectorAll('.celda');
+        if (event.target.id === "terminadoP1"){
+            cambiarTableroP1.classList.add('oculto');
+            cambiarTableroP2.classList.remove('oculto');
+            terminadoP1.classList.add('oculto');
+            terminadoP2.classList.remove('oculto');
+            for (let i = 0; i < celdasP1Campo.length; i++){
+                celdasP1Campo[i].classList.add('oculto');
+            }
+        }
+    });
+
+    terminadoP2.addEventListener('click', function (event){
+        let celdasP2Campo = p2Campo.querySelectorAll('.celda');
+        if (event.target.id === "terminadoP2"){
+            cambiarTableroP2.classList.add('oculto');
+            terminadoP2.classList.add('oculto');
+            comenzarJuego.classList.remove('oculto');
+            for (let i = 0; i < celdasP2Campo.length; i++){
+                celdasP2Campo[i].classList.add('oculto');
+            }
+        }
+    });
+
+
+    let tiempo = 5;
+    function actualizarTiempo() {
+        tiempo++;
+        tiempoRestanteElement.textContent = tiempo.toString();
+        setTimeout(actualizarTiempo, 1000);
+    }
 
     cambiarTableroP1.addEventListener('click', function (event) {
         if (event.target.id === 'tablerop1'){
@@ -23,28 +78,119 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    let celdasP1Campo = p1Campo.querySelectorAll('.celda');
-    let celdasP1Disparos = p1Disparos.querySelectorAll('.celda');
-    let celdasP2Campo = p2Campo.querySelectorAll('.celda');
-    let celdasP2Disparos = p2Disparos.querySelectorAll('.celda');
-    let jugador1;
-    let jugador2;
-    let clic = 0;
+    cambiarTableroP2.addEventListener('click', function (event) {
+        if (event.target.id === 'tablerop2'){
+            p2Campo.innerHTML = '';
+            crearCampoDeJuego(p2Campo);
+            colocarBarcos(p2Campo);
+        }
+    });
+
+    comenzarJuego.addEventListener('click', function (event) {
+        if (event.target.id === 'comenzarJuego'){
+            actualizarTiempo();
+            crearCampoDeJuego(p1Disparos);
+            crearCampoDeJuego(p2Disparos);
+            cambiarJugador();
+        }
+    });
+
+    mostrarCampoP1.addEventListener('mouseover', function (event) {
+        if (event.target.id === 'comenzarJuego'){
+            actualizarTiempo();
+            crearCampoDeJuego(p1Disparos);
+            crearCampoDeJuego(p2Disparos);
+            cambiarJugador();
+        }
+    });
+
+    /*mostrarCampoP1.addEventListener('mouseover', function (event) {
+        let celdasP1Campo = p1Campo.querySelectorAll('.celda');
+        let celdasP1Disparos = p1Disparos.querySelectorAll('.celda');
+        if (event.target.id === 'mostrarCampoP1'){
+            for (let i = 0; i < celdasP1Campo.length; i++){
+                celdasP1Campo[i].classList.remove('oculto');
+            }
+        }
+        eliminarEventListeners(celdasP1Campo);
+        eliminarEventListeners(celdasP1Disparos);
+    });
+
+    mostrarCampoP1.addEventListener('mouseout', function (event) {
+        let celdasP1Campo = p1Campo.querySelectorAll('.celda');
+        let celdasP1Disparos = p1Disparos.querySelectorAll('.celda');
+        if (event.target.id === 'mostrarCampoP1'){
+            for (let i = 0; i < celdasP1Campo.length; i++){
+                celdasP1Campo[i].classList.add('oculto');
+            }
+        }
+        eliminarEventListeners(celdasP1Campo);
+        eliminarEventListeners(celdasP1Disparos);
+    });
+
+    mostrarCampoP2.addEventListener('mouseover', function (event) {
+        let celdasP2Campo = p2Campo.querySelectorAll('.celda');
+        let celdasP2Disparos = p2Disparos.querySelectorAll('.celda');
+        if (event.target.id === 'mostrarCampoP2'){
+            for (let i = 0; i < celdasP2Campo.length; i++){
+                celdasP2Campo[i].classList.remove('oculto');
+            }
+        }
+        eliminarEventListeners(celdasP2Campo);
+        eliminarEventListeners(celdasP2Disparos);
+    });
+
+    mostrarCampoP2.addEventListener('mouseout', function (event) {
+        let celdasP2Campo = p2Campo.querySelectorAll('.celda');
+        let celdasP2Disparos = p2Disparos.querySelectorAll('.celda');
+        if (event.target.id === 'mostrarCampoP2'){
+            for (let i = 0; i < celdasP2Campo.length; i++){
+                celdasP2Campo[i].classList.add('oculto');
+            }
+        }
+        eliminarEventListeners(celdasP2Campo);
+        eliminarEventListeners(celdasP2Disparos);
+    });*/
+
+    function eliminarEventListeners(elementos) {
+        elementos.forEach(elemento => {
+            // Clonar el elemento para eliminar el event listener sin afectar el original
+            const nuevoElemento = elemento.cloneNode(true);
+            elemento.parentNode.replaceChild(nuevoElemento, elemento);
+        });
+    }
 
     cambiarJugador();
 
     function cambiarJugador() {
+        let celdasP1Campo = p1Campo.querySelectorAll('.celda');
+        let celdasP1Disparos = p1Disparos.querySelectorAll('.celda');
+        let celdasP2Campo = p2Campo.querySelectorAll('.celda');
+        let celdasP2Disparos = p2Disparos.querySelectorAll('.celda');
+
         clic++;
-        if (clic %2 === 0){
-            jugador1 = false;
-            jugador2 = true;
-            /*alert('Turno del jugador 2');*/
-            ataque(celdasP2Disparos, celdasP1Campo);
-        }else {
-            jugador1 = true;
-            jugador2 = false;
-            /*alert('Turno del jugador 1');*/
-            ataque(celdasP1Disparos, celdasP2Campo);
+        if (clic === 0){
+
+        }else{
+            if (clic %2 === 0){
+                turno.textContent = 'Jugador2';
+                for (let i = 0; i < celdasP1Disparos.length; i++){
+                    celdasP1Disparos[i].classList.add('oculto');
+                }
+                for (let i = 0; i < celdasP2Disparos.length; i++){
+                    celdasP2Disparos[i].classList.remove('oculto');
+                }
+                ataque(celdasP2Disparos, celdasP1Campo);
+            }else {
+                turno.textContent = 'Jugador1';
+                for (let i = 0; i < celdasP2Disparos.length; i++){
+                    celdasP2Disparos[i].classList.add('oculto');
+                }
+                for (let i = 0; i < celdasP1Disparos.length; i++){
+                    celdasP1Disparos[i].classList.remove('oculto');
+                }
+                ataque(celdasP1Disparos, celdasP2Campo);
+            }
         }
     }
 
@@ -57,9 +203,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     fila = event.target.dataset.row;
                     columna = event.target.dataset.col;
                     event.target.classList.remove('celda');
+                    campoAtacado[i].classList.remove('celda');
                     conseguirMismaCasilla(campoAtaque ,campoAtacado, fila, columna);
                 }else {
-                    alert('Ya habias tocado esta casilla');
+                    /*alert('Ya habias tocado esta casilla');*/
                 }
             });
         }
@@ -76,6 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     campoAtacado[i].classList.add('tocado');
                 }else{
                     campoAtacado[i].classList.add('agua');
+                    campoAtaque[i].classList.add('agua');
                     cambiarJugador();
                     return;
                 }
@@ -98,6 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
+        ganado(campoAtacado);
     }
 
     function tocado(campoAtaque, fila, columna){
@@ -105,6 +254,21 @@ document.addEventListener('DOMContentLoaded', function () {
             if (campoAtaque[i].dataset.row === fila && campoAtaque[i].dataset.col === columna){
                 campoAtaque[i].classList.add('tocado');
             }
+        }
+    }
+
+    function ganado(campoAtacado){
+        let barcosHundidos = 0;
+        for (let i = 0; i < campoAtacado.length; i++) {
+            if (campoAtacado[i].dataset.barco > -1 && campoAtacado[i].classList.contains("hundido")){
+                barcosHundidos++;
+            }
+        }
+        if (barcosHundidos === 20 && turno.textContent === "Jugador1"){
+            alert('Ha ganado el jugador 1')
+        }
+        if (campoAtacado === 20 && turno.textContent === "Jugador2"){
+            alert('Ha ganado el jugador 2')
         }
     }
 
@@ -221,4 +385,5 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
+
 });

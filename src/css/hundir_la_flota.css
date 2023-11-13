@@ -107,10 +107,18 @@ h1 {
     border: 1px solid #000;
 }
 
+#p1Disparos, #p2Disparos, #p1Campo, #p2Campo {
+    background-color: white;
+    border: 0.3rem solid white;
+    box-shadow: 0.3rem 0.3rem 0.1rem rgba(204,204,204,0.8);
+}
+
 .game-container {
      display: flex;
      justify-content: space-around;
      margin: 20px;
+    color: white;
+    text-align: center;
  }
 
 .campoJuego {
@@ -140,5 +148,98 @@ h1 {
 }
 
 .agua {
-    background-color: transparent;
+    background-color: black;
+}
+
+.modal-inicio {
+    display:          block;
+    position:         fixed;
+    top:              50%;
+    left:             50%;
+    transform:        translate(-50%, -50%);
+    width:            max-content;
+    z-index:          11;
+    border:           0.3rem solid #fff;
+    background-color: #000;
+    padding:          1rem;
+    box-shadow:       0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
+}
+
+.fondo-modal-inicio {
+    position:         fixed;
+    top:              0;
+    left:             0;
+    width:            100%;
+    height:           100%;
+    z-index:          10;
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+.interior-modal-inicio {
+    color: #fff;
+}
+
+.interior-modal-inicio p {
+    text-align: center;
+}
+
+.interior-modal-inicio h2 {
+    font-size:     3rem;
+    text-align:    center;
+    margin-bottom: 1.5rem;
+    text-shadow:   0.2rem 0.2rem 0.1rem rgba(204, 204, 204, 1);
+}
+
+.interior-modal-inicio h3 {
+    font-size:     1.5rem;
+    text-align:    center;
+    margin-bottom: 1.5rem;
+}
+
+.interior-modal-inicio ul {
+    margin:     1.5rem 4rem;
+    font-size:  1rem;
+    text-align: left;
+
+    & li {
+        line-height: 2.5rem;
+    }
+}
+
+.interior-modal-inicio button {
+    margin: 2.5rem auto;
+    display: block;
+}
+
+.tooltip-text {
+    visibility:       hidden;
+    width:            auto;
+    min-width: 7.5rem;
+    background-color: #000;
+    color:            #fff;
+    border:           2px solid #fff;
+    text-align:       center;
+    padding:          5px 10px;
+    position:         absolute;
+    z-index:          1;
+    bottom:           100%;
+    left:             50%;
+    transform:         translateX(-50%);
+    margin-bottom:    1rem;
+    box-shadow:       0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
+    white-space: nowrap;
+    text-shadow:      0.15rem 0.15rem 0.15rem rgba(204, 204, 204, 1);
+}
+
+.tooltip-right {
+    left:        100%;
+    top:         50%;
+    transform:   translateY(-50%);
+    margin-left: 1.5rem;
+}
+
+#turno:hover .tooltip-text,
+#time-number:hover .tooltip-text,
+#movimientos-number:hover .tooltip-text {
+    visibility: visible;
 }
