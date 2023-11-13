@@ -117,6 +117,9 @@ let fondoModal = document.getElementById('fondo-modal');
 let fondoModalInicio = document.getElementById('fondo-modal-inicio');
 let modalInicio = document.getElementById('modal-inicio');
 let cerrarModalInicio = document.getElementById('cerrar-inicio');
+const modalVictoria = document.getElementById('modal-victoria');
+const fondoModalVictoria = document.getElementById('fondo-modal-victoria');
+const botonCerrarVictoria = document.getElementById('cerrar-victoria');
 let divsObjetoSVG = document.querySelectorAll('.objetoSVG');
 let colorOptions = document.querySelectorAll('.color-option');
 
@@ -165,6 +168,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }, timeoutBienvenida);
         }, timeoutBienvenida);
     };
+
+    botonCerrarVictoria.onclick = function () {
+        modalVictoria.style.display = 'none';
+        fondoModalVictoria.style.display = 'none';
+        playSound("cursor");
+    }
+
+    botonCerrarVictoria.onmouseover = function () {
+        playSound("cursor");
+    }
 
     /* ONCLICK DE LA VENTANA */
     window.onclick = function (event) {
@@ -250,6 +263,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         iniciarOReiniciarJuego();
                     }, timeoutBienvenida);
                 }, timeoutBienvenida);
+            } else if (botonCerrarVictoria.classList.contains('abierto')) {
+                modalVictoria.style.display = 'none';
+                fondoModalVictoria.style.display = 'none';
+                playSound("cursor");
             }
         }
     });
@@ -359,6 +376,18 @@ document.addEventListener('DOMContentLoaded', () => {
             dibujarTablero(dificultadSeleccionada);
         });
     });
+
+    /**
+     * Función que muestra el modal de victoria.
+     * @param tiempo - tiempo total de la partida.
+     * @returns {void}
+     */
+    function mostrarModalVictoria(tiempo) {
+        document.getElementById('ganador').textContent = `¡Felicidades Player!`;
+        document.getElementById('tiempo-final').textContent = `Tiempo Total: ${tiempo}`;
+        document.getElementById('fondo-modal-victoria').style.display = 'block';
+        document.getElementById('modal-victoria').style.display = 'block';
+    }
 
     /**
      * Función que inicia o reinicia el juego dependiendo del momento de la ejecución en que se llame.
@@ -690,7 +719,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function verificarFinDelJuego() {
         if (cartas.every(carta => carta.revelada)) {
             actualizarYGuardarPuntuacion();
-            alert("GL");
+            mostrarModalVictoria(spanTiempo.textContent);
             resetearJuego();
         }
     }
