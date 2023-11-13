@@ -9,8 +9,14 @@
     --shadow-light: rgba(204, 204, 204, 0.8);
     --shadow-dark: rgba(0, 0, 0, 1);
     --highlight-color: #999;
-    --font-primary: 'Press Start 2P', cursive;
+    --font-primary: 'Press Start 2P', monospace;
     --font-secondary: 'Share Tech Mono', monospace;
+}
+
+#futuro {
+    font-family: Share Tech Mono, monospace;
+    word-spacing: 1rem;
+    text-shadow: 0.38rem 0.25rem 0.3rem rgba(255, 255, 0, 0.8);
 }
 
 a {
@@ -263,7 +269,7 @@ svg {
     }
 
     .coming {
-        font-size: 3rem;
+        font-size: 1rem;
         text-shadow: 0.5rem 0.5rem 0.2rem var(--shadow-light);
         margin-top: 15vh;
     }
@@ -294,7 +300,7 @@ svg {
 }
 
 /* SMALL */
-@media screen and (min-width: 35rem) and (max-width: 47.99rem) {
+@media screen and (min-width: 35.01rem) and (max-width: 48rem) {
     body,
     .retro-prompt,
     .retro-message {
@@ -353,7 +359,7 @@ svg {
     }
 
     .coming {
-        font-size: 5rem;
+        font-size: 3rem;
         text-shadow: 0.5rem 0.5rem 0.2rem var(--shadow-light);
         margin-top: 15vh;
     }
@@ -376,7 +382,7 @@ svg {
 }
 
 /* MEDIUM  - TABLET*/
-@media screen and (min-width: 48rem) and (max-width: 63.99rem) {
+@media screen and (min-width: 48.01rem) and (max-width: 64rem) {
     body,
     .retro-prompt,
     .retro-message {
@@ -435,7 +441,7 @@ svg {
     }
 
     .coming {
-        font-size: 5rem;
+        font-size: 3rem;
         text-shadow: 0.5rem 0.5rem 0.2rem var(--shadow-light);
         margin-top: 15vh;
     }
@@ -458,7 +464,7 @@ svg {
 }
 
 /* LARGE */
-@media screen and (min-width: 64em) and (max-width: 79.99rem) {
+@media screen and (min-width: 64.01em) and (max-width: 80rem) {
     body,
     .retro-prompt,
     .retro-message {
@@ -513,7 +519,7 @@ svg {
     }
 
     .coming {
-        font-size: 5rem;
+        font-size: 3rem;
         text-shadow: 0.5rem 0.5rem 0.2rem var(--shadow-light);
         margin-top: 18vh;
         word-spacing: -3rem;
@@ -535,7 +541,7 @@ svg {
 }
 
 /*EXTRA-LARGE*/
-@media screen and (min-width: 80rem) and (max-width: 119.99rem) {
+@media screen and (min-width: 80.01rem) and (max-width: 120rem) {
     body,
     .retro-prompt,
     .retro-message {
@@ -590,7 +596,7 @@ svg {
     }
 
     .coming {
-        font-size: 7rem;
+        font-size: 5rem;
         text-shadow: 0.5rem 0.5rem 0.1rem var(--shadow-light);
         margin-top: 17vh;
         word-spacing: -3rem;
@@ -612,7 +618,7 @@ svg {
 }
 
 /* Escritorio  XXL*/
-@media (min-width: 120rem) {
+@media (min-width: 120.01rem) {
     body,
     .retro-prompt,
     .retro-message {
@@ -661,7 +667,7 @@ svg {
     }
 
     .coming {
-        font-size: 12rem;
+        font-size: 7rem;
         text-shadow: 0.7rem 0.7rem 0.1rem var(--shadow-light);
         word-spacing: -5rem;
     }

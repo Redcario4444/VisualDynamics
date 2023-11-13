@@ -14,7 +14,7 @@
             <div class="carrusel">
                 <div>
                     <a href="pilla_el_div/index.php">
-                        <h4><small>Reflejos y Velocidad</small>Pilla el Div</h4>
+                        <h4>Pilla el Div</h4>
                         <picture>
                             <img src="../assets/img/main/pilla_el_div.png" alt="imagen">
                         </picture>
@@ -23,8 +23,28 @@
             </div>
             <div class="carrusel">
                 <div>
+                    <a href="memory_cards/index.php">
+                        <h4>Memory Cards</h4>
+                        <picture>
+                            <img src="../assets/img/main/memory_cards.png" alt="imagen">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+            <div class="carrusel">
+                <div>
+                    <a href="cuatro_en_raya/index.php">
+                        <h4>Cuatro en Raya</h4>
+                        <picture>
+                            <img src="../assets/img/main/cuatro_en_raya.png" alt="imagen">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+            <div class="carrusel">
+                <div>
                     <a href="/">
-                        <h4><small>2</small> Mas </h4>
+                        <h4>Hundir la Flota</h4>
                         <picture>
                             <img src="../assets/img/index/fondo_inicio.gif" alt="imagen">
                         </picture>
@@ -34,7 +54,7 @@
             <div class="carrusel">
                 <div>
                     <a href="/">
-                        <h4><small>3</small> Mas </h4>
+                        <h4>Pong</h4>
                         <picture>
                             <img src="../assets/img/index/fondo_inicio.gif" alt="imagen">
                         </picture>
@@ -44,7 +64,7 @@
             <div class="carrusel">
                 <div>
                     <a href="/">
-                        <h4><small>4</small> Mas </h4>
+                        <h4>Snake</h4>
                         <picture>
                             <img src="../assets/img/index/fondo_inicio.gif" alt="imagen">
                         </picture>
@@ -54,7 +74,7 @@
             <div class="carrusel">
                 <div>
                     <a href="/">
-                        <h4><small>5</small> Mas </h4>
+                        <h4>Buscaminas</h4>
                         <picture>
                             <img src="../assets/img/index/fondo_inicio.gif" alt="imagen">
                         </picture>
@@ -64,7 +84,7 @@
             <div class="carrusel">
                 <div>
                     <a href="/">
-                        <h4><small>6</small> Mas </h4>
+                        <h4>Ajedrez</h4>
                         <picture>
                             <img src="../assets/img/index/fondo_inicio.gif" alt="imagen">
                         </picture>
@@ -74,27 +94,7 @@
             <div class="carrusel">
                 <div>
                     <a href="/">
-                        <h4><small>7</small> Mas </h4>
-                        <picture>
-                            <img src="../assets/img/index/fondo_inicio.gif" alt="imagen">
-                        </picture>
-                    </a>
-                </div>
-            </div>
-            <div class="carrusel">
-                <div>
-                    <a href="/">
-                        <h4><small>8</small> Mas </h4>
-                        <picture>
-                            <img src="../assets/img/index/fondo_inicio.gif" alt="imagen">
-                        </picture>
-                    </a>
-                </div>
-            </div>
-            <div class="carrusel">
-                <div>
-                    <a href="/">
-                        <h4><small>9</small> Mas </h4>
+                        <h4>Unnamed</h4>
                         <picture>
                             <img src="../assets/img/index/fondo_inicio.gif" alt="imagen">
                         </picture>

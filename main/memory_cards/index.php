@@ -160,7 +160,6 @@
         </div>
     </div>
 
-    <h1>Memory cards #GC2</h1>
     <!-- Canvas para el juego -->
     <canvas id='memory-cards'></canvas>
 

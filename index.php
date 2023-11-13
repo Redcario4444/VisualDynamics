@@ -107,7 +107,7 @@
 <div id="music-player">
     <button id="play-pause-btn"></button>
 </div>
-<div class="coming" id="coming">COMING SOON!</div>
+<div class="coming" id="coming">Donde los clásicos viajan<br><span id="futuro">AL FUTURO</span></div>
 <audio id="mariocoin" src="/assets/sound/index/mario-coin.mp3"></audio>
 <audio id="bgm" loop src="/assets/sound/index/bgm.mp3">Tu navegador no soporta audio.</audio>
 <audio id="cursor" src="/assets/sound/index/cursor.mp3"></audio>
