@@ -21,6 +21,10 @@
             <button class='botones-seleccion reiniciar' id='reiniciar'>Reiniciar
                 <span class='tooltip-text tooltip-top'>Reinicia tu partida con 'r'</span>
             </button>
+            <button class='botones-seleccion marcador' id='velocidad'><span id='valor-velocidad'
+                ><span style='font-size: 1.1rem'>⚡</span>1x</span>
+                <span class='tooltip-text tooltip-top'>¡Cambia la velocidad de caída con 'v'!</span>
+            </button>
             <button class='botones-seleccion marcador'>Turno: <span id="turno"></span>
                 <span class="tooltip-text tooltip-top">¡Mira los turnos aquí!</span>
             </button>
@@ -36,13 +40,21 @@
                 <h2>¡Bienvenido a las Cuatro en Raya!</h2>
                 <h3>¡Un clásico al alcance de todos!</h3>
                 <ul>
-                    <li>Puedes elegir entre los modos <em>PVIa</em> y <em>PVP</em>.
+                    <li>Puedes elegir entre los modos <em style="text-decoration: underline">PVAi</em> y <em
+                                style="text-decoration: underline">PVP</em>. <span style="font-size: .45rem">La disponibilidad del modo PVAi está sujeta a que no me dé un infarto cerebral antes de mañana...</span>
                     </li>
-                    <li>En el menú de
-                        <span style='text-decoration: underline'>Fondos</span>
-                        puedes elegir entre varios fondos y colores.
+                    <li>En cualquier momento de la partida puedes reiniciar con el botón de reinicio o con la tecla
+                        'r'.
                     </li>
-                    <li>Selecciona reiniciar para volver a empezar.</li>
+                    <li>Controles:
+                        <ul>
+                            <li>Lanzar ficha: ⌨️ barra espaciadora o 🖱️ click izquierdo</li>
+                            <li>Moverse: ⌨️ flechas de direccion o 🖱️ desplazar el mouse</li>
+                        </ul>
+                    </li>
+                    <li>Al acabar la partida, ¡sólamente se puede reiniciar!</li>
+                    <li>¡El tiempo es orientativo, pero si el temporizador se da la vuelta, háztelo mirar...</li>
+                    <li>¡DISFRUTA!</li>
                 </ul>
 
                 <p>¡Buena suerte!</p>
@@ -58,6 +70,30 @@
         <table id='tablero'></table>
         <div id='flecha'>&#x2193;</div>
     </div>
+
+    <!-- Modal de victoria -->
+    <div class="container">
+        <div class="menu">
+            <div class='fondo-modal-victoria' id='fondo-modal-victoria'></div>
+            <div class='modal-victoria menu' id='modal-victoria'>
+                <div class='interior-modal-victoria'>
+                    <h2 id='ganador'></h2>
+                    <h3 id='tiempo-final'></h3>
+                    <p>¡No todos los héroes tienen capa!</p>
+                    <button class='botones-seleccion cerrar-victoria' id='cerrar-victoria'>Cerrar
+                        <span class='tooltip-text  tooltip-top'>Ciérrame con 'c'</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Archivos de audio -->
+    <audio id='welcome' src='../../assets/sound/cuatro_en_raya/welcome.mp3' preload='auto'></audio>
+    <audio id='cursor' src='../../assets/sound/cuatro_en_raya/cursor.mp3' preload='auto'></audio>
+    <audio id='up' src='../../assets/sound/cuatro_en_raya/up.mp3' preload='auto'></audio>
+    <audio id='down' src='../../assets/sound/cuatro_en_raya/down.mp3' preload='auto'></audio>
 
 <?php
     include '../../src/footer.php';
