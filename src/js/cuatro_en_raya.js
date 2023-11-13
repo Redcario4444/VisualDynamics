@@ -1,78 +1,343 @@
 // noinspection SpellCheckingInspection
-
+/* VARIABLES Y CONSTANTES DE CONFIGURACIÓN */
 const fichaAmarilla = "../../assets/img/cuatro_en_raya/moneda_amarilla.svg";
 const fichaRoja = "../../assets/img/cuatro_en_raya/moneda_roja.svg";
-const tablero = document.getElementById('tablero');
-const flecha = document.getElementById('flecha');
-const turno = document.getElementById('turno');
-const botonReiniciar = document.getElementById('reiniciar');
 const margen = 30;
 const multiplicadorFlecha = 0.6;
 const numeroFilasYColumnasTotales = 9;
+const factorAltura = 0.7;
+const timeoutRepintado = 250;
 const espacioEntreCeldas = 5;
-const timeoutCaidaInicial = 0;
-const timeoutCaida = 0;
-let columnaActual = 4;
-let turnoJugador = 1;
-let temporizadorAntirrebote;
-let estadoJuego = Array.from({length: numeroFilasYColumnasTotales}, () => new Array(numeroFilasYColumnasTotales).fill(null));
-let fichaCayendo = false;
-let juegoIniciado = false;
-let juegoActivo = true;
-let tiempoTranscurrido = 0;
+let timeoutCaidaInicial = 50;
+let timeoutCaida = 150;
+const emojiVelocidad = "⚡";
+
+/* ELEMENTOD DEL DOM*/
+const tablero = document.getElementById('tablero');
+const flecha = document.getElementById('flecha');
+const turnoTexto = document.getElementById('turno');
+const botonReiniciar = document.getElementById('reiniciar');
+const botonCerrarInicio = document.getElementById('cerrar-inicio');
+const botonCerrarVictoria = document.getElementById('cerrar-victoria');
+const modalInicio = document.getElementById('modal-inicio');
+const fondoModalInicio = document.getElementById('fondo-modal-inicio');
+const modalVictoria = document.getElementById('modal-victoria');
+const fondoModalVictoria = document.getElementById('fondo-modal-victoria');
+const botones = document.querySelectorAll('.botones-seleccion');
+
+/* VARIABLES DE ESTADO */
+let fichaCayendo;
+let factorVelocidadCaida;
+let estadoJuego;
+let columnaActual;
+let turnoJugador;
+let juegoIniciado;
+let juegoActivo;
+let tiempoTranscurrido;
+
+/* TEMPORIZADORES */
 let temporizador;
+let temporizadorAntirrebote;
 
-flecha.classList.add('flecha-jugador1');
-turno.textContent = "Player 1";
-turno.style.color = "#f4c12f";
-turno.style.textShadow = "0.3rem 0.25rem 0.15rem rgba(242, 138, 11, 0.5)";
+/**
+ * Función que actualiza la posición de la flecha hacia la izquierda.
+ * @returns {void}
+ */
+function flechaIzquierda() {
+    playSound('cursor');
+    if (columnaActual > 0) {
+        columnaActual--;
+        actualizarFlecha();
+    }
+}
 
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * Función que actualiza la posición de la flecha hacia la derecha.
+ * @returns {void}
+ */
+function flechaDerecha() {
+    playSound('cursor');
+    if (columnaActual < numeroFilasYColumnasTotales - 1) {
+        columnaActual++;
+        actualizarFlecha();
+    }
+}
+
+/**
+ * Función que suelta la ficha en la columna actual.
+ * Está bloqueada si ya hay una ficha cayendo o si la columna está llena.
+ * Verifica si hay empate después de soltar la ficha.
+ * @returns {void}
+ */
+function barraEspaciadora() {
+    if (!fichaCayendo && hayEspacioEnColumna(columnaActual)) {
+        soltarFicha(columnaActual);
+        // Verificar si hay empate después de soltar la ficha
+        if (esEmpate()) {
+            alert("Empate");
+            juegoActivo = false;
+        }
+    } else {
+        alert("Columna llena, prueba con otra");
+    }
+}
+
+/**
+ * Función que reinicia el juego si no hay una ficha cayendo.
+ * @returns {void}
+ */
+function manejoReinicio() {
+    if (!fichaCayendo) {
+        playSound('cursor');
+        reiniciarJuego();
+    }
+}
+
+/**
+ * Función que cambia el turno del jugador de forma alterna y actualiza el contexto del turno.
+ * @returns {void}
+ */
+function cambiarTurno() {
+    turnoJugador = turnoJugador === 1 ? 2 : 1;
+    turnoTexto.textContent = `Player ${turnoJugador}`;
+    flecha.className = `flecha-jugador${turnoJugador}`;
+    actualizarEstiloFlecha(turnoJugador);
+}
+
+/**
+ * Función que actualiza el estilo de la flecha según el jugador.
+ * @param jugador - número del jugador actual.
+ * @returns {void}
+ */
+function actualizarEstiloFlecha(jugador) {
+    flecha.className = `flecha-jugador${jugador}`;
+    const colores = ['#f4c12f', '#cf1546'];
+    const sombras = ['0.3rem 0.25rem 0.15rem rgba(242, 138, 11, 0.5)', '0.3rem 0.25rem 0.15rem rgba(157, 22, 57, 0.5)'];
+    turnoTexto.style.color = colores[jugador - 1];
+    turnoTexto.style.textShadow = sombras[jugador - 1];
+}
+
+/**
+ * Función que muestra el modal de victoria.
+ * @param ganador - número del jugador ganador.
+ * @param tiempo - tiempo total de la partida.
+ * @returns {void}
+ */
+function mostrarModalVictoria(ganador, tiempo) {
+    document.getElementById('ganador').textContent = `¡Felicidades Player ${ganador}!`;
+    document.getElementById('tiempo-final').textContent = `Tiempo Total: ${tiempo}`;
+    document.getElementById('fondo-modal-victoria').style.display = 'block';
+    document.getElementById('modal-victoria').style.display = 'block';
+}
+
+/**
+ * Función que maneja la reproducción de sonidos.
+ * @param soundId {string} - ID del elemento de audio.
+ * @returns {void}
+ */
+function playSound(soundId) {
+    let audioElement = document.getElementById(soundId);
+    if (audioElement) {
+        audioElement.play().catch(e => console.error("Error al reproducir el audio:", e));
+    } else {
+        console.error("Elemento de audio no encontrado:", soundId);
+    }
+}
+
+/**
+ * Función que verifica si hay espacio vertical en la columna.
+ * @param col - número de la columna que se comprueba
+ * @returns {boolean} - true si hay espacio, false si no lo hay.
+ */
+function hayEspacioEnColumna(col) {
+    for (let i = 0; i < numeroFilasYColumnasTotales; i++) {
+        if (!estadoJuego[i][col]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * Función que verifica si todas las celdas están llenas.
+ * @returns {boolean} - true si todas las celdas están llenas, false si no lo están.
+ */
+function esEmpate() {
+    for (let i = 0; i < numeroFilasYColumnasTotales; i++) {
+        for (let j = 0; j < numeroFilasYColumnasTotales; j++) {
+            if (!estadoJuego[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+/**
+ * Función que inicia el temporizador y forma el texto del tiempo.
+ * @returns {void}
+ */
+function iniciarTemporizador() {
+    temporizador = setInterval(() => {
+        tiempoTranscurrido++;
+        let minutos = Math.floor(tiempoTranscurrido / 60);
+        let segundos = tiempoTranscurrido % 60;
+
+        minutos = minutos.toString().padStart(2, '0');
+        segundos = segundos.toString().padStart(2, '0');
+
+        document.getElementById('tiempo').textContent = `${minutos}:${segundos}`;
+    }, 1000);
+}
+
+/**
+ * Función que detiene el temporizador y reinicia el tiempo transcurrido.
+ * @returns {void}
+ */
+function detenerTemporizador() {
+    clearInterval(temporizador);
+    tiempoTranscurrido = 0;
+}
+
+/**
+ * Función que cambia la velocidad de caída de las fichas según el factor de velocidad de caída establecido. Además, da feedback sonoro al usuario e imprime el factor de velocidad de caída en el DOM.
+ * @returns {void}
+ */
+function cambioVelocidad() {
+    switch (factorVelocidadCaida) {
+        case 1:
+            factorVelocidadCaida = 2;
+            playSound('up');
+            break;
+        case 2:
+            factorVelocidadCaida = 4;
+            playSound('up');
+            break;
+        case 4:
+            factorVelocidadCaida = 0;
+            playSound('up');
+            break;
+        case 0:
+            factorVelocidadCaida = 0.5;
+            playSound('down');
+            break;
+        default:
+            factorVelocidadCaida = 1;
+            playSound('up');
+            break;
+    }
+
+    document.getElementById('valor-velocidad').innerHTML = factorVelocidadCaida === 0 ? "Infinity" :
+        `<span style="font-size: 1.1rem">${emojiVelocidad}</span>${factorVelocidadCaida}x`;
+}
+
+/**
+ * Función que inicia el juego y todos sus parámetros y listeners generales.
+ * @returns {void}
+ */
+function iniciar() {
+    juegoActivo = true;
+    juegoIniciado = false;
+    fichaCayendo = false;
+    turnoJugador = 1;
+    columnaActual = 4;
+    tiempoTranscurrido = 0;
+    factorVelocidadCaida = 1;
+    estadoJuego = Array.from({length: numeroFilasYColumnasTotales}, () => new Array(numeroFilasYColumnasTotales).fill(null));
     actualizar();
     actualizarFlecha();
+    actualizarEstiloFlecha(turnoJugador);
+    detenerTemporizador();
+    document.getElementById('tiempo').textContent = "00:00";
+    botones.forEach(boton => {
+        if (boton.id !== 'velocidad' && boton.id !== 'reiniciar') {
+            boton.addEventListener('click', () => {
+                playSound('cursor');
+            });
+        } else {
+            if (boton.id === 'velocidad') {
+                boton.addEventListener('click', () => {
+                    cambioVelocidad();
+                });
+            }
+            if (boton.id === 'reiniciar') {
+                boton.addEventListener('click', () => {
+                    manejoReinicio();
+                });
+            }
+        }
+        boton.addEventListener('mouseover', () => {
+            playSound('cursor');
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    iniciar();
 
     window.addEventListener('resize', () => {
-        clearTimeout(temporizadorAntirrebote); // Limpia el temporizador existente
+        clearTimeout(temporizadorAntirrebote);
         temporizadorAntirrebote = setTimeout(() => {
             actualizar();
             actualizarFlecha();
-        }, 250); // Espera 250 ms después de la última llamada para ejecutar la función
+        }, timeoutRepintado);
     });
 
-    botonReiniciar.addEventListener('click', reiniciarJuego);
+    botonCerrarInicio.addEventListener('click', function () {
+        modalInicio.style.display = 'none';
+        fondoModalInicio.style.display = 'none';
+        playSound('welcome');
+    });
 
-    // Mover la flecha con las flechas del teclado
+    botonCerrarVictoria.addEventListener('click', function () {
+        modalVictoria.style.display = 'none';
+        fondoModalVictoria.style.display = 'none';
+        playSound('cursor');
+    });
+
     document.addEventListener('keydown', (e) => {
-        if (!juegoActivo && e.key !== 'r') return; // No hacer nada si el juego no está activo (excepto para reiniciar)
-
-        if (fichaCayendo && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return; // No hacer nada si una ficha ya está cayendo, excepto para las flechas de movimiento
-
-        if (!fichaCayendo && e.key === 'r') {
-            reiniciarJuego();
+        if (e.key === 'c') {
+            if (juegoActivo) {
+                modalInicio.style.display = 'none';
+                fondoModalInicio.style.display = 'none';
+                playSound('welcome');
+            }
+            modalVictoria.style.display = 'none';
+            fondoModalVictoria.style.display = 'none';
+            playSound('cursor');
         }
 
-        if (e.key === 'ArrowLeft' && columnaActual > 0) {
-            columnaActual--;
-            console.log("=>(cuatro_en_raya.js:55) columnaActual", columnaActual);
-            actualizarFlecha();
-        } else if (e.key === 'ArrowRight' && columnaActual < numeroFilasYColumnasTotales - 1) {
-            columnaActual++;
-            actualizarFlecha();
-        } else if (e.key === ' ' && !fichaCayendo) {
-            if (!hayEspacioEnColumna(columnaActual)) {
-                alert("Columna llena, prueba con otra");
-                return;
-            }
-            soltarFicha(columnaActual);
-            if (esEmpate()) {
-                alert("Empate");
-                juegoActivo = false;
-            }
+        if (!juegoActivo && e.key !== 'r') return;
+
+        if (fichaCayendo && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+
+        switch (e.key) {
+            case 'ArrowLeft':
+                flechaIzquierda();
+                break;
+            case 'ArrowRight':
+                flechaDerecha();
+                break;
+            case ' ':
+                barraEspaciadora();
+                break;
+            case 'r':
+                manejoReinicio();
+                break;
+            case 'v':
+                cambioVelocidad();
+                break;
+            default:
+                break;
         }
     });
-
 });
 
+/**
+ * Función que calcula el espacio disponible para el tablero.
+ * Calcula la altura de la ventana y resta la altura de los elementos fijos en el DOM, como el header, footer, etc.
+ * @returns {number} - altura disponible para el tablero en píxeles.
+ */
 function calcularEspacioDisponible() {
     const alturaVentana = window.innerHeight;
     const elementosExcluidos = document.querySelectorAll('.header, footer, .container, h1');
@@ -83,17 +348,16 @@ function calcularEspacioDisponible() {
         const margenSuperior = parseFloat(estilos.marginTop);
         const margenInferior = parseFloat(estilos.marginBottom);
         const alturaTotalElemento = elemento.offsetHeight + margenSuperior + margenInferior;
-
-        // Imprime la información detallada de cada elemento
-        //console.log(`Elemento: ${elemento.tagName} - Clase: ${elemento.className} - Altura: ${elemento.offsetHeight} - Margen superior: ${margenSuperior} - Margen inferior: ${margenInferior}`);
-
         alturaExcluidos += alturaTotalElemento;
     });
-
-    console.log(`Altura total excluida: ${alturaExcluidos}`);
     return alturaVentana - alturaExcluidos;
 }
 
+/**
+ * Función que crea el tablero con las dimensiones calculadas.
+ * Itera sobre el número de filas y columnas totales y crea las celdas con sus dimensiones, estilos e imágenes.
+ * @returns {void}
+ */
 function crearTablero() {
     const espacioDisponible = calcularEspacioDisponible() - margen;
     const alturaCelda = Math.floor(espacioDisponible / numeroFilasYColumnasTotales) - espacioEntreCeldas;
@@ -107,7 +371,6 @@ function crearTablero() {
             celda.style.height = `${alturaCelda}px`;
             celda.style.position = 'relative';
 
-            // Crear el div para el SVG negativo
             let svgNegativo = document.createElement('div');
             svgNegativo.className = 'svg-negativo';
             svgNegativo.style.backgroundImage = 'url(../../assets/img/cuatro_en_raya/moneda_negativo.svg)';
@@ -119,8 +382,6 @@ function crearTablero() {
                     columnaActual = j;
                     actualizarFlecha();
                 }
-                columnaActual = j;
-                actualizarFlecha();
             });
 
             celda.addEventListener('click', () => {
@@ -129,7 +390,6 @@ function crearTablero() {
                 }
             });
 
-            // Colocar la ficha si hay una en esta posición
             if (estadoJuego[i][j]) {
                 colocarFicha(i, j, estadoJuego[i][j]);
             }
@@ -137,21 +397,29 @@ function crearTablero() {
     }
 }
 
+/**
+ * Función que actualiza el tablero y las fichas.
+ * Limpia el tablero existente, crea uno nuevo con las dimensiones actualizadas y reinicializa el estado del juego.
+ * @returns {void}
+ */
 function actualizar() {
-    // Limpiar el tablero existente
     while (tablero.firstChild) {
         tablero.removeChild(tablero.firstChild);
     }
-    crearTablero(); // Crea el tablero con nuevas dimensiones
+    crearTablero();
     actualizarFichas();
     ajustarProporcionFlecha();
-    actualizarFlecha();// Asegúrate de que la flecha esté correctamente posicionada
+    actualizarFlecha();
 }
 
+/**
+ * Función que actualiza la posición de la flecha.
+ * Calcula la posición de la flecha en función de la columna actual y la posición de la celda base.
+ * @returns {void}
+ */
 function actualizarFlecha() {
     flecha.style.visibility = 'hidden';
     requestAnimationFrame(() => {
-        // Aquí dentro, el navegador ya ha terminado el proceso de layout y pintado
         const celdaBase = document.getElementById('celda-0-0');
         const anchoCelda = celdaBase.getBoundingClientRect().width;
         const alturaCelda = celdaBase.getBoundingClientRect().height;
@@ -160,60 +428,69 @@ function actualizarFlecha() {
         const mitadAnchoFlecha = anchoFlecha / 2;
         const mitadAnchoCelda = anchoCelda / 2;
 
-        // Ajuste para el cálculo de la posición izquierda de la flecha
-        // Añade el espacio entre celdas para cada columna a la izquierda de la columna actual
         const espacioTotal = espacioEntreCeldas * columnaActual + 5;
         const posicionIzquierdaFlecha = (columnaActual * anchoCelda) + espacioTotal + mitadAnchoCelda - mitadAnchoFlecha;
 
         flecha.style.width = `${anchoCelda}px`;
         flecha.style.left = `${posicionIzquierdaFlecha}px`;
 
-        // Colocar la flecha un poco por encima de la parte superior del tablero
-        const margenVertical = -alturaCelda * 0.7; // 70% de la altura de la celda
+        const margenVertical = -alturaCelda * factorAltura;
         flecha.style.top = `${tablero.offsetTop + margenVertical}px`;
 
-        // Hacer visible la flecha después de calcular su posición
         flecha.style.visibility = 'visible';
-        console.log("Posición izquierda de la flecha calculada:", posicionIzquierdaFlecha);
-        console.log("Top del tablero:", tablero.offsetTop);
-        console.log("Altura de la celda:", alturaCelda);
-        console.log("Margen vertical calculado:", margenVertical);
+        actualizarEstiloFlecha(turnoJugador);
     });
 }
 
+/**
+ * Función que ajusta las proporciones de la flecha en función de la celda base tras el redimensionamiento de la ventana.
+ * @returns {void}
+ */
 function ajustarProporcionFlecha() {
     const celdaBase = document.getElementById('celda-0-0');
     const alturaCelda = celdaBase.getBoundingClientRect().height;
     const proporcionFuenteRem = alturaCelda / parseFloat(getComputedStyle(document.documentElement).fontSize) * multiplicadorFlecha;
-    flecha.style.fontSize = `${proporcionFuenteRem}rem`; // Ajustar el tamaño en REM
+    flecha.style.fontSize = `${proporcionFuenteRem}rem`;
 }
 
+/**
+ * Función que actualiza las fichas en función de la celda base tras el redimensionamiento de la ventana.
+ * @returns {void}
+ */
 function actualizarFichas() {
     const fichas = document.querySelectorAll('.ficha-img');
     fichas.forEach(ficha => {
         const col = ficha.getAttribute('data-col');
-        const jugadorFicha = ficha.getAttribute('data-jugador'); // Obtener el jugador de la ficha
+        const jugadorFicha = ficha.getAttribute('data-jugador');
 
-        // Encuentra la fila correcta para esta ficha
         let filaActual = -1;
         for (let i = 0; i < numeroFilasYColumnasTotales; i++) {
-            if (estadoJuego[i][col] == jugadorFicha) { // Usa == para comparar strings con números
+            // Es necesaria la coerción de tipos
+            if (estadoJuego[i][col] == jugadorFicha) {
                 filaActual = i;
                 break;
             }
         }
-        if (filaActual === -1) return; // Si no hay fichas en esta columna, no hacer nada
+        if (filaActual === -1) return;
 
-        // Dentro de actualizarFichas, para cada ficha
         const celda = document.getElementById(`celda-${filaActual}-${col}`);
-        ficha.style.top = '0'; // La ficha debería estar al principio de la celda
+        ficha.style.top = '0';
         ficha.style.left = '0';
         ficha.style.height = `${celda.offsetHeight}px`;
         ficha.style.width = `${celda.offsetWidth}px`;
     });
 }
 
-
+/**
+ * Función que dibuja la ficha en el tablero.
+ * Crea un elemento img con la imagen de la ficha y la añade al DOM junto con todos sus estilos y atributos. Dentro contiene una función recursiva que hace caer la ficha hasta la posición final.
+ * @param fila - número de la fila en la que se dibuja la ficha.
+ * @param col - número de la columna en la que se dibuja la ficha.
+ * @param jugador - número del jugador que ha soltado la ficha.
+ * @param callback - función que se ejecuta una vez que la ficha ha terminado de caer.
+ * @see caerFicha
+ * @returns {void}
+ */
 function dibujarFicha(fila, col, jugador, callback) {
     let ficha = document.createElement('img');
     ficha.className = 'ficha-img';
@@ -223,114 +500,73 @@ function dibujarFicha(fila, col, jugador, callback) {
     ficha.style.width = '100%';
     ficha.style.height = '100%';
 
-    // Añade la ficha al DOM en la primera fila de la columna seleccionada
     let celdaInicio = document.getElementById(`celda-0-${col}`);
     celdaInicio.appendChild(ficha);
 
-    // Función para mover la ficha de una fila a la siguiente
+    /**
+     * Función que hace caer la ficha hasta la posición final llamándose a sí misma de forma recursiva.
+     * @param filaActual - número de la fila actual en la que se encuentra la ficha.
+     * @see dibujarFicha
+     * @returns {void}
+     */
     function caerFicha(filaActual) {
         let siguienteCelda = document.getElementById(`celda-${filaActual}-${col}`);
-        siguienteCelda.appendChild(ficha); // Mueve la ficha a la siguiente fila
+        siguienteCelda.appendChild(ficha);
 
         if (filaActual < fila) {
-            setTimeout(() => caerFicha(filaActual + 1, callback), timeoutCaida); // Espera un poco antes de mover a la siguiente fila
+            let velocidadCaida = factorVelocidadCaida === 0 ? 0 : timeoutCaida / factorVelocidadCaida;
+            setTimeout(() => caerFicha(filaActual + 1), velocidadCaida);
         } else {
             let ganador = verificarVictoria();
             if (ganador) {
-                console.log(`El jugador ${ganador} ha ganado!`);
+                detenerTemporizador();
+                mostrarModalVictoria(ganador, document.getElementById('tiempo').textContent);
                 juegoActivo = false;
             }
-
-            if (callback) callback(); // Llamar al callback una vez que la ficha ha terminado de caer
+            if (callback) callback();
         }
     }
 
-    // Comienza la animación
-    setTimeout(() => caerFicha(0, callback), timeoutCaidaInicial);
+    let velocidadInicial = factorVelocidadCaida === 0 ? 0 : timeoutCaidaInicial / factorVelocidadCaida;
+    setTimeout(() => caerFicha(0), velocidadInicial);
 }
 
+/**
+ * Función que suelta la ficha en la columna actual.
+ * Está bloqueada si ya hay una ficha cayendo o si la columna está llena.
+ * Inicializa el temporizador si es la primera ficha que se suelta.
+ * @see dibujarFicha
+ * @see cambiarTurno
+ * @param col - número de la columna en la que se suelta la ficha.
+ */
 function soltarFicha(col) {
-    if (fichaCayendo || !hayEspacioEnColumna(col)) {
-        return;
-    }
+    if (fichaCayendo || !hayEspacioEnColumna(col)) return;
 
     if (!juegoIniciado) {
         iniciarTemporizador();
         juegoIniciado = true;
     }
 
-    fichaCayendo = true; // Establecer que una ficha está cayendo
+    fichaCayendo = true;
     for (let i = numeroFilasYColumnasTotales - 1; i >= 0; i--) {
         let celda = document.getElementById(`celda-${i}-${col}`);
-        if (!celda.querySelector('.ficha-img')) { // Si no hay una ficha en esta celda
+        if (!celda.querySelector('.ficha-img')) {
             dibujarFicha(i, col, turnoJugador, () => {
-                fichaCayendo = false; // Restablecer el estado una vez que la ficha ha caído
+                fichaCayendo = false;
                 cambiarTurno();
             });
-            estadoJuego[i][col] = turnoJugador; // Actualiza el estado del juego
+            estadoJuego[i][col] = turnoJugador;
             break;
         }
     }
 }
 
-function hayEspacioEnColumna(col) {
-    for (let i = 0; i < numeroFilasYColumnasTotales; i++) {
-        if (!estadoJuego[i][col]) { // Si no hay una ficha en esta celda
-            return true;
-        }
-    }
-    return false;
-}
-
-function esEmpate() {
-    for (let i = 0; i < numeroFilasYColumnasTotales; i++) {
-        for (let j = 0; j < numeroFilasYColumnasTotales; j++) {
-            if (!estadoJuego[i][j]) {
-                return false; // Si encuentra una celda vacía, no es empate
-            }
-        }
-    }
-    return true; // Todas las celdas están llenas, es empate
-}
-
-function cambiarTurno() {
-    turnoJugador = turnoJugador === 1 ? 2 : 1;
-    // Actualizar la clase de la flecha según el jugador actual
-    if (turnoJugador === 1) {
-        flecha.classList.remove('flecha-jugador2');
-        flecha.classList.add('flecha-jugador1');
-        turno.textContent = "Player 1";
-        turno.style.color = "#f4c12f";
-        turno.style.textShadow = "0.3rem 0.25rem 0.15rem rgba(242, 138, 11, 0.5)";
-    } else {
-        flecha.classList.remove('flecha-jugador1');
-        flecha.classList.add('flecha-jugador2');
-        turno.textContent = "Player 2";
-        turno.style.color = "#cf1546";
-        turno.style.textShadow = "0.3rem 0.25rem 0.15rem rgba(157, 22, 57, 0.5)";
-    }
-}
-
-function iniciarTemporizador() {
-    temporizador = setInterval(() => {
-        tiempoTranscurrido++;
-        let minutos = Math.floor(tiempoTranscurrido / 60);
-        let segundos = tiempoTranscurrido % 60;
-
-        // Formatea los minutos y segundos para mostrar dos dígitos
-        minutos = minutos.toString().padStart(2, '0');
-        segundos = segundos.toString().padStart(2, '0');
-
-        document.getElementById('tiempo').textContent = `${minutos}:${segundos}`;
-    }, 1000); // Actualiza cada segundo
-}
-
-function detenerTemporizador() {
-    clearInterval(temporizador);
-    tiempoTranscurrido = 0; // Reinicia el contador
-}
-
-
+/**
+ * Función que coloca la ficha en la celda correspondiente y setea todos sus atributos y estilos.
+ * @param fila - número de la fila en la que se coloca la ficha.
+ * @param col - número de la columna en la que se coloca la ficha.
+ * @param jugador - número del jugador que ha soltado la ficha.
+ */
 function colocarFicha(fila, col, jugador) {
     let celda = document.getElementById(`celda-${fila}-${col}`);
     let ficha = document.createElement('img');
@@ -346,34 +582,35 @@ function colocarFicha(fila, col, jugador) {
     celda.appendChild(ficha);
 }
 
+/**
+ * Función que reinicia el juego.
+ * Reinicia todos los parámetros y el estado del juego a sus valores iniciales.
+ * @returns {void}
+ */
 function reiniciarJuego() {
-    // Restablecer el tablero y el estado del juego
+    playSound('welcome');
     estadoJuego = Array.from({length: numeroFilasYColumnasTotales}, () => new Array(numeroFilasYColumnasTotales).fill(null));
-    actualizar();
-    // Restablecer la columna actual y actualizar la flecha
     columnaActual = 4;
+    actualizar();
     actualizarFlecha();
-
-    // Restablecer el turno y actualizar la visualización del turno
     turnoJugador = 1;
-    flecha.classList.remove('flecha-jugador2');
-    flecha.classList.add('flecha-jugador1');
-    turno.textContent = "Player 1";
-    turno.style.color = "#f4c12f";
-    turno.style.textShadow = "0.3rem 0.25rem 0.15rem rgba(242, 138, 11, 0.5)";
-
-    // Detener y reiniciar el temporizador
+    flecha.className = 'flecha-jugador1';
+    turnoTexto.textContent = "Player 1";
+    actualizarEstiloFlecha(turnoJugador);
     detenerTemporizador();
     tiempoTranscurrido = 0;
     document.getElementById('tiempo').textContent = "00:00";
-
-    // Hemos dejado de jugar...
     juegoIniciado = false;
     juegoActivo = true;
 }
 
+/**
+ * Función que verifica si hay victoria en el tablero.
+ * Comprueba las combinaciones ganadoras en horizontal, vertical y diagonal.
+ * @returns {*|null} - número del jugador ganador o null si no hay ganador.
+ */
 function verificarVictoria() {
-    // Verificar horizontalmente
+    // Horizontales
     for (let i = 0; i < numeroFilasYColumnasTotales; i++) {
         for (let j = 0; j < numeroFilasYColumnasTotales - 3; j++) {
             if (estadoJuego[i][j] && estadoJuego[i][j] === estadoJuego[i][j + 1] &&
@@ -383,7 +620,7 @@ function verificarVictoria() {
         }
     }
 
-    // Verificar verticalmente
+    // Verticales
     for (let j = 0; j < numeroFilasYColumnasTotales; j++) {
         for (let i = 0; i < numeroFilasYColumnasTotales - 3; i++) {
             if (estadoJuego[i][j] && estadoJuego[i][j] === estadoJuego[i + 1][j] &&
@@ -393,7 +630,7 @@ function verificarVictoria() {
         }
     }
 
-    // Verificar diagonalmente (de izquierda a derecha)
+    // Diagonales de izquierda a derecha
     for (let i = 0; i < numeroFilasYColumnasTotales - 3; i++) {
         for (let j = 0; j < numeroFilasYColumnasTotales - 3; j++) {
             if (estadoJuego[i][j] && estadoJuego[i][j] === estadoJuego[i + 1][j + 1] &&
@@ -403,7 +640,7 @@ function verificarVictoria() {
         }
     }
 
-    // Verificar diagonalmente (de derecha a izquierda)
+    // Diagonales de derecha a izquierda
     for (let i = 3; i < numeroFilasYColumnasTotales; i++) {
         for (let j = 0; j < numeroFilasYColumnasTotales - 3; j++) {
             if (estadoJuego[i][j] && estadoJuego[i][j] === estadoJuego[i - 1][j + 1] &&
@@ -412,6 +649,5 @@ function verificarVictoria() {
             }
         }
     }
-
-    return null; // No hay ganador todavía
+    return null;
 }
