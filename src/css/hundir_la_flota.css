@@ -67,14 +67,16 @@ h1 {
     margin-right: 1rem;
 }
 
-#ia, #dosJugadores, #reiniciar {
+#ia, #dosJugadores, #reiniciar, #verTableroJ1, #verTableroJ2 {
     position:     relative;
     margin-right: 2rem;
 }
 
 #reiniciar:hover .tooltip-text,
 #ia:hover .tooltip-text,
-#dosJugadores:hover .tooltip-text {
+#dosJugadores:hover .tooltip-text,
+#verTableroJ1:hover .tooltip-text,
+#verTableroJ2:hover .tooltip-text {
     visibility: visible;
 }
 
@@ -96,7 +98,7 @@ h1 {
 }
 
 .oculto {
-    display: none;
+    display: none!important;
 }
 
 #campo-jugador {
@@ -114,12 +116,12 @@ h1 {
 }
 
 .game-container {
-     display: flex;
-     justify-content: space-around;
-     margin: 20px;
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
     color: white;
     text-align: center;
- }
+}
 
 .campoJuego {
     display: grid;
@@ -133,22 +135,54 @@ h1 {
     border: 1px solid;
     cursor: pointer;
     background-color: darkblue;
+    transition: background-color 2s;
 }
 
 .barco {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid;
     background-color: dimgrey;
+    transition: background-color 2s;
 }
 
 .tocado {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid;
     background-color: orange;
+    transition: background-color 2s;
 }
 
 .hundido {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid;
     background-color: red;
+    transition: background-color 2s;
 }
 
 .agua {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid;
     background-color: black;
+    transition: background-color 2s;
+}
+
+.estadoAgua {
+    color: blue;
+    transition: color 2s;
+}
+
+.estadoTocado {
+    color: orange;
+    transition: color 2s;
+}
+
+.estadoHundido {
+    color: red;
+    transition: color 2s;
 }
 
 .modal-inicio {
