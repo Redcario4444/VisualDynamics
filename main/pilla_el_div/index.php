@@ -16,9 +16,11 @@
             <button class='botones-seleccion' id='facil'>Fácil
                 <span class='tooltip-text'>No puedes perder<br>10 Pops +3 seg<br>5000 Puntos +3 seg</span></button>
             <button class='botones-seleccion' id='medio'>Medio
-                <span class='tooltip-text'>3 fallos seguidos YOU LOSE<br>6 fallos en total YOU LOSE<br>10 Pops +1 seg<br>5000 Puntos +1 seg</span></button>
+                <span class='tooltip-text'>3 fallos seguidos YOU LOSE<br>6 fallos en total YOU LOSE<br>10 Pops +1 seg<br>5000 Puntos +1 seg</span>
+            </button>
             <button class='botones-seleccion' id='dificil'>Difícil
-                <span class='tooltip-text'>3 fallos seguidos YOU LOSE<br>6 fallos en total YOU LOSE<br>Cada clic 100 Puntos</span></button>
+                <span class='tooltip-text'>3 fallos seguidos YOU LOSE<br>6 fallos en total YOU LOSE<br>Cada clic 100 Puntos</span>
+            </button>
             <button class='botones-seleccion' id='hardcore'>Hardcore
                 <span class='tooltip-text'>No te lo recomiendo...<br>Nadie ha conseguido hacer 2 puntos</span></button>
             <button class='botones-seleccion' id='infinito'>Infinito
@@ -65,5 +67,6 @@
     <audio id="victoria" src="/assets/sound/pilla_el_div/win.wav"></audio>
 
 <?php
+    $src = '../../assets/img/main/back.svg';
     include '../../src/footer.php';
 ?>

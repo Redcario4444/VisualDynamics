@@ -158,7 +158,25 @@
                 </button>
             </div>
         </div>
+
+        <!-- Modal de victoria -->
+        <div class='container'>
+            <div class='menu'>
+                <div class='fondo-modal-victoria' id='fondo-modal-victoria'></div>
+                <div class='modal-victoria menu' id='modal-victoria'>
+                    <div class='interior-modal-victoria'>
+                        <h2 id='ganador'></h2>
+                        <h3 id='tiempo-final'></h3>
+                        <p>¡No todos los héroes tienen capa!</p>
+                        <button class='botones-seleccion cerrar-victoria' id='cerrar-victoria'>Cerrar
+                            <span class='tooltip-text  tooltip-top'>Ciérrame con 'c'</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 
     <!-- Canvas para el juego -->
     <canvas id='memory-cards'></canvas>
@@ -169,5 +187,6 @@
     <audio id='cursor' src='../../assets/sound/memory_cards/cursor.mp3' preload="auto"></audio>
 
 <?php
+    $src = '../../assets/img/main/back.svg';
     include '../../src/footer.php';
 ?>

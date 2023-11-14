@@ -1,10 +1,12 @@
 // Get the canvas element and its drawing context
-const canvas = document.getElementById('fireworks');
-const ctx = canvas.getContext('2d');
+const canvas2 = document.getElementById('fireworks');
+const ctx2 = canvas2.getContext('2d');
 
 // Set the canvas size to full screen
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas2.width = window.innerWidth;
+canvas2.height = window.innerHeight;
+
+let ganado = false;
 
 // Define the Particle class for the explosion particles
 class Particle {
@@ -23,11 +25,11 @@ class Particle {
 
     // Draw a particle on the canvas
     draw() {
-        ctx.globalAlpha = this.alpha;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
-        ctx.fillStyle = this.color;
-        ctx.fill();
+        ctx2.globalAlpha = this.alpha;
+        ctx2.beginPath();
+        ctx2.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
+        ctx2.fillStyle = this.color;
+        ctx2.fill();
     }
 
     // Update the particle position and opacity
@@ -55,10 +57,10 @@ class Firework {
 
     // Draw the firework rocket on the canvas
     draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, 3, 0, Math.PI * 2, false);
-        ctx.fillStyle = this.color;
-        ctx.fill();
+        ctx2.beginPath();
+        ctx2.arc(this.x, this.y, 3, 0, Math.PI * 2, false);
+        ctx2.fillStyle = this.color;
+        ctx2.fill();
     }
 
     // Create particles for explosion
@@ -95,11 +97,12 @@ let fireworks = [];
 // Function to animate the fireworks
 function animate() {
     // Request the next animation frame
+    if (!ganado) return;
     requestAnimationFrame(animate);
 
     // Clear the canvas and create a trailing effect
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx2.fillStyle = 'rgba(0, 0, 0, 0.1)';
+    ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
 
     // Update and draw each firework
     fireworks.forEach((firework, index) => {
@@ -114,9 +117,9 @@ function animate() {
 
     // Occasionally create a new firework
     if (Math.random() < 0.015) {
-        const x = Math.random() * canvas.width;
+        const x = Math.random() * canvas2.width;
         const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
-        fireworks.push(new Firework(x, canvas.height, color));
+        fireworks.push(new Firework(x, canvas2.height, color));
     }
 }
 

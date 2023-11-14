@@ -78,5 +78,6 @@
 
 
 <?php
+    $src = '../../assets/img/main/back.svg';
     include '../../src/footer.php';
 ?>

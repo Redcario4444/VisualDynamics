@@ -96,5 +96,6 @@
     <audio id='down' src='../../assets/sound/cuatro_en_raya/down.mp3' preload='auto'></audio>
 
 <?php
+    $src = '../../assets/img/main/back.svg';
     include '../../src/footer.php';
 ?>

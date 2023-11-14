@@ -103,6 +103,15 @@ footer {
     left:             0;
 }
 
+a > img {
+    width:    3rem;
+    height:   3rem;
+    position: absolute;
+    top:      0.5rem;
+    left:     1rem;
+
+}
+
 p {
     margin: 0;
 }
