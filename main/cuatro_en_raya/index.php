@@ -88,7 +88,6 @@
         </div>
     </div>
 
-
     <!-- Archivos de audio -->
     <audio id='welcome' src='../../assets/sound/cuatro_en_raya/welcome.mp3' preload='auto'></audio>
     <audio id='cursor' src='../../assets/sound/cuatro_en_raya/cursor.mp3' preload='auto'></audio>

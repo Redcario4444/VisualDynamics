@@ -1,0 +1,241 @@
+@import url('https://fonts.cdnfonts.com/css/press-start-2p');
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+@import url('normalize.css');
+
+html {
+    font-size:   16px;
+    font-family: "Press Start 2P", monospace;
+}
+
+body {
+    background-image: url("../../assets/img/index/fondo_inicio.gif");
+    background-size:  0.3rem;
+}
+
+h1 {
+    color:      #fff;
+    font-size:  2.5rem;
+    text-align: center;
+    width:      100%;
+    margin-top: 2rem;
+}
+
+.container {
+    text-align: center;
+    margin:     1rem auto 5rem;
+}
+
+.menu {
+    display:         flex;
+    flex-wrap:       wrap;
+    justify-content: center;
+    align-items:     center;
+    width:           100%;
+}
+
+.botones-seleccion {
+    margin:        0.5rem 1rem;
+    padding:       0.5rem 1rem;
+    color:         #fff;
+    background:    #000;
+    border:        0.3rem solid #fff;
+    outline:       none;
+    box-shadow:    0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
+    border-radius: 0.15rem;
+}
+
+.botones-seleccion:focus,
+.botones-seleccion:hover {
+    outline:     none;
+    background:  #999;
+    text-shadow: 0.2rem 0.2rem 0.1rem rgba(0, 0, 0, 1);
+}
+
+/* MODAL DE INICIO / BIENVENIDA */
+.modal-inicio {
+    display:          block;
+    position:         fixed;
+    top:              50%;
+    left:             50%;
+    transform:        translate(-50%, -50%);
+    width:            max-content;
+    z-index:          11;
+    border:           0.3rem solid #fff;
+    background-color: #000;
+    padding:          1rem;
+    box-shadow:       0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
+}
+
+.fondo-modal-inicio {
+    position:         fixed;
+    top:              0;
+    left:             0;
+    width:            100%;
+    height:           100%;
+    z-index:          10;
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+.interior-modal-inicio {
+    color: #fff;
+}
+
+.interior-modal-inicio h2 {
+    font-size:     3rem;
+    text-align:    center;
+    margin-bottom: 1.5rem;
+    text-shadow:   0.2rem 0.2rem 0.1rem rgba(204, 204, 204, 1);
+}
+
+.interior-modal-inicio h3 {
+    font-size:     1.5rem;
+    text-align:    center;
+    margin-bottom: 1.5rem;
+}
+
+.interior-modal-inicio > ul {
+    margin:     1.5rem 4rem;
+    font-size:  1rem;
+    text-align: left;
+
+    & li {
+        line-height: 2.5rem;
+    }
+}
+
+.interior-modal-inicio button {
+    margin-top: 2.5rem;
+}
+
+/** MODAL DE VICTORIA **/
+.modal-victoria {
+    display:          none;
+    position:         fixed;
+    top:              50%;
+    left:             50%;
+    transform:        translate(-50%, -50%);
+    width:            max-content;
+    z-index:          11;
+    border:           0.3rem solid #fff;
+    background-color: #000;
+    padding:          1rem;
+    box-shadow:       0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
+}
+
+.fondo-modal-victoria {
+    display:          none;
+    position:         fixed;
+    top:              0;
+    left:             0;
+    width:            100%;
+    height:           100%;
+    z-index:          10;
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+.interior-modal-victoria {
+    color: #fff;
+}
+
+.interior-modal-victoria h2 {
+    font-size:     3rem;
+    text-align:    center;
+    margin-bottom: 1.5rem;
+    text-shadow:   0.2rem 0.2rem 0.1rem rgba(204, 204, 204, 1);
+}
+
+.interior-modal-victoria h3 {
+    font-size:     1.5rem;
+    text-align:    center;
+    margin-bottom: 1.5rem;
+}
+
+.interior-modal-victoria button {
+    margin-top: 2.5rem;
+}
+
+/* TOOLTIP MAESTRO*/
+.tooltip-text {
+    visibility:       hidden;
+    width:            auto;
+    min-width:        120px;
+    background-color: #000;
+    color:            #fff;
+    border:           2px solid #fff;
+    text-align:       center;
+    padding:          5px 10px;
+    position:         absolute;
+    z-index:          5;
+    box-shadow:       0.3rem 0.3rem 0.1rem rgba(204, 204, 204, 0.8);
+    text-shadow:      0.15rem 0.15rem 0.15rem rgba(204, 204, 204, 1);
+    white-space:      nowrap;
+}
+
+/* POSICIONES TOOLTIP */
+.tooltip-top {
+    bottom:        100%;
+    left:          50%;
+    transform:     translateX(-50%);
+    margin-bottom: 1rem;
+}
+
+.tooltip-bottom {
+    top:        100%;
+    left:       50%;
+    transform:  translateX(-50%);
+    margin-top: 1rem;
+}
+
+.tooltip-left {
+    right:        100%;
+    top:          50%;
+    transform:    translateY(-50%);
+    margin-right: 1rem;
+}
+
+.tooltip-right {
+    left:        100%;
+    top:         50%;
+    transform:   translateY(-50%);
+    margin-left: 1rem;
+}
+
+/** HOVERS DE LOS TOOLTIPS **/
+.marcador:hover .tooltip-text,
+.reiniciar:hover .tooltip-text,
+.cerrar-inicio:hover .tooltip-text,
+.cerrar-victoria:hover .tooltip-text {
+    visibility: visible;
+}
+
+/* POSITION DE LOS TOOLTIPS */
+.marcador,
+.reiniciar,
+.cerrar-inicio,
+.cerrar-victoria {
+    position: relative;
+}
+
+/** ESTILOS TABLERO TETRIS **/
+
+.celda-tetris {
+    width:            30px; /* Ancho de cada celda */
+    height:           30px; /* Alto de cada celda */
+    background-color: transparent; /* Color de fondo inicial */
+    border:           1px solid #777; /* Borde de cada celda */
+}
+
+#tablero-tetris {
+    display:               grid;
+    grid-template-columns: repeat(10, 1fr); /* 10 columnas */
+    grid-template-rows: repeat(20, auto); /* 20 filas */
+    grid-gap:              1px; /* Espacio entre celdas */
+    width:                 300px; /* Ancho total del tablero */
+    height:                600px; /* Alto total del tablero */
+    margin:                0 auto; /* Centrar el tablero */
+    background-color:      #555; /* Color de fondo entre celdas */
+}
+
+.fila-tetris {
+    display: contents; /* Esto asegura que fila-tetris no afecte la estructura de la cuadrícula */
+}
