@@ -3,20 +3,14 @@
 @import url('normalize.css');
 
 :root {
-    --text-color: #fff;
+    --text-color:       #fff;
     --background-color: #000;
-    --border-color: #fff;
-    --shadow-light: rgba(204, 204, 204, 0.8);
-    --shadow-dark: rgba(0, 0, 0, 1);
-    --highlight-color: #999;
-    --font-primary: 'Press Start 2P', monospace;
-    --font-secondary: 'Share Tech Mono', monospace;
-}
-
-#futuro {
-    font-family: Share Tech Mono, monospace;
-    word-spacing: 1rem;
-    text-shadow: 0.38rem 0.25rem 0.3rem rgba(255, 255, 0, 0.8);
+    --border-color:     #fff;
+    --shadow-light:     rgba(204, 204, 204, 0.8);
+    --shadow-dark:      rgba(0, 0, 0, 1);
+    --highlight-color:  #999;
+    --font-primary:     'Press Start 2P', monospace;
+    --font-secondary:   'Share Tech Mono', monospace;
 }
 
 a {
@@ -32,48 +26,49 @@ a {
 }
 
 html {
-    font-size: 16px;
+    font-size:   16px;
     font-family: "Press Start 2P", serif;
+    overflow:    hidden;
 }
 
 body,
 .retro-prompt,
 .retro-message {
     background-image: url("../../assets/img/index/fondo_inicio.gif");
-    background-size: 0.3rem;
+    background-size:  0.3rem;
 }
 
 svg {
-    display: block;
+    display:  block;
     position: relative;
     overflow: hidden;
-    margin: 0 auto;
+    margin:   0 auto;
 }
 
 .retro-prompt,
 .retro-message {
-    display: flex;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
+    display:         flex;
+    position:        fixed;
+    left:            0;
+    top:             0;
+    width:           100%;
     justify-content: center;
-    align-items: center;
-    color: var(--text-color);
+    align-items:     center;
+    color:           var(--text-color);
 }
 
 .prompt-container,
 .prompt-message {
-    position: relative;
+    position:   relative;
     background: var(--background-color);
-    border: 0.3rem solid var(--border-color);
+    border:     0.3rem solid var(--border-color);
 }
 
 .close {
     position: absolute;
-    cursor: pointer;
-    top: 0.5rem;
-    right: 0.5rem;
+    cursor:   pointer;
+    top:      0.5rem;
+    right:    0.5rem;
 }
 
 .memory-card-list {
@@ -81,29 +76,29 @@ svg {
 }
 
 .memory-card-option {
-    cursor: pointer;
+    cursor:     pointer;
     text-align: center;
 }
 
 .memory-card-option:focus,
 .memory-card-option:hover {
-    outline: none;
+    outline:    none;
     background: var(--highlight-color);
 }
 
 .titulo {
-    color: var(--text-color);
-    text-align: center;
+    color:           var(--text-color);
+    text-align:      center;
     text-decoration: none;
 }
 
 .coming {
-    color: var(--text-color);
-    text-align: center;
+    color:           var(--text-color);
+    text-align:      center;
     text-decoration: none;
-    display: none;
-    opacity: 0;
-    animation: fadeIn 5s ease-in-out 1s forwards;
+    display:         none;
+    opacity:         0;
+    animation:       fadeIn 5s ease-in-out 1s forwards;
 }
 
 @keyframes fadeIn {
@@ -116,18 +111,18 @@ svg {
 }
 
 .titulo-animado {
-    background: linear-gradient(
-            to right,
-            yellow 50%,
-            rgba(255, 255, 0, 0.8) 40%,
-            transparent 70%
-    );
+    background:              linear-gradient(
+                                     to right,
+                                     yellow 50%,
+                                     rgba(255, 255, 0, 0.8) 40%,
+                                     transparent 70%
+                             );
 
-    background-clip: text;
+    background-clip:         text;
     -webkit-background-clip: text;
-    color: transparent;
-    background-size: 200% 100%;
-    animation: fillText 1.40s linear infinite, shadowGlow 1.40s linear infinite;
+    color:                   transparent;
+    background-size:         200% 100%;
+    animation:               fillText 1.40s linear infinite, shadowGlow 1.40s linear infinite;
 }
 
 @keyframes fillText {
@@ -149,13 +144,13 @@ svg {
 }
 
 .texto-oculto {
-    opacity: 0;
-    transform: translateY(-750%);
-    transition: opacity 8s, transform 8s;
+    opacity:    0;
+    transform:  translateY(-500%);
+    transition: opacity 10s, transform 5s;
 }
 
 .mostrar-texto {
-    opacity: 1;
+    opacity:   1;
     transform: translateY(0);
 }
 
@@ -164,40 +159,41 @@ svg {
 }
 
 #music-player {
-    position: fixed;
+    position:         fixed;
     background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display:          flex;
+    justify-content:  center;
+    align-items:      center;
+    z-index:          10;
 }
 
 #play-pause-btn {
     background-color: transparent;
-    color: var(--text-color);
-    border: none;
-    cursor: pointer;
-    outline: none;
-    display: none;
+    color:            var(--text-color);
+    border:           none;
+    cursor:           pointer;
+    outline:          none;
+    display:          none;
 }
 
 #pause-emoji, #pause-text {
-    color: #3d07e7;
+    color:       #3d07e7;
     text-shadow: 0.2rem 0.2rem 0.1rem rgba(67, 1, 231, 0.5);
 
 }
 
 #play-emoji, #play-text {
-    color: #e30b0b;
+    color:       #e30b0b;
     text-shadow: 0.2rem 0.2rem 0.1rem rgba(227, 11, 11, 0.5);
 }
 
 #pause-emoji {
     margin-right: 0.75rem;
-    font-size: 1rem;
+    font-size:    1rem;
 }
 
 #play-emoji {
-    margin-left: 0.25rem;
+    margin-left:  0.25rem;
     margin-right: 0.5rem;
 }
 
@@ -209,6 +205,12 @@ svg {
     font-size: 1.5rem;
 }
 
+#futuro {
+    font-family:  Share Tech Mono, monospace;
+    word-spacing: 0.5rem;
+    text-shadow:  0.38rem 0.25rem 0.3rem rgba(255, 255, 0, 0.8);
+}
+
 /* EXTRA SMALL - MOBILE S - MOBILE M - MOBILE L*/
 @media screen and (max-width: 35rem) {
     body,
@@ -218,21 +220,21 @@ svg {
     }
 
     svg {
-        width: 90vw;
+        width:  90vw;
         height: 30vh;
     }
 
     .retro-prompt,
     .retro-message {
-        height: 50%;
+        height:    50%;
         font-size: 0.7rem;
     }
 
     .prompt-container,
     .prompt-message {
-        position: relative;
-        padding: 1.5rem;
-        border: 0.1rem solid var(--border-color);
+        position:   relative;
+        padding:    1.5rem;
+        border:     0.1rem solid var(--border-color);
         margin-top: 30rem;
 
         & p {
@@ -241,19 +243,19 @@ svg {
     }
 
     .close {
-        top: 0.25rem;
-        right: 0.25rem;
+        top:       0.25rem;
+        right:     0.25rem;
         font-size: 0.8rem;
     }
 
     .memory-card-list {
-        margin: 0 auto;
+        margin:  0 auto;
         padding: 0;
     }
 
     .memory-card-option {
-        padding: 0.5rem;
-        border: 0.1rem solid var(--border-color);
+        padding:    0.5rem;
+        border:     0.1rem solid var(--border-color);
         margin-top: 1rem;
     }
 
@@ -263,20 +265,20 @@ svg {
     }
 
     .titulo {
-        font-size: 2rem;
+        font-size:   2rem;
         text-shadow: 0.4rem 0.4rem 0.2rem var(--shadow-light);
-        margin-top: 10vh;
+        margin-top:  10vh;
     }
 
     .coming {
-        font-size: 1rem;
+        font-size:   1rem;
         text-shadow: 0.5rem 0.5rem 0.2rem var(--shadow-light);
-        margin-top: 15vh;
+        margin-top:  15vh;
     }
 
     #music-player {
         bottom: 0;
-        left: 59vw;
+        left:   59vw;
         height: 6rem;
     }
 
@@ -308,20 +310,20 @@ svg {
     }
 
     svg {
-        width: 90vw;
+        width:  90vw;
         height: 30vh;
     }
 
     .retro-prompt,
     .retro-message {
-        height: 50%;
+        height:    50%;
         font-size: 1.2rem;
     }
 
     .prompt-container,
     .prompt-message {
-        padding: 1.5rem 1.96rem 1.98rem 1.8rem;
-        border: 0.1rem solid var(--border-color);
+        padding:    1.5rem 1.96rem 1.98rem 1.8rem;
+        border:     0.1rem solid var(--border-color);
         margin-top: 30rem;
 
         & p {
@@ -330,19 +332,19 @@ svg {
     }
 
     .close {
-        top: 0.25rem;
+        top:   0.25rem;
         right: 0.25rem;
     }
 
     .memory-card-list {
-        padding-left: 1.2rem;
+        padding-left:  1.2rem;
         padding-right: 1rem;
     }
 
     .memory-card-option {
-        padding: 1rem;
-        border: 0.1rem solid var(--border-color);
-        margin-top: 1rem;
+        padding:       1rem;
+        border:        0.1rem solid var(--border-color);
+        margin-top:    1rem;
         margin-bottom: 1rem;
     }
 
@@ -352,21 +354,21 @@ svg {
     }
 
     .titulo {
-        font-size: 3rem;
-        text-shadow: 0.4rem 0.4rem 0.2rem var(--shadow-light);
-        margin-top: 10vh;
+        font-size:    3rem;
+        text-shadow:  0.4rem 0.4rem 0.2rem var(--shadow-light);
+        margin-top:   10vh;
         word-spacing: -1rem;
     }
 
     .coming {
-        font-size: 3rem;
+        font-size:   3rem;
         text-shadow: 0.5rem 0.5rem 0.2rem var(--shadow-light);
-        margin-top: 15vh;
+        margin-top:  15vh;
     }
 
     #music-player {
         bottom: 0;
-        left: 83vw;
+        left:   83vw;
         height: 4rem;
     }
 
@@ -390,20 +392,20 @@ svg {
     }
 
     svg {
-        width: 90vw;
+        width:  90vw;
         height: 30vh;
     }
 
     .retro-prompt,
     .retro-message {
-        height: 70%;
+        height:    70%;
         font-size: 1.2rem;
     }
 
     .prompt-container,
     .prompt-message {
-        padding: 1.5rem 1.96rem 1.98rem 1.8rem;
-        border: 0.1rem solid var(--border-color);
+        padding:    1.5rem 1.96rem 1.98rem 1.8rem;
+        border:     0.1rem solid var(--border-color);
         margin-top: 30rem;
 
         & p {
@@ -412,19 +414,19 @@ svg {
     }
 
     .close {
-        top: 0.25rem;
+        top:   0.25rem;
         right: 0.25rem;
     }
 
     .memory-card-list {
-        padding-left: 1.2rem;
+        padding-left:  1.2rem;
         padding-right: 1rem;
     }
 
     .memory-card-option {
-        padding: 1rem;
-        border: 0.1rem solid var(--border-color);
-        margin-top: 1rem;
+        padding:       1rem;
+        border:        0.1rem solid var(--border-color);
+        margin-top:    1rem;
         margin-bottom: 1rem;
     }
 
@@ -434,21 +436,21 @@ svg {
     }
 
     .titulo {
-        font-size: 3rem;
-        text-shadow: 0.4rem 0.4rem 0.2rem var(--shadow-light);
-        margin-top: 10vh;
+        font-size:    3rem;
+        text-shadow:  0.4rem 0.4rem 0.2rem var(--shadow-light);
+        margin-top:   10vh;
         word-spacing: -1rem;
     }
 
     .coming {
-        font-size: 3rem;
+        font-size:   3rem;
         text-shadow: 0.5rem 0.5rem 0.2rem var(--shadow-light);
-        margin-top: 15vh;
+        margin-top:  15vh;
     }
 
     #music-player {
         bottom: 0;
-        left: 81vw;
+        left:   81vw;
         height: 10vh;
     }
 
@@ -472,21 +474,21 @@ svg {
     }
 
     svg {
-        width: 90vw;
+        width:  90vw;
         height: 30vh;
     }
 
     .retro-prompt,
     .retro-message {
-        height: 60%;
+        height:    60%;
         font-size: 1rem;
     }
 
     .prompt-container,
     .prompt-message {
-        position: relative;
-        padding: 2rem 2.4rem 2rem 2.4rem;
-        border: 0.2rem solid var(--border-color);
+        position:   relative;
+        padding:    2rem 2.4rem 2rem 2.4rem;
+        border:     0.2rem solid var(--border-color);
         margin-top: 30rem;
 
         & p {
@@ -495,14 +497,14 @@ svg {
     }
 
     .memory-card-list {
-        padding-left: 1.2rem;
+        padding-left:  1.2rem;
         padding-right: 1rem;
     }
 
     .memory-card-option {
-        padding: 1rem;
-        border: 0.2rem solid var(--border-color);
-        margin-top: 1rem;
+        padding:       1rem;
+        border:        0.2rem solid var(--border-color);
+        margin-top:    1rem;
         margin-bottom: 1rem;
     }
 
@@ -512,22 +514,22 @@ svg {
     }
 
     .titulo {
-        font-size: 3rem;
-        text-shadow: 0.4rem 0.4rem 0.2rem var(--shadow-light);
-        margin-top: 13vh;
+        font-size:    3rem;
+        text-shadow:  0.4rem 0.4rem 0.2rem var(--shadow-light);
+        margin-top:   13vh;
         word-spacing: -1rem;
     }
 
     .coming {
-        font-size: 3rem;
-        text-shadow: 0.5rem 0.5rem 0.2rem var(--shadow-light);
-        margin-top: 18vh;
+        font-size:    3rem;
+        text-shadow:  0.5rem 0.5rem 0.2rem var(--shadow-light);
+        margin-top:   18vh;
         word-spacing: -3rem;
     }
 
     #music-player {
         bottom: 0;
-        left: 80vw;
+        left:   80vw;
         height: 10vh;
     }
 
@@ -549,21 +551,21 @@ svg {
     }
 
     svg {
-        width: 80vw;
+        width:  80vw;
         height: 30vh;
     }
 
     .retro-prompt,
     .retro-message {
-        height: 60%;
+        height:    60%;
         font-size: 1.2rem;
     }
 
     .prompt-container,
     .prompt-message {
-        position: relative;
-        padding: 2.5rem 3rem 2.5rem 3rem;
-        border: 0.3rem solid var(--border-color);
+        position:   relative;
+        padding:    2.5rem 3rem 2.5rem 3rem;
+        border:     0.3rem solid var(--border-color);
         margin-top: 30rem;
 
         & p {
@@ -572,14 +574,14 @@ svg {
     }
 
     .memory-card-list {
-        padding-left: 1.2rem;
+        padding-left:  1.2rem;
         padding-right: 1rem;
     }
 
     .memory-card-option {
-        padding: 1rem;
-        border: 0.3rem solid var(--border-color);
-        margin-top: 1rem;
+        padding:       1rem;
+        border:        0.3rem solid var(--border-color);
+        margin-top:    1rem;
         margin-bottom: 1rem;
     }
 
@@ -589,23 +591,24 @@ svg {
     }
 
     .titulo {
-        font-size: 4rem;
-        text-shadow: 0.4rem 0.4rem 0.1rem var(--shadow-light);
-        margin-top: 12vh;
+        font-size:    3rem;
+        text-shadow:  0.4rem 0.4rem 0.1rem var(--shadow-light);
+        margin-top:   10vh;
         word-spacing: -1rem;
     }
 
     .coming {
-        font-size: 5rem;
-        text-shadow: 0.5rem 0.5rem 0.1rem var(--shadow-light);
-        margin-top: 17vh;
-        word-spacing: -3rem;
+        font-size:   3rem;
+        text-shadow: 0.4rem 0.4rem 0.1rem var(--shadow-light);
+        margin-top:  15vh;
+        position:    relative;
     }
 
     #music-player {
-        bottom: 0;
-        left: 85vw;
-        height: 6rem;
+        bottom:  0;
+        left:    85vw;
+        height:  6rem;
+        z-index: 10;
     }
 
     #pause-emoji, #pause-text {
@@ -614,6 +617,12 @@ svg {
 
     #play-emoji, #play-text {
         text-shadow: 0.25rem 0.25rem 0.1rem rgba(227, 11, 11, 0.5);
+    }
+
+    #futuro {
+        position: absolute;
+        left:     40rem;
+        top:      2rem;
     }
 }
 
@@ -626,20 +635,20 @@ svg {
     }
 
     svg {
-        width: 100vw;
+        width:  100vw;
         height: 25vh;
     }
 
     .retro-prompt,
     .retro-message {
-        height: 100%;
+        height:    100%;
         font-size: 2rem;
     }
 
     .prompt-container,
     .prompt-message {
-        padding: 4rem 6.9rem 6.9rem 4rem;
-        border: 0.4rem solid var(--border-color);
+        padding:    4rem 6.9rem 6.9rem 4rem;
+        border:     0.4rem solid var(--border-color);
         box-shadow: 0.3rem 0.3rem 0.1rem var(--shadow-light);
         margin-top: 30rem;
 
@@ -649,8 +658,8 @@ svg {
     }
 
     .memory-card-option {
-        padding: 2rem;
-        border: 0.5rem solid var(--border-color);
+        padding:    2rem;
+        border:     0.5rem solid var(--border-color);
         box-shadow: 0.3rem 0.3rem 0.1rem var(--shadow-light);
         margin-top: 3rem;
     }
@@ -661,25 +670,26 @@ svg {
     }
 
     .titulo {
-        font-size: 8rem;
-        text-shadow: 0.5rem 0.5rem 0.1rem var(--shadow-light);
-        word-spacing: -3rem;
+        font-size:    5rem;
+        text-shadow:  0.5rem 0.5rem 0.1rem var(--shadow-light);
+        word-spacing: -1rem;
     }
 
     .coming {
-        font-size: 7rem;
-        text-shadow: 0.7rem 0.7rem 0.1rem var(--shadow-light);
-        word-spacing: -5rem;
+        font-size:   5rem;
+        text-shadow: 0.5rem 0.5rem 0.1rem var(--shadow-light);
+        line-height: 2rem;
+        position:    relative;
     }
 
     .titulo,
     .coming {
-        margin-top: 20vh;
+        margin-top: 18vh;
     }
 
     #music-player {
         bottom: 0;
-        left: 87vw;
+        left:   86vw;
         height: 9rem;
     }
 
@@ -693,11 +703,11 @@ svg {
 
     #pause-emoji {
         margin-right: 0.75rem;
-        font-size: 2rem;
+        font-size:    2rem;
     }
 
     #play-emoji {
-        margin-left: 0.25rem;
+        margin-left:  0.25rem;
         margin-right: 0.5rem;
     }
 
@@ -705,5 +715,13 @@ svg {
     #play-text,
     #pause-text {
         font-size: 3rem;
+    }
+
+    #futuro {
+        word-spacing: 1.5rem;
+        text-shadow:  0.38rem 0.25rem 0.3rem rgba(255, 255, 0, 0.8);
+        position:     absolute;
+        left:         40rem;
+        top:          3rem;
     }
 }

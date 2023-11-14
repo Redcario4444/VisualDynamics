@@ -13,5 +13,6 @@
 <!-- AQUÍ EL CONTENIDO DE LA PÁGINA -->
 
 <?php
+    $src = ""; /*TODO AÑADIR LINK RELATIVO AL BOTÓN DEL FOOTER*/
     include 'src/footer.php'; #TODO COMPROBAR RUTA! (RUTA RELATIVA A LA UBICACIÓN DE ESTE ARCHIVO)
 ?>
