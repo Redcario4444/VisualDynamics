@@ -60,24 +60,6 @@ const PIEZAS = [
     [Z, COLORES.Z]
 ];
 
-let juego;
-let reiniciar = document.getElementById('reiniciar');
-
-document.addEventListener('DOMContentLoaded', () => {
-    juego = new Juego();
-    juego.iniciar();
-    document.addEventListener('keydown', (event) => control(juego, event));
-    reiniciar.addEventListener('click', () => {
-        juego.reiniciar();
-    });
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'r') {
-            juego.reiniciar();
-        }
-    });
-});
-
 class Pieza {
     constructor(forma, color) {
         this.forma = forma;
@@ -86,6 +68,7 @@ class Pieza {
     }
 
     mover(direccion) {
+        console.log(`Moviendo pieza desde x: ${this.posicion.x}, y: ${this.posicion.y}`);
         switch (direccion) {
             case 'izquierda':
                 this.posicion.x -= 1;
@@ -97,26 +80,21 @@ class Pieza {
                 this.posicion.y += 1;
                 break;
         }
-        console.log(`Moviendo pieza hacia ${direccion}: nueva posición x: ${this.posicion.x}, y: ${this.posicion.y}`);
+        console.log(`Pieza movida a x: ${this.posicion.x}, y: ${this.posicion.y}`);
     }
 
     rotar() {
-        // Crea una copia de la forma actual para revertir si es necesario
         let formaOriginal = this.forma.map(fila => fila.slice());
 
-        // Transpone la matriz de la forma
         for (let y = 0; y < this.forma.length; ++y) {
             for (let x = 0; x < y; ++x) {
                 [this.forma[x][y], this.forma[y][x]] = [this.forma[y][x], this.forma[x][y]];
             }
         }
 
-        // Invierte el orden de cada fila para obtener una rotación de 90 grados
         this.forma.forEach(row => row.reverse());
 
-        // Verifica colisión después de la rotación
         if (juego.tablero.verificarColision(this)) {
-            // Revertir la forma si hay colisión
             this.forma = formaOriginal;
         } else {
             console.log("Rotando pieza");
@@ -143,7 +121,9 @@ class Tablero {
                 let cuadriculaX = x + pieza.posicion.x;
 
                 if (valor !== 0 && cuadriculaY >= 0 && cuadriculaY < this.filas && cuadriculaX >= 0 && cuadriculaX < this.columnas) {
-                    this.cuadricula[y + pieza.posicion.y][x + pieza.posicion.x] = pieza.color;
+                    if (!this.cuadricula[cuadriculaY][cuadriculaX]) {
+                        this.cuadricula[cuadriculaY][cuadriculaX] = pieza.color;
+                    }
                 }
             });
         });
@@ -151,36 +131,54 @@ class Tablero {
     }
 
     verificarLineaCompleta() {
+        let lineasCompletadas = 0;
         for (let y = 0; y < this.filas; y++) {
-            if (this.cuadricula[y].every(valor => valor !== 0)) {
+            if (this.cuadricula[y].every(valor => valor !== null)) {
                 this.cuadricula.splice(y, 1);
-                this.cuadricula.unshift(Array(this.columnas).fill(0));
-                juego.puntuacion += 10;
+                this.cuadricula.unshift(Array(this.columnas).fill(null));
+                lineasCompletadas++;
             }
+        }
+
+        if (lineasCompletadas > 0) {
+            switch (lineasCompletadas) {
+                case 1:
+                    juego.puntuacion += 100;
+                    break;
+                case 2:
+                    juego.puntuacion += 300;
+                    break;
+                case 3:
+                    juego.puntuacion += 500;
+                    break;
+                case 4:
+                    juego.puntuacion += 800;
+                    break;
+            }
+
+            juego.actualizarNivel();
+            actualizarPuntuacionYnivel();
         }
     }
 
+
     verificarColision(pieza) {
+        console.log("Verificando colisión para pieza en posición x: " + pieza.posicion.x + ", y: " + pieza.posicion.y);
+        console.log("Forma de la pieza: ", pieza.forma);
         for (let y = 0; y < pieza.forma.length; y++) {
             for (let x = 0; x < pieza.forma[y].length; x++) {
                 if (pieza.forma[y][x] !== 0) {
                     const cuadriculaY = y + pieza.posicion.y;
                     const cuadriculaX = x + pieza.posicion.x;
 
-                    // Verificar colisiones con los bordes del tablero
-                    if (cuadriculaX < 0 || cuadriculaX >= this.columnas) {
+                    if (cuadriculaY < 0) continue;
+
+                    if (cuadriculaX < 0 || cuadriculaX >= this.columnas || cuadriculaY >= this.filas) {
                         console.log(`Colisión detectada en el borde. X: ${cuadriculaX}, Y: ${cuadriculaY}`);
                         return true;
                     }
 
-                    // Verificar colisiones con el fondo del tablero
-                    if (cuadriculaY >= this.filas) {
-                        console.log(`Colisión detectada en el fondo. X: ${cuadriculaX}, Y: ${cuadriculaY}`);
-                        return true;
-                    }
-
-                    // Verificar colisiones con otras piezas
-                    if (cuadriculaY >= 0 && this.cuadricula[cuadriculaY][cuadriculaX]) {
+                    if (this.cuadricula[cuadriculaY] && this.cuadricula[cuadriculaY][cuadriculaX]) {
                         console.log(`Colisión detectada con otra pieza. X: ${cuadriculaX}, Y: ${cuadriculaY}`);
                         return true;
                     }
@@ -189,38 +187,6 @@ class Tablero {
         }
         return false;
     }
-
-    limpiarPieza(pieza) {
-        // Recorre la cuadricula y elimina las celdas ocupadas por la pieza
-        for (let y = 0; y < this.filas; y++) {
-            for (let x = 0; x < this.columnas; x++) {
-                if (this.cuadricula[y][x] === pieza.color) {
-                    this.cuadricula[y][x] = null;
-                }
-            }
-        }
-    }
-
-    colocarPieza(pieza) {
-        pieza.forma.forEach((row, dy) => {
-            row.forEach((value, dx) => {
-                if (value !== 0) {
-                    let posY = pieza.posicion.y + dy;
-                    let posX = pieza.posicion.x + dx;
-
-                    // Verificar que las coordenadas estén dentro del tablero
-                    if (posY >= 0 && posY < this.filas && posX >= 0 && posX < this.columnas) {
-                        this.cuadricula[posY][posX] = pieza.color;
-                    }
-                }
-            });
-        });
-    }
-
-    actualizarCuadricula(pieza) {
-        this.limpiarPieza(pieza);
-        this.colocarPieza(pieza);
-    }
 }
 
 class Juego {
@@ -228,23 +194,29 @@ class Juego {
         this.tablero = new Tablero(20, 10);
         this.piezaActual = null;
         this.puntuacion = 0;
+        this.nivel = 1;
         this.tiempoUltimoMovimiento = 0;
-        this.intervaloMovimiento = 1000; // 1 segundo
+        this.intervaloMovimiento = 1000;
         this.iniciar();
     }
 
     iniciar() {
         crearCuadriculaDOM(this.tablero);
         this.piezaActual = this.generarNuevaPieza();
+        mostrarSiguientePieza(this.piezaActual);
         requestAnimationFrame(this.actualizar.bind(this));
+        iniciarContadorTiempo();
     }
 
     reiniciar() {
         this.tablero = new Tablero(20, 10);
+        actualizarTableroDOM(this.tablero);
         this.piezaActual = null;
         this.puntuacion = 0;
+        this.nivel = 1;
         this.tiempoUltimoMovimiento = 0;
-        this.intervaloMovimiento = 3000;
+        this.intervaloMovimiento = 1000;
+        detenerContadorTiempo();
         this.iniciar();
     }
 
@@ -260,7 +232,11 @@ class Juego {
             console.log("Fin del juego. Puntuación final:", this.puntuacion);
             return null;
         }
-        console.log(`Generando nueva pieza de tipo ${color}. Posición inicial x: ${nuevaPieza.posicion.x}, y: ${nuevaPieza.posicion.y}`);
+
+        const indiceSiguiente = (indiceAleatorio + 1) % PIEZAS.length;
+        const [siguienteForma, siguienteColor] = PIEZAS[indiceSiguiente];
+        mostrarSiguientePieza(new Pieza(siguienteForma, siguienteColor));
+
         return nuevaPieza;
     }
 
@@ -270,61 +246,46 @@ class Juego {
         }
 
         const deltaTiempo = tiempoActual - this.tiempoUltimoMovimiento;
-
         if (this.piezaActual && deltaTiempo > this.intervaloMovimiento) {
             this.moverPiezaActual('abajo');
             this.tiempoUltimoMovimiento = tiempoActual;
         }
 
-        if (this.tablero.verificarColision(this.piezaActual)) {
-            // Si hay colisión, coloca la pieza actual en el tablero
-            this.tablero.agregarPieza(this.piezaActual);
-            this.tablero.verificarLineaCompleta();
-            // Genera una nueva pieza
-            if (this.piezaActual === null) {
-                console.log("No se puede generar una nueva pieza. Fin del juego.");
-                // Detener el juego o tomar otras acciones
-                return;
-            }
-            this.piezaActual = this.generarNuevaPieza();
-            if (this.piezaActual === null) {
-                console.log("Fin del juego. Puntuación final:", this.puntuacion);
-                console.log("No se puede generar una nueva pieza. Fin del juego.");
-                return; // Detiene el juego si no se puede generar una nueva pieza
-            }
-            console.log("Pieza colisionó. Generando nueva pieza.");
-        }
-
-        console.log("Actualizando juego. Tiempo actual: ", tiempoActual);
         actualizarTableroDOM(this.tablero);
         requestAnimationFrame(this.actualizar.bind(this));
     }
 
     moverPiezaActual(direccion) {
-        // Guarda la posición original de la pieza
         const posicionOriginal = {...this.piezaActual.posicion};
-
-        // Intenta mover la pieza
         this.piezaActual.mover(direccion);
+        actualizarTableroDOM(this.tablero);
 
-        // Verifica colisión después del movimiento
         if (this.tablero.verificarColision(this.piezaActual)) {
-            // Si hay colisión, revierte al estado original
             this.piezaActual.posicion = posicionOriginal;
-        } else {
-            // Imprimir la posición de la pieza antes de actualizar el tablero
-            console.log("Pieza actualizada a", this.piezaActual.posicion);
-            // Actualiza el tablero con la nueva posición
-            this.tablero.actualizarCuadricula(this.piezaActual);
+
+            if (direccion === 'abajo') {
+                this.tablero.agregarPieza(this.piezaActual);
+                actualizarTableroDOM(this.tablero);
+                this.tablero.verificarLineaCompleta();
+                this.piezaActual = this.generarNuevaPieza();
+                actualizarTableroDOM(this.tablero);
+            }
         }
     }
 
     rotarPiezaActual() {
-        // Rota la pieza actual y verifica colisiones
         this.piezaActual.rotar();
         if (this.tablero.verificarColision(this.piezaActual)) {
-            // Si hay colisión, revierte la rotación
-            this.piezaActual.rotar(); // Rotar de nuevo para revertir
+            this.piezaActual.rotar();
+        }
+    }
+
+    actualizarNivel() {
+        let nivelAnterior = this.nivel;
+        this.nivel = Math.floor(this.puntuacion / 1000) + 1;
+
+        if (this.nivel > nivelAnterior) {
+            this.intervaloMovimiento = Math.max(200, this.intervaloMovimiento - 100);
         }
     }
 }
@@ -343,11 +304,11 @@ function control(juego, event) {
     }
 }
 
-function direccionOpuesta(direccion) {
-    if (direccion === 'izquierda') return 'derecha';
-    if (direccion === 'derecha') return 'izquierda';
-    // Para 'abajo', no necesitamos revertir el movimiento
+function actualizarPuntuacionYnivel() {
+    document.getElementById('puntuacion').textContent = `Puntuación: ${juego.puntuacion}`;
+    document.getElementById('nivel').textContent = `Nivel: ${juego.nivel}`;
 }
+
 
 function crearCuadriculaDOM(tablero) {
     const tableroDOM = document.getElementById('tablero-tetris');
@@ -372,13 +333,119 @@ function actualizarTableroDOM(tablero) {
 
     for (let y = 0; y < tablero.filas; y++) {
         const fila = tableroDOM[y].children;
-
         for (let x = 0; x < tablero.columnas; x++) {
-            const celda = fila[x];
-            const valor = tablero.cuadricula[y][x];
-            celda.style.backgroundColor = valor ? valor : 'transparent';
+            fila[x].style.backgroundColor = 'transparent';
         }
     }
-    console.log("Actualizando el tablero en el DOM");
+
+    for (let y = 0; y < tablero.filas; y++) {
+        const fila = tableroDOM[y].children;
+        for (let x = 0; x < tablero.columnas; x++) {
+            if (tablero.cuadricula[y][x]) {
+                fila[x].style.backgroundColor = tablero.cuadricula[y][x];
+            }
+        }
+    }
+
+    if (juego.piezaActual) {
+        juego.piezaActual.forma.forEach((row, dy) => {
+            row.forEach((value, dx) => {
+                if (value !== 0) {
+                    let posY = juego.piezaActual.posicion.y + dy;
+                    let posX = juego.piezaActual.posicion.x + dx;
+                    if (posY >= 0 && posY < tablero.filas && posX >= 0 && posX < tablero.columnas) {
+                        tableroDOM[posY].children[posX].style.backgroundColor = juego.piezaActual.color;
+                    }
+                }
+            });
+        });
+    }
 }
 
+function mostrarSiguientePieza(pieza) {
+    const contenedor = document.getElementById('siguiente-pieza');
+    contenedor.innerHTML = '';
+
+    pieza.forma.forEach(fila => {
+        const filaDiv = document.createElement('div');
+        fila.forEach(valor => {
+            const celdaDiv = document.createElement('div');
+            celdaDiv.classList.add('celda-miniatura');
+            if (valor) {
+                celdaDiv.style.backgroundColor = pieza.color;
+            }
+            filaDiv.appendChild(celdaDiv);
+        });
+        contenedor.appendChild(filaDiv);
+    });
+}
+
+Juego.prototype.actualizar = function (tiempoActual) {
+    if (!juegoPausado) {
+        if (!this.tiempoUltimoMovimiento) {
+            this.tiempoUltimoMovimiento = tiempoActual;
+        }
+
+        const deltaTiempo = tiempoActual - this.tiempoUltimoMovimiento;
+        if (this.piezaActual && deltaTiempo > this.intervaloMovimiento) {
+            this.moverPiezaActual('abajo');
+            this.tiempoUltimoMovimiento = tiempoActual;
+        }
+
+        actualizarTableroDOM(this.tablero);
+        requestAnimationFrame(this.actualizar.bind(this));
+    }
+};
+
+let juego;
+let reiniciar = document.getElementById('reiniciar');
+let juegoPausado = false;
+let tiempoTranscurrido = 0;
+let intervaloTiempo;
+
+function actualizarTiempo() {
+    tiempoTranscurrido++;
+    let minutos = Math.floor(tiempoTranscurrido / 60);
+    let segundos = tiempoTranscurrido % 60;
+    document.getElementById('tiempo').textContent = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+}
+
+function iniciarContadorTiempo() {
+    intervaloTiempo = setInterval(actualizarTiempo, 1000);
+}
+
+function detenerContadorTiempo() {
+    clearInterval(intervaloTiempo);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    juego = new Juego();
+    juego.iniciar();
+    actualizarPuntuacionYnivel();
+    document.addEventListener('keydown', (event) => control(juego, event));
+    reiniciar.addEventListener('click', () => {
+        juego.reiniciar();
+        actualizarPuntuacionYnivel();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'r') {
+            juego.reiniciar();
+            actualizarPuntuacionYnivel();
+        }
+    });
+
+    document.getElementById('pausar').addEventListener('click', function () {
+        juegoPausado = !juegoPausado;
+        if (juegoPausado) {
+            this.textContent = 'Reanudar';
+        } else {
+            this.textContent = 'Pausar';
+            requestAnimationFrame(juego.actualizar.bind(juego));
+        }
+    });
+
+    document.getElementById('volumen').addEventListener('input', function (event) {
+        let volumen = event.target.value;
+    });
+});

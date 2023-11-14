@@ -101,6 +101,16 @@
                     </a>
                 </div>
             </div>
+            <div class='carrusel'>
+                <div>
+                    <a href='tetris/index.php'>
+                        <h4>tetris</h4>
+                        <picture>
+                            <img src='../assets/img/index/fondo_inicio.gif' alt='imagen'>
+                        </picture>
+                    </a>
+                </div>
+            </div>
         </div>
         <button class="carrusel-arrow carrusel-next" id="button-next" data-button="button-next">▶</button>
     </div>

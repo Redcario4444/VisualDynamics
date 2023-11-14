@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let sonido = new Audio("/assets/sound/index/mario-coin.mp3");
             sonido.play();
             toYellow();
-        }, 7000);
+        }, 5000);
     }
 
     let playPauseBtn = document.getElementById('play-pause-btn');

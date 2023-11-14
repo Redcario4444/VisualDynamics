@@ -187,15 +187,15 @@ h1 {
 }
 
 .tooltip-left {
-    right:        100%;
     top:          50%;
+    right:        100%;
     transform:    translateY(-50%);
     margin-right: 1rem;
 }
 
 .tooltip-right {
-    left:        100%;
     top:         50%;
+    left:        100%;
     transform:   translateY(-50%);
     margin-left: 1rem;
 }
@@ -204,7 +204,8 @@ h1 {
 .marcador:hover .tooltip-text,
 .reiniciar:hover .tooltip-text,
 .cerrar-inicio:hover .tooltip-text,
-.cerrar-victoria:hover .tooltip-text {
+.cerrar-victoria:hover .tooltip-text,
+.pausar:hover .tooltip-text {
     visibility: visible;
 }
 
@@ -212,11 +213,18 @@ h1 {
 .marcador,
 .reiniciar,
 .cerrar-inicio,
-.cerrar-victoria {
+.cerrar-victoria,
+.pausar {
     position: relative;
 }
 
 /** ESTILOS TABLERO TETRIS **/
+
+.contenedor-juego {
+    height: max-content;
+    width:  max-content;
+    margin: 0 auto;
+}
 
 .celda-tetris {
     width:            30px; /* Ancho de cada celda */
@@ -229,13 +237,21 @@ h1 {
     display:               grid;
     grid-template-columns: repeat(10, 1fr); /* 10 columnas */
     grid-template-rows: repeat(20, auto); /* 20 filas */
-    grid-gap:              1px; /* Espacio entre celdas */
-    width:                 300px; /* Ancho total del tablero */
-    height:                600px; /* Alto total del tablero */
+    grid-gap:              2px; /* Espacio entre celdas */
+    width:                 320px; /* Ancho total del tablero */
+    height:                640px; /* Alto total del tablero */
     margin:                0 auto; /* Centrar el tablero */
     background-color:      #555; /* Color de fondo entre celdas */
 }
 
 .fila-tetris {
     display: contents; /* Esto asegura que fila-tetris no afecte la estructura de la cuadrícula */
+}
+
+#menu > button:nth-child(1) > span.tooltip-text.tooltip-bottom {
+    left: 130%;
+}
+
+#menu > button:nth-child(4) > span.tooltip-text.tooltip-bottom {
+    left: -2%;
 }
