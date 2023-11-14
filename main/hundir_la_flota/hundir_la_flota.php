@@ -13,19 +13,25 @@
     <div class='container'>
         <!-- Menú de Selección de Dificultad -->
         <div id='menu-dificultad'>
-            <button class='botones-seleccion' id='ia'>VS IA
-                <span class='tooltip-text'>Mídete contra la máquina</span></button>
-            <button class='botones-seleccion' id='dosJugadores'>2 Players
+            <button class='botones-seleccion' id='ia'>Player VS GlaDos
+                <span class='tooltip-text'>Mídete contra la IA Final</span></button>
+            <button class='botones-seleccion' id='dosJugadores'>Player VS Player
                 <span class='tooltip-text'>Juega con un amigo, si tienes</span>
             </button>
-            <button class='botones-seleccion' id='reiniciar'>Reiniciar
+            <button class='botones-seleccion oculto' id='reiniciar'>Reiniciar
                 <span class='tooltip-text'>Reinicia tu partida</span>
+            </button>
+            <button class='botones-seleccion oculto' id='verTableroJ1'>Ver Tablero J1
+                <span class='tooltip-text'>¡¡¡No hagas trampas!!!</span>
+            </button>
+            <button class='botones-seleccion oculto' id='verTableroJ2'>Ver Tablero J2
+                <span class='tooltip-text'>Usa esto con responsabilidad</span>
             </button>
         </div>
         <div>
-            <button class='botones-seleccion marcador'>Turno: <span id="turno">Nadie</span></button>
-            <button class='botones-seleccion marcador'>Tiempo: <span id='time-number'>0</span></button>
-            <button class='botones-seleccion marcador'>Movimientos: <span id='movimientos-number'>0</span></button>
+            <button class='botones-seleccion marcador oculto' id="turnos">Turno: <span id="turno">Nadie</span></button>
+            <button class='botones-seleccion marcador oculto' id="temporizador">Tiempo: <span id='time-number'>0</span></button>
+            <button class='botones-seleccion marcador oculto' id="ultimoMovimiento">Movimientos: <span id='movimientos'></span></button>
             <button class='botones-seleccion marcador oculto' id='tablerop1'>Cambiar tablero P1</button>
             <button class='botones-seleccion marcador oculto' id='tablerop2'>Cambiar tablero P2</button>
             <button class='botones-seleccion marcador oculto' id='terminadoP1'>Tablero escogido</button>
@@ -38,33 +44,35 @@
     <div class='game-container'>
         <div>
             <h2 id="mostrarCampoP1"></h2>
-            <div id='p1Campo' class='campoJuego'></div>
+            <div id='p1Campo' class='campoJuego oculto'></div>
             <br><br><br>
-            <div id='p1Disparos' class='campoJuego'></div>
+            <div id='p1Disparos' class='campoJuego oculto'></div>
         </div>
         <div>
             <h2 id='mostrarCampoP2'></h2>
-            <div id='p2Campo' class='campoJuego'></div>
+            <div id='p2Campo' class='campoJuego oculto'></div>
             <br><br><br>
-            <div id='p2Disparos' class='campoJuego'></div>
+            <div id='p2Disparos' class='campoJuego oculto'></div>
         </div>
     </div>
 
 
-    <div class='fondo-modal-inicio' id='fondo-modal-inicio'></div>
-    <div class='modal-inicio' id='modal-inicio'>
-        <div class='interior-modal-inicio'>
-            <h2>¡Bienvenido a Hundir la flota!</h2>
-            <h3>¡Disfruta de un verdadero clásico en formato digital!</h3>
-            <ul>
-                <li>Puedes elegir jugar con un amigo o medirte contra la IA GlaDOS.</li>
-                <li>Si no puedes ganar a GlaDOS...ÚNETE A ELLA y déjate ganar.</li>
-                <li>Un entretenido juego de estrategia naval.</li>
-            </ul>
+    <div id="unlucky">
+        <div class='fondo-modal-inicio' id='fondo-modal-inicio'></div>
+        <div class='modal-inicio' id='modal-inicio'>
+            <div class='interior-modal-inicio'>
+                <h2>¡Bienvenido a Hundir la flota!</h2>
+                <h3>¡Disfruta de un verdadero clásico en formato digital!</h3>
+                <ul>
+                    <li>Puedes elegir jugar con un amigo o medirte contra la IA GlaDOS.</li>
+                    <li>Si no puedes ganar a GlaDOS...ÚNETE A ELLA y déjate ganar.</li>
+                    <li>Un entretenido juego de estrategia naval.</li>
+                </ul>
 
-            <p>¡Buena suerte!</p>
-            <button class='botones-seleccion cerrar-inicio abierto' id='cerrar-inicio'>Cerrar
-            </button>
+                <p>¡Buena suerte!</p>
+                <button class='botones-seleccion cerrar-inicio abierto' id='cerrar-inicio'>Cerrar
+                </button>
+            </div>
         </div>
     </div>
 

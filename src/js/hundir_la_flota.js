@@ -3,82 +3,409 @@ document.addEventListener('DOMContentLoaded', function () {
     let p1Disparos = document.getElementById('p1Disparos');
     let p2Campo = document.getElementById('p2Campo');
     let p2Disparos = document.getElementById('p2Disparos');
-    let cambiarTableroP1 = document.getElementById('tablerop1');
-    let cambiarTableroP2 = document.getElementById('tablerop2');
-    let comenzarJuego = document.getElementById('comenzarJuego');
     let turno = document.getElementById('turno');
-    let turnoJugador = 1; // Inicializa la variable de turno
+    let clic = 0;
     let contadorDeBarcos = 0;
+    let dosJugadores = document.getElementById('dosJugadores');
+    let ia = document.getElementById('ia');
+    let terminadoP1 = document.getElementById('terminadoP1');
+    let mostrarCampoP1 = document.getElementById('mostrarCampoP1');
+    let mostrarCampoP2 = document.getElementById('mostrarCampoP2');
+    let cambiarTableroP1 = document.getElementById('tablerop1');
+
     let cerrarModal = document.getElementById("cerrar-inicio");
     let fondoModal = document.getElementById("fondo-modal-inicio");
     let modalInicio = document.getElementById("modal-inicio");
-    let dosJugadores = document.getElementById('dosJugadores');
-    let terminadoP1 = document.getElementById('terminadoP1');
+
     let terminadoP2 = document.getElementById('terminadoP2');
     let tiempoRestanteElement = document.getElementById('time-number');
-    let mostrarCampoP1 = document.getElementById('mostrarCampoP1');
-    let mostrarCampoP2 = document.getElementById('mostrarCampoP2');
+    let cambiarTableroP2 = document.getElementById('tablerop2');
+    let movimientos = document.getElementById('movimientos');
+    let temporizador = document.getElementById('temporizador');
+    let turnos = document.getElementById('turnos');
+    let ultimoMovimiento = document.getElementById('ultimoMovimiento');
+    let verTableroJ1 = document.getElementById('verTableroJ1');
+    let verTableroJ2 = document.getElementById('verTableroJ2');
+    let barcosTocadosP1 = 0;
+    let barcosTocadosP2 = 0;
+    let tocado = 0;
+    let glaDos = false;
 
-    function gestionarVisibilidadTableros() {
-        p1Disparos.style.display = turnoJugador === 1 ? '' : 'none';
-        p2Disparos.style.display = turnoJugador === 2 ? '' : 'none';
+    cerrarModal.addEventListener('click', function () {
+        fondoModal.classList.add('oculto');
+        modalInicio.style.display = "none";
+    });
+
+    setTimeout(function () {
+    }, 3000);
+
+    dosJugadores.addEventListener('click', function (event) {
+        if (event.target.id === "dosJugadores"){
+                cambiarTableroP1.classList.remove('oculto');
+                mostrarCampoP1.textContent = "P1";
+                mostrarCampoP2.textContent = "P2";
+                ia.classList.add('oculto');
+                dosJugadores.classList.add('oculto');
+        }
+    });
+
+    ia.addEventListener('click', function (event) {
+        if (event.target.id === "ia"){
+            glaDos = true;
+            cambiarTableroP1.classList.remove('oculto');
+            mostrarCampoP1.textContent = "P1";
+            mostrarCampoP2.textContent = "GlaDos";
+            ia.classList.add('oculto');
+            dosJugadores.classList.add('oculto');
+        }
+    });
+
+    cambiarTableroP1.addEventListener('click', function (event) {
+        p1Campo.innerHTML = "";
+        p1Disparos.innerHTML = "";
+        crearCampoDeJuego(p1Campo);
+        colocarBarcos(p1Campo);
+        crearCampoDeJuego(p1Disparos);
+        p1Campo.classList.remove('oculto');
+        p1Disparos.classList.add('oculto');
+        terminadoP1.classList.remove('oculto');
+    });
+
+    cambiarTableroP2.addEventListener('click', function (event) {
+        if (glaDos){
+            p2Campo.innerHTML = "";
+            p2Disparos.innerHTML = "";
+            crearCampoDeJuego(p2Campo);
+            colocarBarcos(p2Campo);
+            crearCampoDeJuego(p2Disparos);
+            terminadoP2.click();
+        }else {
+            p2Campo.innerHTML = "";
+            p2Disparos.innerHTML = "";
+            crearCampoDeJuego(p2Campo);
+            colocarBarcos(p2Campo);
+            crearCampoDeJuego(p2Disparos);
+            p2Campo.classList.remove('oculto');
+            p2Disparos.classList.add('oculto');
+            terminadoP2.classList.remove('oculto');
+        }
+    });
+
+    terminadoP1.addEventListener('click', function (event) {
+        if (event.target.id === "terminadoP1") {
+            if (glaDos) {
+                cambiarTableroP1.classList.add('oculto');
+                terminadoP1.classList.add('oculto');
+                p1Campo.classList.add('oculto');
+                cambiarTableroP2.click();
+            }else {
+                cambiarTableroP1.classList.add('oculto');
+                terminadoP1.classList.add('oculto');
+                p1Campo.classList.add('oculto');
+                cambiarTableroP2.classList.remove('oculto');
+            }
+        }
+    });
+
+    terminadoP2.addEventListener('click', function (event) {
+        if (glaDos) {
+            temporizador.classList.remove('oculto');
+            turnos.classList.remove('oculto');
+            ultimoMovimiento.classList.remove('oculto');
+            verTableroJ1.classList.remove('oculto');
+            verTableroJ2.classList.remove('oculto');
+            p1Disparos.classList.remove('oculto');
+            p2Disparos.classList.remove('oculto');
+            actualizarTiempo();
+            cambiarJugador();
+        }else{
+            if (event.target.id === "terminadoP2"){
+                terminadoP2.classList.add('oculto');
+                temporizador.classList.remove('oculto');
+                turnos.classList.remove('oculto');
+                ultimoMovimiento.classList.remove('oculto');
+                cambiarTableroP2.classList.add('oculto');
+                verTableroJ1.classList.remove('oculto');
+                verTableroJ2.classList.remove('oculto');
+                p2Campo.classList.add('oculto');
+                p1Disparos.classList.remove('oculto');
+                actualizarTiempo();
+                cambiarJugador();
+            }
+        }
+    });
+
+    verTableroJ1.addEventListener('mouseover', function (event) {
+        if (event.target.id === "verTableroJ1"){
+            p1Campo.classList.remove('oculto');
+        }
+    });
+
+    verTableroJ1.addEventListener('mouseout', function (event) {
+        if (event.target.id === "verTableroJ1"){
+            p1Campo.classList.add('oculto');
+        }
+    });
+
+    verTableroJ2.addEventListener('mouseover', function (event) {
+        if (event.target.id === "verTableroJ2"){
+            p2Campo.classList.remove('oculto');
+        }
+    });
+
+    verTableroJ2.addEventListener('mouseout', function (event) {
+        if (event.target.id === "verTableroJ2"){
+            p2Campo.classList.add('oculto');
+        }
+    });
+
+    let tiempo = 0;
+    let min = 0;
+    function actualizarTiempo() {
+        tiempo++;
+        if (tiempo === 60) {
+            tiempo = 0;
+            min++;
+        }
+        tiempoRestanteElement.textContent = min.toString().padStart(2, '0') + ":" + tiempo.toString().padStart(2, '0');
+        setTimeout(actualizarTiempo, 1000);
     }
+
 
     function cambiarJugador() {
-        turnoJugador = turnoJugador === 1 ? 2 : 1;
-        turno.textContent = `Turno del Jugador ${turnoJugador}`;
-        gestionarVisibilidadTableros();
-    }
+        let celdasP1Campo = p1Campo.querySelectorAll('.celda');
+        let celdasP1Disparos = p1Disparos.querySelectorAll('.celda');
+        let celdasP2Campo = p2Campo.querySelectorAll('.celda');
+        let celdasP2Disparos = p2Disparos.querySelectorAll('.celda');
+        let comprobarVictoraGlaDos = 0;
 
-    function manejarAtaque(event, campoAtacado) {
-        let fila = event.target.dataset.row;
-        let columna = event.target.dataset.col;
-        let celdaObjetivo = campoAtacado.querySelector(`[data-row="${fila}"][data-col="${columna}"]`);
+        for (let i = 0; i < p1Campo.length; i++){
+            if (p1Campo[i].classList.contains('hundido')){
+                comprobarVictoraGlaDos++;
+                alert(comprobarVictoraGlaDos);
+            }
+            comprobarVictoraGlaDos = 0;
+        }
 
-        if (!celdaObjetivo) return; // Evita errores si la celda objetivo no existe
+        if (comprobarVictoraGlaDos === 20){
+            alert("GLADOS HA GANADO");
+        }
 
-        if (celdaObjetivo.classList.contains('barco')) {
-            marcarComoTocado(celdaObjetivo, event.target);
+        clic++;
+        if (clic === 0){
 
-            if (verificarHundido(celdaObjetivo, campoAtacado)) {
-                marcarComoHundido(celdaObjetivo.dataset.barco, campoAtacado);
-                if (verificarFinJuego(campoAtacado)) {
-                    declararGanador();
+        }else{
+            if (glaDos){
+                if (clic %2 === 0){
+                    turno.textContent = 'GlaDos';
+                    ataque(celdasP2Disparos, celdasP1Campo);
+                    AtaqueGlaDos(celdasP2Disparos, celdasP1Campo);
+                }
+                if (clic %2 !== 0){
+                    turno.textContent = 'Jugador1';
+                    ataque(celdasP1Disparos, celdasP2Campo);
+                }
+            }else {
+                if (clic %2 === 0){
+                    turno.textContent = 'Jugador2';
+                    p1Disparos.classList.add('oculto');
+                    p2Disparos.classList.remove('oculto');
+                    ataque(celdasP2Disparos, celdasP1Campo);
+                }else {
+                    turno.textContent = 'Jugador1';
+                    p2Disparos.classList.add('oculto');
+                    p1Disparos.classList.remove('oculto');
+                    ataque(celdasP1Disparos, celdasP2Campo);
                 }
             }
-        } else {
-            event.target.classList.add('agua');
-            cambiarJugador();
+        }
+
+        function AtaqueGlaDos(campoAtaque, campoAtacado) {
+            let disparado = 0;
+
+            while (disparado === 0){
+                let numeroRandomFilas = Math.floor(Math.random() * 10);
+                let numeroRandomColumnas = Math.floor(Math.random() * 10);
+
+                for (let i = 0; i < campoAtaque.length; i++) {
+                    for (let i = 0; i < campoAtaque.length; i++){
+                        if (campoAtaque[i].classList.contains('tocado')) {
+                             let devuelta = encontrarCeldaVecinaValida(campoAtaque[i], campoAtaque[i].dataset.row, campoAtaque[i].dataset.col);
+                            alert(devuelta[i].dataset.row+" "+devuelta[i].dataset.col)
+                             disparado = 1;
+                        }else {
+                            if (parseInt(campoAtaque[i].dataset.row) === numeroRandomFilas && parseInt(campoAtaque[i].dataset.col) === numeroRandomColumnas){
+                                if (campoAtacado[i].classList.contains('barco')){
+                                    AtaqueGlaDos(campoAtaque, campoAtacado);
+                                }
+                                if(campoAtaque[i].classList.contains("celda")){
+                                    for (let j = 0; j < campoAtacado.length; j++){
+                                        if (campoAtaque[i].dataset.row === campoAtacado[j].dataset.row && campoAtaque[i].dataset.col === campoAtacado[j].dataset.col) {
+                                            campoAtaque[i].click();
+                                            disparado = 1;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        function encontrarCeldaVecinaValida(campo, row, col) {
+            const movimientos = [
+                { fila: -1, columna: 0 },
+                { fila: 1, columna: 0 },
+                { fila: 0, columna: -1 },
+                { fila: 0, columna: 1 },
+            ];
+
+            for (let i = 0; i < movimientos.length; i++) {
+                const nuevaFila = parseInt(row) + movimientos[i].fila;
+                const nuevaColumna = parseInt(col) + movimientos[i].columna;
+
+                const celdaVecina = document.querySelector(`[data-row='${nuevaFila}'][data-col='${nuevaColumna}']`);
+
+                if (celdaVecina) {
+                    if (celdaVecina.classList.contains('celda') && !celdaVecina.classList.contains('agua')) {
+                        return celdaVecina;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 
-    function marcarComoTocado(celdaObjetivo, celdaAtacante) {
-        celdaObjetivo.classList.add('tocado');
-        celdaAtacante.classList.add('tocado');
+    function ataque(campoAtaque, campoAtacado){
+        for (let i = 0; i < campoAtaque.length; i++) {
+            campoAtaque[i].addEventListener('click', function (event) {
+                let fila = event.target.dataset.row;
+                let columna = event.target.dataset.col;
+                if (event.target.classList.contains('celda')) {
+                    fila = event.target.dataset.row;
+                    columna = event.target.dataset.col;
+                    event.target.classList.remove('celda');
+                    campoAtacado[i].classList.remove('celda');
+                    conseguirMismaCasilla(campoAtaque ,campoAtacado, fila, columna);
+                }
+            });
+        }
     }
 
-    function verificarHundido(celdaObjetivo, campoAtacado) {
-        let idBarco = celdaObjetivo.dataset.barco;
-        let celdasBarco = campoAtacado.querySelectorAll(`[data-barco="${idBarco}"]`);
-        return Array.from(celdasBarco).every(celda => celda.classList.contains('tocado'));
+    function conseguirMismaCasilla(campoAtaque ,campoAtacado, fila, columna){
+        let sinTocar = 0;
+        let probarHundirse;
+        for (let i = 0; i < campoAtaque.length; i++) {
+            if (campoAtacado[i].dataset.row === fila && campoAtacado[i].dataset.col === columna){
+                probarHundirse = campoAtacado[i].dataset.barco;
+                if (campoAtacado[i].classList.contains('barco')){
+                    campoAtacado[i].classList.remove('barco');
+                    campoAtacado[i].classList.add('tocado');
+                }else{
+                    campoAtacado[i].classList.add('agua');
+                    campoAtaque[i].classList.add('agua');
+                    calcularMovimientos(campoAtaque[i].dataset.row, campoAtaque[i].dataset.col, " Agua");
+                    setTimeout(function () {
+                    }, 2000);
+                    cambiarJugador();
+                    return;
+                }
+            }
+        }
+        for (let i = 0; i < campoAtacado.length; i++) {
+            if (campoAtacado[i].dataset.barco === probarHundirse && !campoAtacado[i].classList.contains('tocado')){
+                calcularMovimientos(campoAtaque[i].dataset.row, campoAtaque[i].dataset.col, " Tocado");
+                sinTocar++;
+                tocado++;
+            }
+        }
+        if (sinTocar > 0){
+            for (let i = 0; i < campoAtaque.length; i++) {
+                if (campoAtaque[i].dataset.row === fila && campoAtaque[i].dataset.col === columna){
+                    campoAtaque[i].classList.add('tocado');
+                }
+            }
+        }else {
+            for (let i = 0; i < campoAtacado.length; i++) {
+                if (campoAtacado[i].dataset.barco === probarHundirse && campoAtacado[i].classList.contains('tocado')){
+                    campoAtacado[i].classList.remove('tocado');
+                    campoAtacado[i].classList.add('hundido');
+                    campoAtaque[i].classList.remove('tocado');
+                    campoAtaque[i].classList.add('hundido');
+                    calcularMovimientos(campoAtaque[i].dataset.row, campoAtaque[i].dataset.col, " Tocado y Hundido");
+                }
+            }
+        }
+        ganado();
     }
 
-    function marcarComoHundido(idBarco, campoAtacado) {
-        let celdasBarco = campoAtacado.querySelectorAll(`[data-barco="${idBarco}"]`);
-        celdasBarco.forEach(celda => {
-            celda.classList.remove('tocado');
-            celda.classList.add('hundido');
-        });
+    function ganado(){
+        if (tocado !== 0){
+            if (clic % 2 !== 0){
+                barcosTocadosP1++;
+            }else {
+                barcosTocadosP2++;
+            }
+        }
+        if (barcosTocadosP1 === 20){
+            alert("P1: ha ganado");
+        }else if (barcosTocadosP2 === 20){
+            alert("P2: ha ganado");
+        }
     }
 
-    function verificarFinJuego(campoAtacado) {
-        let celdasBarco = campoAtacado.querySelectorAll('.barco');
-        return Array.from(celdasBarco).every(celda => celda.classList.contains('hundido'));
-    }
+    function calcularMovimientos(fila, columna, evento){
+        switch (columna) {
+            case "0":
+                columna = "A";
+                break;
+            case "1":
+                columna = "B";
+                break;
+            case "2":
+                columna = "C";
+                break;
+            case "3":
+                columna = "D";
+                break;
+            case "4":
+                columna = "E";
+                break;
+            case "5":
+                columna = "F";
+                break;
+            case "6":
+                columna = "G";
+                break;
+            case "7":
+                columna = "H";
+                break;
+            case "8":
+                columna = "I";
+                break;
+            case "9":
+                columna = "J";
+                break;
+        }
+        fila++;
+        movimientos.textContent = " " + columna + fila + evento;
 
-    function declararGanador() {
-        // Lógica para declarar el ganador y terminar el juego
-        alert('¡El juego ha terminado! Ganador: Jugador X');
+        if (evento === " Agua"){
+            movimientos.classList.remove('estadoTocado');
+            movimientos.classList.remove('estadoHundido');
+            movimientos.classList.add('estadoAgua');
+        }
+        if (evento === " Tocado") {
+            movimientos.classList.remove('estadoAgua');
+            movimientos.classList.remove('estadoHundido');
+            movimientos.classList.add('estadoTocado');
+        }
+        if (evento === " Tocado y Hundido"){
+            movimientos.classList.remove('estadoAgua');
+            movimientos.classList.remove('estadoTocado');
+            movimientos.classList.add('estadoHundido');
+        }
     }
 
     function crearCampoDeJuego(contenedor) {
@@ -121,8 +448,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("No se pudo colocar el barco después de varios intentos.");
             return;
         }
-
-        // Marcar las celdas ocupadas por el barco
         marcarCeldasBarcos(contenedor, posicion, longitud, contadorDeBarcos);
     }
 
@@ -194,242 +519,5 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
-
-    cerrarModal.addEventListener('click', cerrarModalInicio);
-    dosJugadores.addEventListener('click', iniciarModoDosJugadores);
-    terminadoP1.addEventListener('click', finalizarSeleccionP1);
-    terminadoP2.addEventListener('click', finalizarSeleccionP2);
-    cambiarTableroP1.addEventListener('click', () => cambiarTablero(p1Campo));
-    cambiarTableroP2.addEventListener('click', () => cambiarTablero(p2Campo));
-    comenzarJuego.addEventListener('click', iniciarJuego);
-
-    function cerrarModalInicio() {
-        fondoModal.classList.add('oculto');
-        modalInicio.style.display = "none";
-        /*bienvenidaSound.currentTime = 0;
-        bienvenidaSound.play();*/
-    }
-
-    function iniciarModoDosJugadores(event) {
-        if (event.target.id === "dosJugadores") {
-            /*setTimeout(function () {
-            }, 3000);*/
-            cambiarTableroP1.classList.remove('oculto');
-            terminadoP1.classList.remove('oculto');
-            mostrarCampoP1.textContent = "Jugador1";
-            mostrarCampoP2.textContent = "Jugador2";
-        }
-    }
-
-    function finalizarSeleccionP1(event) {
-        let celdasP1Campo = p1Campo.querySelectorAll('.celda');
-        if (event.target.id === "terminadoP1") {
-            cambiarTableroP1.classList.add('oculto');
-            cambiarTableroP2.classList.remove('oculto');
-            terminadoP1.classList.add('oculto');
-            terminadoP2.classList.remove('oculto');
-            for (let i = 0; i < celdasP1Campo.length; i++) {
-                celdasP1Campo[i].classList.add('oculto');
-            }
-        }
-    }
-
-    function finalizarSeleccionP2(event) {
-        let celdasP2Campo = p2Campo.querySelectorAll('.celda');
-        if (event.target.id === "terminadoP2") {
-            cambiarTableroP2.classList.add('oculto');
-            terminadoP2.classList.add('oculto');
-            comenzarJuego.classList.remove('oculto');
-            for (let i = 0; i < celdasP2Campo.length; i++) {
-                celdasP2Campo[i].classList.add('oculto');
-            }
-        }
-    }
-
-    function cambiarTablero(contenedor) {
-        contenedor.innerHTML = '';
-        crearCampoDeJuego(contenedor);
-        colocarBarcos(contenedor);
-    }
-
-    function iniciarJuego() {
-        // Lógica para iniciar el juego
-        crearCampoDeJuego(p1Disparos);
-        crearCampoDeJuego(p2Disparos);
-        agregarEventosDeAtaque(p1Disparos, p2Campo, 1);
-        agregarEventosDeAtaque(p2Disparos, p1Campo, 2);
-        cambiarJugador();
-    }
-
-    function agregarEventosDeAtaque(campoAtaque, campoAtacado, jugadorAtacante) {
-        campoAtaque.querySelectorAll('.celda').forEach(celda => {
-            celda.addEventListener('click', function (event) {
-                if (turnoJugador === jugadorAtacante) {
-                    manejarAtaque(event, campoAtacado);
-                }
-            });
-        });
-    }
-
-// Implementación de las funciones de creación de tablero y colocación de barcos aquí...
-
-    cambiarTableroP2.addEventListener('click', function (event) {
-        if (event.target.id === 'tablerop2') {
-            p2Campo.innerHTML = '';
-            crearCampoDeJuego(p2Campo);
-            colocarBarcos(p2Campo);
-        }
-    });
-
-    comenzarJuego.addEventListener('click', function (event) {
-        if (event.target.id === 'comenzarJuego') {
-            crearCampoDeJuego(p1Disparos);
-            crearCampoDeJuego(p2Disparos);
-            cambiarJugador();
-        }
-    });
-
-    mostrarCampoP1.addEventListener('mouseover', function (event) {
-        if (event.target.id === 'comenzarJuego') {
-            crearCampoDeJuego(p1Disparos);
-            crearCampoDeJuego(p2Disparos);
-            cambiarJugador();
-        }
-    });
-
-    mostrarCampoP1.addEventListener('mouseover', function (event) {
-        let celdasP1Campo = p1Campo.querySelectorAll('.celda');
-        let celdasP1Disparos = p1Disparos.querySelectorAll('.celda');
-        if (event.target.id === 'mostrarCampoP1') {
-            for (let i = 0; i < celdasP1Campo.length; i++) {
-                celdasP1Campo[i].classList.remove('oculto');
-            }
-        }
-        eliminarEventListeners(celdasP1Campo);
-        eliminarEventListeners(celdasP1Disparos);
-    });
-
-    mostrarCampoP1.addEventListener('mouseout', function (event) {
-        let celdasP1Campo = p1Campo.querySelectorAll('.celda');
-        let celdasP1Disparos = p1Disparos.querySelectorAll('.celda');
-        if (event.target.id === 'mostrarCampoP1') {
-            for (let i = 0; i < celdasP1Campo.length; i++) {
-                celdasP1Campo[i].classList.add('oculto');
-            }
-        }
-        eliminarEventListeners(celdasP1Campo);
-        eliminarEventListeners(celdasP1Disparos);
-    });
-
-    mostrarCampoP2.addEventListener('mouseover', function (event) {
-        let celdasP2Campo = p2Campo.querySelectorAll('.celda');
-        let celdasP2Disparos = p2Disparos.querySelectorAll('.celda');
-        if (event.target.id === 'mostrarCampoP2') {
-            for (let i = 0; i < celdasP2Campo.length; i++) {
-                celdasP2Campo[i].classList.remove('oculto');
-            }
-        }
-        eliminarEventListeners(celdasP2Campo);
-        eliminarEventListeners(celdasP2Disparos);
-    });
-
-    mostrarCampoP2.addEventListener('mouseout', function (event) {
-        let celdasP2Campo = p2Campo.querySelectorAll('.celda');
-        let celdasP2Disparos = p2Disparos.querySelectorAll('.celda');
-        if (event.target.id === 'mostrarCampoP2') {
-            for (let i = 0; i < celdasP2Campo.length; i++) {
-                celdasP2Campo[i].classList.add('oculto');
-            }
-        }
-        eliminarEventListeners(celdasP2Campo);
-        eliminarEventListeners(celdasP2Disparos);
-    });
-
-    function eliminarEventListeners(elementos) {
-        elementos.forEach(elemento => {
-            // Clonar el elemento para eliminar el event listener sin afectar el original
-            const nuevoElemento = elemento.cloneNode(true);
-            elemento.parentNode.replaceChild(nuevoElemento, elemento);
-        });
-    }
-
-    function ataque(campoAtaque, campoAtacado) {
-        for (let i = 0; i < campoAtaque.length; i++) {
-            campoAtaque[i].addEventListener('click', function (event) {
-                let fila = event.target.dataset.row;
-                let columna = event.target.dataset.col;
-                if (event.target.classList.contains('celda')) {
-                    fila = event.target.dataset.row;
-                    columna = event.target.dataset.col;
-                    event.target.classList.remove('celda');
-                    campoAtacado[i].classList.remove('celda');
-                    conseguirMismaCasilla(campoAtaque, campoAtacado, fila, columna);
-                } else {
-                    /*alert('Ya habias tocado esta casilla');*/
-                }
-            });
-        }
-    }
-
-    function conseguirMismaCasilla(campoAtaque, campoAtacado, fila, columna) {
-        let sinTocar = 0;
-        let probarHundirse;
-        for (let i = 0; i < campoAtaque.length; i++) {
-            if (campoAtacado[i].dataset.row === fila && campoAtacado[i].dataset.col === columna) {
-                probarHundirse = campoAtacado[i].dataset.barco;
-                if (campoAtacado[i].classList.contains('barco')) {
-                    campoAtacado[i].classList.remove('barco');
-                    campoAtacado[i].classList.add('tocado');
-                } else {
-                    campoAtacado[i].classList.add('agua');
-                    campoAtaque[i].classList.add('agua');
-                    cambiarJugador();
-                    return;
-                }
-            }
-        }
-        for (let i = 0; i < campoAtacado.length; i++) {
-            if (campoAtacado[i].dataset.barco === probarHundirse && !campoAtacado[i].classList.contains('tocado')) {
-                sinTocar++;
-            }
-        }
-        if (sinTocar > 0) {
-            tocado(campoAtaque, fila, columna);
-        } else {
-            for (let i = 0; i < campoAtacado.length; i++) {
-                if (campoAtacado[i].dataset.barco === probarHundirse && campoAtacado[i].classList.contains('tocado')) {
-                    campoAtacado[i].classList.remove('tocado');
-                    campoAtacado[i].classList.add('hundido');
-                    campoAtaque[i].classList.remove('tocado');
-                    campoAtaque[i].classList.add('hundido');
-                }
-            }
-        }
-        ganado(campoAtacado);
-    }
-
-    function tocado(campoAtaque, fila, columna) {
-        for (let i = 0; i < campoAtaque.length; i++) {
-            if (campoAtaque[i].dataset.row === fila && campoAtaque[i].dataset.col === columna) {
-                campoAtaque[i].classList.add('tocado');
-            }
-        }
-    }
-
-    function ganado(campoAtacado) {
-        let barcosHundidos = 0;
-        for (let i = 0; i < campoAtacado.length; i++) {
-            if (campoAtacado[i].dataset.barco > -1 && campoAtacado[i].classList.contains("hundido")) {
-                barcosHundidos++;
-            }
-        }
-        if (barcosHundidos === 20 && turno.textContent === "Jugador1") {
-            alert('Ha ganado el jugador 1')
-        }
-        if (campoAtacado === 20 && turno.textContent === "Jugador2") {
-            alert('Ha ganado el jugador 2')
-        }
-    }
-
 
 });
