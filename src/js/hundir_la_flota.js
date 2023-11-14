@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function () {
         do {
             posicion = cogerPosicionAleatoria(longitud);
             intento++;
-        } while ((!comprobarCeldasAdyacentes(contenedor, posicion) || conprobarSuperposicion(contenedor, posicion)) && intento < maximoIntentos);
+        } while ((!comprobarCeldasAdyacentes(contenedor, posicion) || comprobarSuperposicion(contenedor, posicion)) && intento < maximoIntentos);
 
         if (intento >= maximoIntentos) {
             console.log("No se pudo colocar el barco después de varios intentos.");
@@ -493,7 +493,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return true;
     }
 
-    function conprobarSuperposicion(contenedor, posicion) {
+    function comprobarSuperposicion(contenedor, posicion) {
         for (let i = 0; i < posicion.length; i++) {
             let comprobarfila = posicion.row + (posicion.direction === 'vertical' ? i : 0);
             let comprobarColumna = posicion.col + (posicion.direction === 'horizontal' ? i : 0);
