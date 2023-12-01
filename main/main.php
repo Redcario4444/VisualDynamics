@@ -43,7 +43,7 @@
             </div>
             <div class="carrusel">
                 <div>
-                    <a href="/">
+                    <a href="hundir_la_flota/hundir_la_flota.php">
                         <h4>Hundir la Flota</h4>
                         <picture>
                             <img src="../assets/img/index/fondo_inicio.gif" alt="imagen">

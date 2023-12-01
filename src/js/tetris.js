@@ -1,3 +1,5 @@
+/* TODO BARRA ESPACIADORA QUE CAIGA ABAJO*/
+
 const I = [
     [0, 0, 0, 0],
     [1, 1, 1, 1],
@@ -402,6 +404,12 @@ let reiniciar = document.getElementById('reiniciar');
 let juegoPausado = false;
 let tiempoTranscurrido = 0;
 let intervaloTiempo;
+let tiempo = document.getElementById('tiempo');
+let theme = document.getElementById('theme');
+
+tiempo.addEventListener('click', () => {
+
+});
 
 function actualizarTiempo() {
     tiempoTranscurrido++;
@@ -427,11 +435,21 @@ document.addEventListener('DOMContentLoaded', () => {
         juego.reiniciar();
         actualizarPuntuacionYnivel();
     });
-
+    let song = false;
     document.addEventListener('keydown', (event) => {
         if (event.key === 'r') {
             juego.reiniciar();
             actualizarPuntuacionYnivel();
+        }
+        if (event.key === ' ') {
+            if (!song) {
+                let audio = new Audio(theme.src);
+                audio.play();
+                song = true;
+            } else {
+                audio.stop();
+                song = false;
+            }
         }
     });
 
@@ -445,7 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById('volumen').addEventListener('input', function (event) {
-        let volumen = event.target.value;
-    });
+    /*    document.getElementById('volumen').addEventListener('input', function (event) {
+            let volumen = event.target.value;
+        });*/
 });

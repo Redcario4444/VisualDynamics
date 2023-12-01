@@ -40,6 +40,7 @@
     <div class='contenedor-juego'>
         <div id='tablero-tetris'></div>
     </div>
+    <audio id='theme' src='../../assets/sound/tetris/theme.mp3' preload='auto'></audio>
 <?php
     $src = '../../assets/img/main/back.svg';
     include '../../src/footer.php';
