@@ -13,12 +13,13 @@ body {
 }
 
 .container {
+    margin: auto;
     text-align:    center;
-    margin-bottom: 0.8rem;
-    margin-top:    1.2rem;
 }
 
 h1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     color:      white;
     font-size:  2.5rem;
     text-align: center;
@@ -81,7 +82,7 @@ h1 {
 }
 
 .marcador {
-    margin-left: 2rem;
+    margin: 1rem;
 }
 
 #score, #clicks, #tiempo {
@@ -98,7 +99,21 @@ h1 {
 }
 
 .oculto {
-    display: none!important;
+    display: none !important;
+}
+
+.mostrar {
+    animation: cambiarOpacidad 1500ms ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes cambiarOpacidad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 #campo-jugador {
@@ -109,10 +124,14 @@ h1 {
     border: 1px solid #000;
 }
 
-#p1Disparos, #p2Disparos, #p1Campo, #p2Campo {
+#p1Disparos, #p2Disparos, #p1Campo, #p2Campo{
     background-color: white;
     border: 0.3rem solid white;
     box-shadow: 0.3rem 0.3rem 0.1rem rgba(204,204,204,0.8);
+}
+
+#mostrarCampoP1, #mostrarCampoP2 {
+    margin-bottom: 2rem;
 }
 
 .game-container {
@@ -162,6 +181,12 @@ h1 {
     transition: background-color 2s;
 }
 
+.prohibida {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid;
+}
+
 .agua {
     width: 2.5rem;
     height: 2.5rem;
@@ -207,6 +232,26 @@ h1 {
     height:           100%;
     z-index:          10;
     background-color: rgba(0, 0, 0, 0.95);
+}
+
+.fondo-modal-victoria {
+    position:         fixed;
+    top:              0;
+    left:             0;
+    width:            100%;
+    height:           100%;
+    z-index:          10;
+    animation: cambiarFondo 2s linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes cambiarFondo {
+    from {
+        background-color: transparent;
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0.95);
+    }
 }
 
 .interior-modal-inicio {
