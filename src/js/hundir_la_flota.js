@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let win8Sound = document.getElementById('win8');
         let win9Sound = document.getElementById('win9');
         let win10Sound = document.getElementById('win10');
+        let venganza = document.getElementById('venganza');
         let botones = document.getElementById('botones');
 
         ia.addEventListener('mouseover', function () {
@@ -144,6 +145,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 dosJugadores.classList.add('oculto');
             }
         });
+
+        if (reinicio === 2) {
+            setTimeout(function () {
+                venganza.currentTime = 0;
+                venganza.play();
+            }, 2000);
+            cerrarModal.click();
+            ia.click();
+        }
 
         cambiarTableroP1.addEventListener('click', function (event) {
             p1Campo.innerHTML = "";
@@ -497,7 +507,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (barcosTocadosP1 === 20) {
                         terminado = true;
-                        alert("P1: ha ganado");
                         fondoModalVictoria.classList.replace('oculto', 'fondo-modal-victoria');
                         setTimeout(function () {
                             modalInicioVictoria.innerHTML = "\n" +
@@ -505,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 "            <div class='interior-modal-inicio'>\n" +
                                 "                <h2>HAS GANADO J1</h2>\n" +
                                 "                <h3>Guau, en verdad le has ganado...</h3>\n" +
-                                "                <p>¿Como te etreves a ganarme HUMANO?</p>\n" +
+                                "                <p>¿Como te atreves a ganarme HUMANO?</p>\n" +
                                 "                <p>SE ACABO, QUIERO MI REVANCHA</p>\n" +
                                 "                <p>¡¡¡YO SOY GLADOS, LA MEJOR IA QUE EXISTE!!!</p>\n" +
                                 "                <button class='botones-seleccion cerrar-inicio abierto' id='cerrar-inicio-victoria'>REVANCHA\n" +
@@ -518,14 +527,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                 botones.currentTime = 0;
                                 botones.play();
                             });
+                            reiniciarJuego();
                             setTimeout(function () {
                                 sonidoPerdido();
-                                reiniciarJuego();
                             }, 4000);
                         }, 2000);
                     } else if (barcosTocadosGlaDos === 20) {
                         terminado = true;
-                        alert("GlaDos ha ganado");
                         fondoModalVictoria.classList.replace('oculto', 'fondo-modal-victoria');
                         setTimeout(function () {
                             modalInicioVictoria.innerHTML = "\n" +
@@ -546,9 +554,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                 botones.currentTime = 0;
                                 botones.play();
                             });
+                            reiniciarJuego();
                             setTimeout(function () {
                                 sonidoGanado();
-                                reiniciarJuego();
                             }, 4000);
                         }, 2000);
                     }
@@ -564,7 +572,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                     if (barcosTocadosP1 === 20) {
                         terminado = true;
-                        alert("P1: ha ganado");
                         fondoModalVictoria.classList.replace('oculto', 'fondo-modal-victoria');
                         setTimeout(function () {
                             modalInicioVictoria.innerHTML = "\n" +
@@ -589,7 +596,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         }, 2000);
                     } else if (barcosTocadosP2 === 20) {
                         terminado = true;
-                        alert("P2: ha ganado");
                         fondoModalVictoria.classList.replace('oculto', 'fondo-modal-victoria');
                         setTimeout(function () {
                             modalInicioVictoria.innerHTML = "\n" +
@@ -707,7 +713,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     "            </div>\n" +
                     "        </div>";
 
-                iniciarJuego(0);
+                if (barcosTocadosP1 === 20 && glaDos) {
+                    iniciarJuego(2);
+                }else {
+                    iniciarJuego(0);
+                }
             });
 
 

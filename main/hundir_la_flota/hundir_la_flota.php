@@ -114,6 +114,7 @@
     <audio id='win8' src='/assets/sound/hundir_la_flota/win_GlaDos_8.wav'></audio>
     <audio id='win9' src='/assets/sound/hundir_la_flota/win_GlaDos_9.wav'></audio>
     <audio id='win10' src='/assets/sound/hundir_la_flota/win_GlaDos_10.wav'></audio>
+    <audio id='venganza' src='/assets/sound/hundir_la_flota/venganzaGlaDos.wav'></audio>
     <audio id='botones' src='/assets/sound/index/cursor.mp3'></audio>
 
 
