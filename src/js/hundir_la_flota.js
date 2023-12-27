@@ -121,10 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
             cerrarModal.click();
         }
 
-
-        setTimeout(function () {
-        }, 3000);
-
         dosJugadores.addEventListener('click', function (event) {
             if (event.target.id === "dosJugadores") {
                 cambiarTableroP1.classList.remove('oculto');
@@ -150,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(function () {
                 venganza.currentTime = 0;
                 venganza.play();
-            }, 2000);
+            }, 15000);
             cerrarModal.click();
             ia.click();
         }
